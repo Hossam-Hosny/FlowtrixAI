@@ -1,0 +1,16 @@
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\bin\Debug\net10.0\FlowtrixAI.Application.deps.json
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\bin\Debug\net10.0\FlowtrixAI.Application.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\bin\Debug\net10.0\FlowtrixAI.Application.pdb
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\bin\Debug\net10.0\FlowtrixAI.Domain.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\bin\Debug\net10.0\FlowtrixAI.Domain.pdb
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\FlowtrixAI.Application.csproj.AssemblyReference.cache
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\FlowtrixAI.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\FlowtrixAI.Application.AssemblyInfoInputs.cache
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\FlowtrixAI.Application.AssemblyInfo.cs
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\FlowtrixAI.Application.csproj.CoreCompileInputs.cache
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\FlowtrixAI.Application.sourcelink.json
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\Flowtrix.493BD705.Up2Date
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\FlowtrixAI.Application.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\refint\FlowtrixAI.Application.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\FlowtrixAI.Application.pdb
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Application\obj\Debug\net10.0\ref\FlowtrixAI.Application.dll

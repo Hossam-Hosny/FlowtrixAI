@@ -1,0 +1,12 @@
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\bin\Debug\net10.0\FlowtrixAI.Domain.deps.json
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\bin\Debug\net10.0\FlowtrixAI.Domain.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\bin\Debug\net10.0\FlowtrixAI.Domain.pdb
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\FlowtrixAI.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\FlowtrixAI.Domain.AssemblyInfoInputs.cache
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\FlowtrixAI.Domain.AssemblyInfo.cs
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\FlowtrixAI.Domain.csproj.CoreCompileInputs.cache
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\FlowtrixAI.Domain.sourcelink.json
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\FlowtrixAI.Domain.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\refint\FlowtrixAI.Domain.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\FlowtrixAI.Domain.pdb
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\ref\FlowtrixAI.Domain.dll

@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "+oONJ9f6IYU=",
+  "success": false,
+  "projectFilePath": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\FlowtrixAI.Api.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1301",
+      "level": "Error",
+      "message": "Unable to load the service index for source https://api.nuget.org/v3/index.json.\r\n  An error occurred while sending the request.\r\n  The remote name could not be resolved: 'api.nuget.org'",
+      "projectPath": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\FlowtrixAI.Api.csproj",
+      "filePath": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\FlowtrixAI.Api.csproj",
+      "targetGraphs": []
+    }
+  ]
+}

@@ -39,3 +39,6 @@ C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\Flowtr
 C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAi\obj\Debug\net10.0\FlowtrixAI.Api.pdb
 C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAi\obj\Debug\net10.0\FlowtrixAI.Api.genruntimeconfig.cache
 C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAi\obj\Debug\net10.0\ref\FlowtrixAI.Api.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAi\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAi\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAi\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll

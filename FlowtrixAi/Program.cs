@@ -11,6 +11,10 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
 
+
+
+
+
 // Add application , infrastructure and presentation services
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -20,6 +24,13 @@ builder.AddPresentation();
 
 var app = builder.Build();
 app.UseMiddleware<ErrorHandlingMiddleware>();
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 

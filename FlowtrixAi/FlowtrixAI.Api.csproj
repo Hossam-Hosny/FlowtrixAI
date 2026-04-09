@@ -8,12 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FlowtrixAI.Application\FlowtrixAI.Application.csproj" />
     <ProjectReference Include="..\FlowtrixAI.Domain\FlowtrixAI.Domain.csproj" />
     <ProjectReference Include="..\FlowtrixAI.Infrastructure\FlowtrixAI.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

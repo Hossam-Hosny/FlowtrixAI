@@ -16,3 +16,5 @@ C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\Flowtr
 C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Infrastructure\obj\Debug\net10.0\refint\FlowtrixAI.Infrastructure.dll
 C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Infrastructure\obj\Debug\net10.0\FlowtrixAI.Infrastructure.pdb
 C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Infrastructure\obj\Debug\net10.0\ref\FlowtrixAI.Infrastructure.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Infrastructure\bin\Debug\net10.0\FlowtrixAI.Infrastructure.runtimeconfig.json
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Infrastructure\obj\Debug\net10.0\FlowtrixAI.Infrastructure.genruntimeconfig.cache

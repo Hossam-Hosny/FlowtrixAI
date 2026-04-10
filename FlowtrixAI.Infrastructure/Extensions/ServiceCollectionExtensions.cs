@@ -1,4 +1,6 @@
-﻿using FlowtrixAI.Infrastructure.Context;
+﻿using FlowtrixAI.Domain.Repositories;
+using FlowtrixAI.Infrastructure.Context;
+using FlowtrixAI.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,19 @@ namespace FlowtrixAI.Infrastructure.Extensions
             {
                 options.UseSqlServer(connectionString);
             });
+
+
+
+
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IInventoryRepository, InventoryRepository>();
+            services.AddScoped<IBomRepository, BomRepository>();
+
+            services.AddScoped<IReportRepository, ReportRepository>();
+            services.AddScoped<IProcessRepository, ProcessRepository>();
+            services.AddScoped<IProductionRecordRepository, ProductionRecordRepository>();
+            services.AddScoped<IQualityCheckRepository, QualityCheckRepository>();
+
 
         }
     }

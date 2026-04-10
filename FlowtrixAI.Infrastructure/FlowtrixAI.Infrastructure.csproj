@@ -20,8 +20,4 @@
     <ProjectReference Include="..\FlowtrixAI.Application\FlowtrixAI.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

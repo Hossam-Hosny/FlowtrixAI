@@ -1,11 +1,14 @@
 ﻿using FlowtrixAI.Domain.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlowtrixAI.Infrastructure.Context;
 
-internal class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
+internal class AppDbContext (DbContextOptions<AppDbContext> options)
+            : IdentityDbContext<AppUser, IdentityRole<int>, int>(options)
 {
-    public DbSet<AppUser> Users { get; set; }
+    
     public DbSet<Product> Products { get; set; }
     public DbSet<BillOfMaterial> BoMs { get; set; }
     public DbSet<Process> Processes { get; set; }
@@ -23,7 +26,7 @@ internal class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-
+        base.OnModelCreating(modelBuilder);
 
 
         modelBuilder.Entity<ProductionRecord>()
@@ -43,6 +46,8 @@ internal class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(
             .WithMany(u => u.Reports)
             .HasForeignKey(r => r.GeneratedById)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Ignore<IdentityPasskeyData>();
 
 
     }

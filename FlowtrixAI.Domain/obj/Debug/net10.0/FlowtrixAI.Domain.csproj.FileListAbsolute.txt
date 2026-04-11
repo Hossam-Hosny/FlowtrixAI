@@ -10,3 +10,4 @@ C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\Flowtr
 C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\refint\FlowtrixAI.Domain.dll
 C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\FlowtrixAI.Domain.pdb
 C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\ref\FlowtrixAI.Domain.dll
+C:\Users\USER\OneDrive\Desktop\Visual Studio Folder\vs Porjects\Siraj App\FlowtrixAi Solution\FlowtrixAI.Domain\obj\Debug\net10.0\FlowtrixAI.Domain.csproj.AssemblyReference.cache

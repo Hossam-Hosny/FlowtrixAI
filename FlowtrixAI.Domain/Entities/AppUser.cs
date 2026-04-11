@@ -1,6 +1,9 @@
-﻿namespace FlowtrixAI.Domain.Entities;
+﻿
+using Microsoft.AspNetCore.Identity;
 
-public class AppUser
+namespace FlowtrixAI.Domain.Entities;
+
+public class AppUser : IdentityUser<int>
 {
     public AppUser()
     {
@@ -9,11 +12,8 @@ public class AppUser
         Reports = new HashSet<Report>();
     }
 
-
-    public int Id { get; set; }
     public string Name { get; set; }
-    public string Email { get; set; }
-    public string Role { get; set; } 
+   
     public DateTime CreatedAt { get; set; }
 
    

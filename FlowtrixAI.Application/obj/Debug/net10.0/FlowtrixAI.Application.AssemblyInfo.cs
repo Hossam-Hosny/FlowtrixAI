@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlowtrixAI.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5b91aefc8bd5ee757c2d51919bf08e20b28f4aff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+196df1f9094ac2e2ba3f5ee40ba8c0ec03b9b04e")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlowtrixAI.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlowtrixAI.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -4,6 +4,8 @@ using FlowtrixAI.Application.Production.Interface;
 using FlowtrixAI.Application.Production.Services;
 using FlowtrixAI.Application.Quality.Interface;
 using FlowtrixAI.Application.Quality.Services;
+using FlowtrixAI.Application.Reports.Interface;
+using FlowtrixAI.Application.Reports.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FlowtrixAI.Application.Extensions
@@ -18,6 +20,7 @@ namespace FlowtrixAI.Application.Extensions
             services.AddScoped<IInventoryService,InventoryService>();
             services.AddScoped<IProductionService, ProductionService>();
             services.AddScoped<IQualityService,  QualityService>();
+            services.AddScoped<IReportService, ReportService>();
 
 
 

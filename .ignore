@@ -1,0 +1,18 @@
+# .ignore for search tools (ripgrep, fd, etc.)
+# Usually mirrors .gitignore but can be used for extra exclusions.
+
+[Bb]in/
+[Oo]bj/
+[Ll]ogs/
+.vs/
+.vscode/
+.idea/
+.git/
+node_modules/
+dist/
+build/
+*.log
+*.tmp
+*.bak
+/wwwroot/uploads/
+/wwwroot/temp/

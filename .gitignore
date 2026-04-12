@@ -1,0 +1,81 @@
+# .gitignore for .NET (Visual Studio, VS Code, JetBrains)
+# This is a comprehensive list to ensure build artifacts and IDE files are not tracked.
+
+## Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+dist/
+build/
+
+## Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+*.userprefs
+*.slnLaunch.user
+*.sln.launch
+
+## Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+## JetBrains (Rider, etc.)
+.idea/
+*.iws
+*.iml
+*.ipr
+
+## OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+## Secrets and Environment
+.env
+.env.*
+!.env.example
+*.local
+secrets.json
+appsettings.local.json
+**/appsettings.Development.json
+**/appsettings.Staging.json
+**/appsettings.Production.json
+**/ocelot.Development.json
+**/ocelot.Staging.json
+**/ocelot.Production.json
+**/seeds/*.Development.json
+
+## Packages
+node_modules/
+.npm/
+.yarn/
+jspm_packages/
+packages/
+!packages/repositories.config
+*.nupkg
+
+## Tools
+.terraform/
+.vagrant/
+*.log
+*.bak
+*.tmp
+*.temp
+
+## Test Results
+[Tt]est[Rr]esults/
+*.trx
+
+## Web/Client
+/wwwroot/uploads/
+/wwwroot/temp/

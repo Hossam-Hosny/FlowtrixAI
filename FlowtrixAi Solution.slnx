@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="FlowtrixAI.Application/FlowtrixAI.Application.csproj" />
+  <Project Path="FlowtrixAi.Client/FlowtrixAi.Client.csproj" Id="b4c0fa27-ec09-42a0-8870-0dac2ac75f29" />
   <Project Path="FlowtrixAI.Domain/FlowtrixAI.Domain.csproj" />
   <Project Path="FlowtrixAI.Infrastructure/FlowtrixAI.Infrastructure.csproj" />
   <Project Path="FlowtrixAi/FlowtrixAI.Api.csproj" />

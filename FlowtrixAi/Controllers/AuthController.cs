@@ -1,5 +1,7 @@
 ﻿using FlowtrixAI.Application.JWT.Interface;
+using FlowtrixAI.Domain.Constants;
 using FlowtrixAI.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,11 +23,12 @@ namespace FlowtrixAI.Api.Controllers
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
 
-            await _userManager.AddToRoleAsync(user, "Engineer");
+            await _userManager.AddToRoleAsync(user, UserRoles.Engineer);
 
             return Ok(new { Message = "User registered successfully" });
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost("register-admin")]
         public async Task<IActionResult> RegisterAdmin(string userName, string password)
         {
@@ -37,7 +40,7 @@ namespace FlowtrixAI.Api.Controllers
             if (!result.Succeeded)
                 return BadRequest(result.Errors);
 
-            await _userManager.AddToRoleAsync(user, "Admin");
+            await _userManager.AddToRoleAsync(user, UserRoles.Admin);
 
             return Ok(new { Message = "User registered successfully" });
         }

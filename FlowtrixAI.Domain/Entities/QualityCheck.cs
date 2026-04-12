@@ -7,7 +7,7 @@ public class QualityCheck
     public DateTime CheckAt { get; set; }
     public string Notes { get; set; }
 
-
+    public bool IsPassed => DecfectCount == 0;
 
     public int ProductionRecordId { get; set; }
     public ProductionRecord ProductionRecord { get; set; }

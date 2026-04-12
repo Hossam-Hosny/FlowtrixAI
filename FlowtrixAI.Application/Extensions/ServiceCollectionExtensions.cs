@@ -26,6 +26,7 @@ namespace FlowtrixAI.Application.Extensions
             services.AddScoped<IReportService, ReportService>();
 
             services.AddScoped<IJwtService, JwtService>();
+            
 
 
 

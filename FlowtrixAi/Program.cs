@@ -41,7 +41,7 @@ builder.Services.AddAuthentication(options =>
             ClockSkew = TimeSpan.Zero
         };
     });
-
+builder.Services.AddAuthorization();
 
 // Add application , infrastructure and presentation services
 builder.Services.AddApplication();
@@ -60,8 +60,7 @@ using (var scope = app.Services.CreateScope())
 
 
 
-    app.UseMiddleware<ErrorHandlingMiddleware>();
-
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
@@ -70,6 +69,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseAuthentication();
 app.UseAuthorization();

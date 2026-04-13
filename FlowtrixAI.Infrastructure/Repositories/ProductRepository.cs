@@ -23,7 +23,21 @@ internal class ProductRepository(AppDbContext _context) : IProductRepository
         }
     }
 
-    public async Task<List<Product>> GetAllAsync() => await _context.Products.ToListAsync();
+    public async Task<List<Product>> GetAllAsync() => await _context.Products.Include(p => p.BOMs)
+    .Select(p => new Product
+    {
+        Id = p.Id,
+        Name = p.Name,
+        BOMs = p.BOMs.Select(b => new BillOfMaterial
+        {
+            Id = b.Id,
+            ComponentName = b.ComponentName,
+            QuantityRequired = b.QuantityRequired,
+            Unit = b.Unit
+            
+        }).ToList()
+    })
+        .ToListAsync();
 
     public async Task<Product?> GetByIdAsync(int id)=> await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 

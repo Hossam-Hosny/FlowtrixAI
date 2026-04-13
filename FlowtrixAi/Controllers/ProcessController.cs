@@ -11,6 +11,7 @@ namespace FlowtrixAI.Api.Controllers
     {
 
         // Add Process Step
+        [HttpPost]
         public async Task<IActionResult> AddStep(CreateProcessDto createProcessDto)
         {
             var process = new Process

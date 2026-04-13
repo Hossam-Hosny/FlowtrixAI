@@ -1,1 +1,4 @@
 wwwroot\images\products.cs
+wwwroot\images\products\bdbf055e-3627-4c78-9f63-c64df5eeb8de.jpeg
+wwwroot\images\products\d07e05ec-a5f8-48e6-a938-674925032bb0.jpeg
+wwwroot\images\products\f93abe3e-b23f-45da-8802-aa9b3e882f6c.jpeg

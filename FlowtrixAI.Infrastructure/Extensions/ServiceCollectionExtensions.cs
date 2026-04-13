@@ -34,7 +34,9 @@ namespace FlowtrixAI.Infrastructure.Extensions
             services.AddScoped<IProductionRecordRepository, ProductionRecordRepository>();
             services.AddScoped<IQualityCheckRepository, QualityCheckRepository>();
 
-            
+            services.AddScoped<IProductionOrderRepository, ProductionOrderRepository>();
+
+
 
 
         }

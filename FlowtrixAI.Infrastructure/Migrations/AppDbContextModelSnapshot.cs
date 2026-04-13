@@ -222,6 +222,37 @@ namespace FlowtrixAI.Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("FlowtrixAI.Domain.Entities.ProductionOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductionOrders");
+                });
+
             modelBuilder.Entity("FlowtrixAI.Domain.Entities.ProductionRecord", b =>
                 {
                     b.Property<int>("Id")
@@ -480,6 +511,17 @@ namespace FlowtrixAI.Infrastructure.Migrations
                 {
                     b.HasOne("FlowtrixAI.Domain.Entities.Product", "Product")
                         .WithMany("Processes")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("FlowtrixAI.Domain.Entities.ProductionOrder", b =>
+                {
+                    b.HasOne("FlowtrixAI.Domain.Entities.Product", "Product")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

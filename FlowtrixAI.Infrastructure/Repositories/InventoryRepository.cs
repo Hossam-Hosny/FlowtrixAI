@@ -27,6 +27,8 @@ internal class InventoryRepository(AppDbContext _context) : IInventoryRepository
 
     public async Task<InventoryItem?> GetByIdAsync(int id) => await _context.Inventory.FirstOrDefaultAsync(i => i.Id == id);
 
+    public async Task<InventoryItem?> GetByNameAsync(string name) => await _context.Inventory.FirstOrDefaultAsync(i => i.ComponentName == name);
+
 
     public async Task UpdateAsync(InventoryItem item)
     {

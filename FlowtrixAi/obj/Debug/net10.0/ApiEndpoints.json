@@ -61,5 +61,321 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.BOMController",
+    "Method": "AddBoMsForProduct",
+    "RelativePath": "api/BOM",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addBoMdto",
+        "Type": "FlowtrixAI.Application.BoM.Dtos.AddBoMdto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.BOMController",
+    "Method": "GetBoMsForProduct",
+    "RelativePath": "api/BOM/product/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.InventoryController",
+    "Method": "AddToInventory",
+    "RelativePath": "api/Inventory/AddToInventory",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_inventoryDto",
+        "Type": "FlowtrixAI.Application.Inventory.Dtos.CreateInventoryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.InventoryController",
+    "Method": "GetAllInventory",
+    "RelativePath": "api/Inventory/GetAllInventory",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.InventoryController",
+    "Method": "UpdateInventory",
+    "RelativePath": "api/Inventory/UpdateInventory",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_inventoryDto",
+        "Type": "FlowtrixAI.Application.Inventory.Dtos.UpdateInventoryDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProcessController",
+    "Method": "AddStep",
+    "RelativePath": "api/Process",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createProcessDto",
+        "Type": "FlowtrixAI.Application.Process.Dtos.CreateProcessDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProcessController",
+    "Method": "GetProcessByProductId",
+    "RelativePath": "api/Process/product/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductController",
+    "Method": "CreateProduct",
+    "RelativePath": "api/Product/CreateProduct",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Image",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductController",
+    "Method": "GetAllProducts",
+    "RelativePath": "api/Product/GetAllProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductController",
+    "Method": "GetProductById",
+    "RelativePath": "api/Product/GetProductById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionController",
+    "Method": "Create",
+    "RelativePath": "api/Production",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createProductionDto",
+        "Type": "FlowtrixAI.Application.Production.Dtos.CreateProductionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionController",
+    "Method": "GetAll",
+    "RelativePath": "api/Production",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionController",
+    "Method": "GetByProduct",
+    "RelativePath": "api/Production/product/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "GetAllCompletedProducts",
+    "RelativePath": "api/ProductionOrder",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "Complete",
+    "RelativePath": "api/ProductionOrder/{id}/complete",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "Deliver",
+    "RelativePath": "api/ProductionOrder/{id}/deliver",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "Fail",
+    "RelativePath": "api/ProductionOrder/{id}/fail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "Start",
+    "RelativePath": "api/ProductionOrder/{id}/start",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.QualityController",
+    "Method": "Create",
+    "RelativePath": "api/Quality",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createQualityDto",
+        "Type": "FlowtrixAI.Application.Quality.Dtos.CreateQualityDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.QualityController",
+    "Method": "GetAll",
+    "RelativePath": "api/Quality",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "CreateProductionOrder",
+    "RelativePath": "create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createProductionOrderDto",
+        "Type": "FlowtrixAI.Application.ProductionOrder.Dtos.CreateProductionOrderDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

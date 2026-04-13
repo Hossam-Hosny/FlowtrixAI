@@ -3,28 +3,157 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\inventorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.Inventory.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.Products.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\qualitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\qualitycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\quality\\dtos\\createqualitydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\quality\\dtos\\createqualitydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\product\\dtos\\createproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\product\\dtos\\createproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\processcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\processcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\middlewares\\errorhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\middlewares\\errorhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\repositories\\iproductionorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\repositories\\iproductionorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.AspNetUsers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\productionordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\productionordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\productionorder\\services\\productionorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\productionorder\\services\\productionorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\repositories\\productionorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\repositories\\productionorderrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\productionorder\\interface\\iproductionorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\productionorder\\interface\\iproductionorderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\productioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\productioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\bomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\bomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\constants\\ordersteps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\constants\\ordersteps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\constants\\productsteps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\constants\\productsteps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\entities\\productionorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\entities\\productionorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\productionorder\\dtos\\createproductionorderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\productionorder\\dtos\\createproductionorderdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\flowtrixai.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\flowtrixai.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412142953_AddingProductionOrder-Table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FlowtrixAI.Infrastructure\\Migrations\\20260412142953_AddingProductionOrder-Table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\repositories\\bomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\repositories\\bomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\repositories\\ibomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\repositories\\ibomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\entities\\billofmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\entities\\billofmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\bom\\dtos\\addbomdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\bom\\dtos\\addbomdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\inventory\\dtos\\updateinventorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\inventory\\dtos\\updateinventorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\repositories\\inventoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\repositories\\inventoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\repositories\\iinventoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\repositories\\iinventoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\inventory\\dtos\\createinventorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\inventory\\dtos\\createinventorydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\entities\\qualitycheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\entities\\qualitycheck.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\quality\\dtos\\qualityresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\quality\\dtos\\qualityresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\quality\\dtos\\createqualitydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\quality\\dtos\\createqualitydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\productioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\productioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\quality\\dtos\\qualityresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\quality\\dtos\\qualityresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\production\\dtos\\productionresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,10 +164,6 @@
       "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\production\\dtos\\createproductiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\processcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\processcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\process\\dtos\\processresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\process\\dtos\\processresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -47,36 +172,8 @@
       "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\process\\dtos\\createprocessdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\flowtrixai.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\flowtrixai.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\constants\\productsteps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\constants\\productsteps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\product\\dtos\\createproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\product\\dtos\\createproductdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\bomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\bomcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\bom\\dtos\\addbomdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\bom\\dtos\\addbomdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\product\\dtos\\productresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\product\\dtos\\productresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -91,14 +188,6 @@
       "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\flowtrixai.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412105257_AddingPhotoToProduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FlowtrixAI.Infrastructure\\Migrations\\20260412105257_AddingPhotoToProduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\production\\interface\\iproductionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\production\\interface\\iproductionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -109,14 +198,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\jwt\\interface\\ijwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\jwt\\interface\\ijwtservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|solutionrelative:flowtrixai.application\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\constants\\userroles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -136,10 +217,6 @@
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.AspNetUserLogins.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\extensions\\servicecollectionextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\seeders\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\seeders\\roleseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -150,10 +227,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\entities\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\context\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6050472F-5D38-9646-069B-92BA729757ED}|FlowtrixAI.Application\\FlowtrixAI.Application.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.application\\reports\\services\\reportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -188,20 +261,12 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:FlowtrixAI.Infrastructure\\Migrations\\20260410145428_Initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\entities\\productionrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\entities\\productionrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\entities\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\entities\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\entities\\process.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\entities\\process.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\entities\\billofmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|solutionrelative:flowtrixai.domain\\entities\\billofmaterial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -214,10 +279,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai\\middlewares\\errorhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{131C44CD-2C71-8540-B0C6-9CE21B67C7DD}|FlowtrixAi\\FlowtrixAI.Api.csproj|solutionrelative:flowtrixai\\middlewares\\errorhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2CCB0C50-3FA6-0540-3E72-0973728EFC2C}|FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.domain\\exceptions\\notfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -234,6 +295,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\migrations\\20260411175801_additentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\migrations\\20260411175801_additentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\migrations\\20260412120835_addingispassedtoqualitytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\migrations\\20260412120835_addingispassedtoqualitytable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\migrations\\20260412105257_addingphototoproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\migrations\\20260412105257_addingphototoproduct.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|c:\\users\\user\\onedrive\\desktop\\visual studio folder\\vs porjects\\siraj app\\flowtrixai solution\\flowtrixai.infrastructure\\migrations\\20260412143220_addingproductionorder-table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2A9C4751-1872-410E-100F-071B79F3D72C}|FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj|solutionrelative:flowtrixai.infrastructure\\migrations\\20260412143220_addingproductionorder-table.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -243,245 +316,96 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20260412120835_AddingIsPassedToQualityTable.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs",
-              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T12:08:35.762Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "QualityController.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\QualityController.cs",
-              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\QualityController.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\QualityController.cs",
-              "RelativeToolTip": "FlowtrixAi\\Controllers\\QualityController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAwB8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T12:01:19.008Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "QualityResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Dtos\\QualityResponseDto.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Quality\\Dtos\\QualityResponseDto.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Dtos\\QualityResponseDto.cs",
-              "RelativeToolTip": "FlowtrixAI.Application\\Quality\\Dtos\\QualityResponseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:59:43.013Z",
+              "DocumentIndex": 3,
+              "Title": "dbo.Inventory [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.Inventory.sql",
+              "ToolTip": "dbo.Inventory [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-04-13T12:39:02.95Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "CreateQualityDto.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Dtos\\CreateQualityDto.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Quality\\Dtos\\CreateQualityDto.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Dtos\\CreateQualityDto.cs",
-              "RelativeToolTip": "FlowtrixAI.Application\\Quality\\Dtos\\CreateQualityDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Repositories\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Repositories\\ProductRepository.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Repositories\\ProductRepository.cs",
+              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Repositories\\ProductRepository.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAhwCQAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:58:47.733Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ProductionController.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProductionController.cs",
-              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\ProductionController.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProductionController.cs",
-              "RelativeToolTip": "FlowtrixAi\\Controllers\\ProductionController.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAQwDIAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:49:10.604Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ProductionResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Dtos\\ProductionResponseDto.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Production\\Dtos\\ProductionResponseDto.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Dtos\\ProductionResponseDto.cs",
-              "RelativeToolTip": "FlowtrixAI.Application\\Production\\Dtos\\ProductionResponseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:47:58.422Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "QualityCheck.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\QualityCheck.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\QualityCheck.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\QualityCheck.cs",
-              "RelativeToolTip": "FlowtrixAI.Domain\\Entities\\QualityCheck.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T14:19:34.252Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "CreateProductionDto.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Dtos\\CreateProductionDto.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Production\\Dtos\\CreateProductionDto.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Dtos\\CreateProductionDto.cs",
-              "RelativeToolTip": "FlowtrixAI.Application\\Production\\Dtos\\CreateProductionDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:46:57.425Z",
+              "WhenOpened": "2026-04-13T11:49:43.225Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "ErrorHandlingMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Middlewares\\ErrorHandlingMiddleware.cs",
+              "RelativeDocumentMoniker": "FlowtrixAi\\Middlewares\\ErrorHandlingMiddleware.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Middlewares\\ErrorHandlingMiddleware.cs",
+              "RelativeToolTip": "FlowtrixAi\\Middlewares\\ErrorHandlingMiddleware.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAQwBkAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-05T14:34:54.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "ProcessController.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProcessController.cs",
               "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\ProcessController.cs",
               "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProcessController.cs",
               "RelativeToolTip": "FlowtrixAi\\Controllers\\ProcessController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAQwCkAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-12T11:36:16.888Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ProcessResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Process\\Dtos\\ProcessResponseDto.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Process\\Dtos\\ProcessResponseDto.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Process\\Dtos\\ProcessResponseDto.cs",
-              "RelativeToolTip": "FlowtrixAI.Application\\Process\\Dtos\\ProcessResponseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:35:21.014Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CreateProcessDto.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Process\\Dtos\\CreateProcessDto.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Process\\Dtos\\CreateProcessDto.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Process\\Dtos\\CreateProcessDto.cs",
-              "RelativeToolTip": "FlowtrixAI.Application\\Process\\Dtos\\CreateProcessDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:34:15.048Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ProductSteps.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Constants\\ProductSteps.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Constants\\ProductSteps.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Constants\\ProductSteps.cs",
-              "RelativeToolTip": "FlowtrixAI.Domain\\Constants\\ProductSteps.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:32:29.483Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "BOMController.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\BOMController.cs",
-              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\BOMController.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\BOMController.cs",
-              "RelativeToolTip": "FlowtrixAi\\Controllers\\BOMController.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAQwCwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:07:38.491Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 0,
               "Title": "ProductController.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\ProductController.cs",
               "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProductController.cs",
               "RelativeToolTip": "FlowtrixAi\\Controllers\\ProductController.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAwB8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-12T11:01:06.208Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "AddBoMdto.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\BoM\\Dtos\\AddBoMdto.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\BoM\\Dtos\\AddBoMdto.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\BoM\\Dtos\\AddBoMdto.cs",
-              "RelativeToolTip": "FlowtrixAI.Application\\BoM\\Dtos\\AddBoMdto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "InventoryController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\InventoryController.cs",
+              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\InventoryController.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\InventoryController.cs",
+              "RelativeToolTip": "FlowtrixAi\\Controllers\\InventoryController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T10:59:57.365Z",
+              "WhenOpened": "2026-04-12T13:25:59.163Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ProductResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Product\\Dtos\\ProductResponseDto.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Product\\Dtos\\ProductResponseDto.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Product\\Dtos\\ProductResponseDto.cs",
-              "RelativeToolTip": "FlowtrixAI.Application\\Product\\Dtos\\ProductResponseDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T10:58:11.295Z",
+              "DocumentIndex": 4,
+              "Title": "dbo.Products [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.Products.sql",
+              "ToolTip": "dbo.Products [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-04-13T11:56:54.039Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "FlowtrixAI.Application.csproj",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\FlowtrixAI.Application.csproj",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\FlowtrixAI.Application.csproj",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\FlowtrixAI.Application.csproj",
-              "RelativeToolTip": "FlowtrixAI.Application\\FlowtrixAI.Application.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-05T15:12:55.067Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "products.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\wwwroot\\images\\products.cs",
-              "RelativeDocumentMoniker": "FlowtrixAi\\wwwroot\\images\\products.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\wwwroot\\images\\products.cs",
-              "RelativeToolTip": "FlowtrixAi\\wwwroot\\images\\products.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T10:56:11.897Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 6,
               "Title": "CreateProductDto.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Product\\Dtos\\CreateProductDto.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\Product\\Dtos\\CreateProductDto.cs",
@@ -494,7 +418,478 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "QualityController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\QualityController.cs",
+              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\QualityController.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\QualityController.cs",
+              "RelativeToolTip": "FlowtrixAi\\Controllers\\QualityController.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T12:01:19.008Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Program.cs",
+              "RelativeDocumentMoniker": "FlowtrixAi\\Program.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Program.cs",
+              "RelativeToolTip": "FlowtrixAi\\Program.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAawD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-05T14:41:48.567Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ProductionOrderRepository.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Repositories\\ProductionOrderRepository.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Repositories\\ProductionOrderRepository.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Repositories\\ProductionOrderRepository.cs",
+              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Repositories\\ProductionOrderRepository.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAuwBIAAAC6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T14:49:47.388Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "FlowtrixAi\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwDEAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-11T18:23:23.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ProductionOrderController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProductionOrderController.cs",
+              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\ProductionOrderController.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProductionOrderController.cs",
+              "RelativeToolTip": "FlowtrixAi\\Controllers\\ProductionOrderController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAADwvzkAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T17:47:45.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IProductionOrderRepository.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Repositories\\IProductionOrderRepository.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Repositories\\IProductionOrderRepository.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Repositories\\IProductionOrderRepository.cs",
+              "RelativeToolTip": "FlowtrixAI.Domain\\Repositories\\IProductionOrderRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T14:48:12.36Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "dbo.AspNetUsers [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.AspNetUsers.sql",
+              "ToolTip": "dbo.AspNetUsers [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-04-12T19:19:46.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ProductionOrderService.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\ProductionOrder\\Services\\ProductionOrderService.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\ProductionOrder\\Services\\ProductionOrderService.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\ProductionOrder\\Services\\ProductionOrderService.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\ProductionOrder\\Services\\ProductionOrderService.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAGgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T14:44:59.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IProductionOrderService.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\ProductionOrder\\Interface\\IProductionOrderService.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\ProductionOrder\\Interface\\IProductionOrderService.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\ProductionOrder\\Interface\\IProductionOrderService.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\ProductionOrder\\Interface\\IProductionOrderService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T14:44:17.119Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ProductionController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProductionController.cs",
+              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\ProductionController.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\ProductionController.cs",
+              "RelativeToolTip": "FlowtrixAi\\Controllers\\ProductionController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:49:10.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "BOMController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\BOMController.cs",
+              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\BOMController.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\BOMController.cs",
+              "RelativeToolTip": "FlowtrixAi\\Controllers\\BOMController.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAQwC4AAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:07:38.491Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "OrderSteps.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Constants\\OrderSteps.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Constants\\OrderSteps.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Constants\\OrderSteps.cs",
+              "RelativeToolTip": "FlowtrixAI.Domain\\Constants\\OrderSteps.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T17:58:15.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ProductSteps.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Constants\\ProductSteps.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Constants\\ProductSteps.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Constants\\ProductSteps.cs",
+              "RelativeToolTip": "FlowtrixAI.Domain\\Constants\\ProductSteps.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:32:29.483Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ProductionOrder.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\ProductionOrder.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\ProductionOrder.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\ProductionOrder.cs",
+              "RelativeToolTip": "FlowtrixAI.Domain\\Entities\\ProductionOrder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T14:27:16.495Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 22,
+              "Title": "ServiceCollectionExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Extensions\\ServiceCollectionExtensions.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Extensions\\ServiceCollectionExtensions.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB4AAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-05T15:13:10.86Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "CreateProductionOrderDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\ProductionOrder\\Dtos\\CreateProductionOrderDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\ProductionOrder\\Dtos\\CreateProductionOrderDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\ProductionOrder\\Dtos\\CreateProductionOrderDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\ProductionOrder\\Dtos\\CreateProductionOrderDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T14:33:20.243Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "ServiceCollectionExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
+              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAUwCAAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-05T15:14:35.898Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "20260412143220_AddingProductionOrder-Table.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412143220_AddingProductionOrder-Table.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Migrations\\20260412143220_AddingProductionOrder-Table.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412143220_AddingProductionOrder-Table.cs",
+              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Migrations\\20260412143220_AddingProductionOrder-Table.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T14:32:20.657Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "20260412142953_AddingProductionOrder-Table.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412142953_AddingProductionOrder-Table.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Migrations\\20260412142953_AddingProductionOrder-Table.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412142953_AddingProductionOrder-Table.cs",
+              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Migrations\\20260412142953_AddingProductionOrder-Table.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T14:29:54.032Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "BomRepository.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Repositories\\BomRepository.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Repositories\\BomRepository.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Repositories\\BomRepository.cs",
+              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Repositories\\BomRepository.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAvwCEAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T13:57:39.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "FlowtrixAI.Application.csproj",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\FlowtrixAI.Application.csproj",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\FlowtrixAI.Application.csproj",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\FlowtrixAI.Application.csproj",
+              "RelativeToolTip": "FlowtrixAI.Application\\FlowtrixAI.Application.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-05T15:12:55.067Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "IBomRepository.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Repositories\\IBomRepository.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Repositories\\IBomRepository.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Repositories\\IBomRepository.cs",
+              "RelativeToolTip": "FlowtrixAI.Domain\\Repositories\\IBomRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T13:59:18.528Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Context\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Context\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Context\\AppDbContext.cs",
+              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Context\\AppDbContext.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAQwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T14:32:22.094Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "BillOfMaterial.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\BillOfMaterial.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\BillOfMaterial.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\BillOfMaterial.cs",
+              "RelativeToolTip": "FlowtrixAI.Domain\\Entities\\BillOfMaterial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T14:12:10.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "AddBoMdto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\BoM\\Dtos\\AddBoMdto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\BoM\\Dtos\\AddBoMdto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\BoM\\Dtos\\AddBoMdto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\BoM\\Dtos\\AddBoMdto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T10:59:57.365Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "UpdateInventoryDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Inventory\\Dtos\\UpdateInventoryDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Inventory\\Dtos\\UpdateInventoryDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Inventory\\Dtos\\UpdateInventoryDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Inventory\\Dtos\\UpdateInventoryDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T13:25:09.907Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "InventoryRepository.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Repositories\\InventoryRepository.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Repositories\\InventoryRepository.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Repositories\\InventoryRepository.cs",
+              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Repositories\\InventoryRepository.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwB4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T13:38:36.744Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "IInventoryRepository.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Repositories\\IInventoryRepository.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Repositories\\IInventoryRepository.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Repositories\\IInventoryRepository.cs",
+              "RelativeToolTip": "FlowtrixAI.Domain\\Repositories\\IInventoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T13:38:56.305Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "CreateInventoryDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Inventory\\Dtos\\CreateInventoryDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Inventory\\Dtos\\CreateInventoryDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Inventory\\Dtos\\CreateInventoryDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Inventory\\Dtos\\CreateInventoryDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T13:23:59.146Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "20260412120835_AddingIsPassedToQualityTable.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs",
+              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Migrations\\20260412120835_AddingIsPassedToQualityTable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T12:08:35.762Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "QualityResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Dtos\\QualityResponseDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Quality\\Dtos\\QualityResponseDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Dtos\\QualityResponseDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Quality\\Dtos\\QualityResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:59:43.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "CreateQualityDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Dtos\\CreateQualityDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Quality\\Dtos\\CreateQualityDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Dtos\\CreateQualityDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Quality\\Dtos\\CreateQualityDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:58:47.733Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "QualityCheck.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\QualityCheck.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\QualityCheck.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\QualityCheck.cs",
+              "RelativeToolTip": "FlowtrixAI.Domain\\Entities\\QualityCheck.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T14:19:34.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "ProductionResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Dtos\\ProductionResponseDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Production\\Dtos\\ProductionResponseDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Dtos\\ProductionResponseDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Production\\Dtos\\ProductionResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:47:58.422Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "CreateProductionDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Dtos\\CreateProductionDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Production\\Dtos\\CreateProductionDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Dtos\\CreateProductionDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Production\\Dtos\\CreateProductionDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:46:57.425Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "ProcessResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Process\\Dtos\\ProcessResponseDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Process\\Dtos\\ProcessResponseDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Process\\Dtos\\ProcessResponseDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Process\\Dtos\\ProcessResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:35:21.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "CreateProcessDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Process\\Dtos\\CreateProcessDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Process\\Dtos\\CreateProcessDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Process\\Dtos\\CreateProcessDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Process\\Dtos\\CreateProcessDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:34:15.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "ProductResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Product\\Dtos\\ProductResponseDto.cs",
+              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Product\\Dtos\\ProductResponseDto.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Product\\Dtos\\ProductResponseDto.cs",
+              "RelativeToolTip": "FlowtrixAI.Application\\Product\\Dtos\\ProductResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T10:58:11.295Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "products.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\wwwroot\\images\\products.cs",
+              "RelativeDocumentMoniker": "FlowtrixAi\\wwwroot\\images\\products.cs",
+              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\wwwroot\\images\\products.cs",
+              "RelativeToolTip": "FlowtrixAi\\wwwroot\\images\\products.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T10:56:11.897Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
               "Title": "20260412105257_AddingPhotoToProduct.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260412105257_AddingPhotoToProduct.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Migrations\\20260412105257_AddingPhotoToProduct.cs",
@@ -502,12 +897,11 @@
               "RelativeToolTip": "FlowtrixAI.Infrastructure\\Migrations\\20260412105257_AddingPhotoToProduct.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T10:52:57.136Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-12T10:52:57.136Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 48,
               "Title": "JwtService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\JWT\\Services\\JwtService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\JWT\\Services\\JwtService.cs",
@@ -515,12 +909,11 @@
               "RelativeToolTip": "FlowtrixAI.Application\\JWT\\Services\\JwtService.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAIAxwBMAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T18:07:57.372Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-11T18:07:57.372Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 49,
               "Title": "IJwtService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\JWT\\Interface\\IJwtService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\JWT\\Interface\\IJwtService.cs",
@@ -528,12 +921,11 @@
               "RelativeToolTip": "FlowtrixAI.Application\\JWT\\Interface\\IJwtService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T18:03:38.438Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-11T18:03:38.438Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 44,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\appsettings.json",
               "RelativeDocumentMoniker": "FlowtrixAi\\appsettings.json",
@@ -541,38 +933,11 @@
               "RelativeToolTip": "FlowtrixAi\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-05T15:19:41.973Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-05T15:19:41.973Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Program.cs",
-              "RelativeDocumentMoniker": "FlowtrixAi\\Program.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Program.cs",
-              "RelativeToolTip": "FlowtrixAi\\Program.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAAAEkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T14:41:48.567Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "FlowtrixAi\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "FlowtrixAi\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAQwCMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T18:23:23.286Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 46,
               "Title": "FlowtrixAI.Api.csproj",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\FlowtrixAI.Api.csproj",
               "RelativeDocumentMoniker": "FlowtrixAi\\FlowtrixAI.Api.csproj",
@@ -580,25 +945,11 @@
               "RelativeToolTip": "FlowtrixAi\\FlowtrixAI.Api.csproj",
               "ViewState": "AgIAAAIAAAAAAAAAAAAuwBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-05T14:34:38.756Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-05T14:34:38.756Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "ServiceCollectionExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Extensions\\ServiceCollectionExtensions.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Application\\Extensions\\ServiceCollectionExtensions.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Extensions\\ServiceCollectionExtensions.cs",
-              "RelativeToolTip": "FlowtrixAI.Application\\Extensions\\ServiceCollectionExtensions.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAAABwAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T15:13:10.86Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 47,
               "Title": "IProductionService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Interface\\IProductionService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\Production\\Interface\\IProductionService.cs",
@@ -606,25 +957,11 @@
               "RelativeToolTip": "FlowtrixAI.Application\\Production\\Interface\\IProductionService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-11T11:11:44.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-11T11:11:44.436Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\Product.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\Product.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\Product.cs",
-              "RelativeToolTip": "FlowtrixAI.Domain\\Entities\\Product.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAxwA0AAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T14:08:01.579Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 50,
               "Title": "UserRoles.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Constants\\UserRoles.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Constants\\UserRoles.cs",
@@ -632,12 +969,11 @@
               "RelativeToolTip": "FlowtrixAI.Domain\\Constants\\UserRoles.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T10:38:52.276Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-12T10:38:52.276Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 51,
               "Title": "FlowtrixAI.Domain.csproj",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj",
               "RelativeDocumentMoniker": "FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj",
@@ -645,12 +981,11 @@
               "RelativeToolTip": "FlowtrixAI.Domain\\FlowtrixAI.Domain.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-04-05T14:28:49.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-05T14:28:49.531Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 53,
               "Title": "dbo.AspNetRoles.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.AspNetRoles.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.AspNetRoles.sql",
@@ -659,7 +994,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 52,
               "Title": "dbo.AspNetUserRoles.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.AspNetUserRoles.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.AspNetUserRoles.sql",
@@ -668,7 +1003,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 55,
               "Title": "RoleSeeder.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Seeders\\RoleSeeder.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Seeders\\RoleSeeder.cs",
@@ -680,7 +1015,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 54,
               "Title": "dbo.AspNetUserLogins.sql",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.AspNetUserLogins.sql",
               "ToolTip": "ViewDataWindow_MSSQL__/_localdb__MSSQLLocalDB/FlowtrixAI/True/SqlTable/dbo.AspNetUserLogins.sql",
@@ -689,19 +1024,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "ServiceCollectionExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
-              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Extensions\\ServiceCollectionExtensions.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAUwCQAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T15:14:35.898Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 56,
               "Title": "FlowtrixAI.Infrastructure.csproj",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj",
               "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\FlowtrixAI.Infrastructure.csproj",
@@ -713,7 +1036,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 73,
               "Title": "20260411184224_Initial.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260411184224_Initial.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Migrations\\20260411184224_Initial.cs",
@@ -725,7 +1048,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 57,
               "Title": "AppUser.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\AppUser.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\AppUser.cs",
@@ -737,7 +1060,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 74,
               "Title": "20260411175801_AddItentity.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260411175801_AddItentity.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Migrations\\20260411175801_AddItentity.cs",
@@ -749,19 +1072,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Context\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Context\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Context\\AppDbContext.cs",
-              "RelativeToolTip": "FlowtrixAI.Infrastructure\\Context\\AppDbContext.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAIwBwAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T14:32:22.094Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 63,
               "Title": "InventoryService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Inventory\\Services\\InventoryService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\Inventory\\Services\\InventoryService.cs",
@@ -773,7 +1084,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 61,
               "Title": "IQualityService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Interface\\IQualityService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\Quality\\Interface\\IQualityService.cs",
@@ -785,7 +1096,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 59,
               "Title": "IReportService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Reports\\Interface\\IReportService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\Reports\\Interface\\IReportService.cs",
@@ -797,7 +1108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 58,
               "Title": "ReportService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Reports\\Services\\ReportService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\Reports\\Services\\ReportService.cs",
@@ -809,7 +1120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 60,
               "Title": "QualityService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Quality\\Services\\QualityService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\Quality\\Services\\QualityService.cs",
@@ -821,7 +1132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 62,
               "Title": "ProductionService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Production\\Services\\ProductionService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\Production\\Services\\ProductionService.cs",
@@ -833,7 +1144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 64,
               "Title": "IInventoryService.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Application\\Inventory\\Interface\\IInventoryService.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Application\\Inventory\\Interface\\IInventoryService.cs",
@@ -845,7 +1156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 65,
               "Title": "20260410145428_Initial.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Infrastructure\\Migrations\\20260410145428_Initial.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Infrastructure\\Migrations\\20260410145428_Initial.cs",
@@ -856,19 +1167,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
-              "Title": "ProductionRecord.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\ProductionRecord.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\ProductionRecord.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\ProductionRecord.cs",
-              "RelativeToolTip": "FlowtrixAI.Domain\\Entities\\ProductionRecord.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAxwBUAAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T14:17:40.759Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 66,
               "Title": "Report.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\Report.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\Report.cs",
@@ -876,12 +1175,11 @@
               "RelativeToolTip": "FlowtrixAI.Domain\\Entities\\Report.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T14:23:29.715Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-10T14:23:29.715Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 67,
               "Title": "Process.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\Process.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\Process.cs",
@@ -889,24 +1187,11 @@
               "RelativeToolTip": "FlowtrixAI.Domain\\Entities\\Process.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T14:15:45.232Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-10T14:15:45.232Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
-              "Title": "BillOfMaterial.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\BillOfMaterial.cs",
-              "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Entities\\BillOfMaterial.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Entities\\BillOfMaterial.cs",
-              "RelativeToolTip": "FlowtrixAI.Domain\\Entities\\BillOfMaterial.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T14:12:10.168Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 68,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "FlowtrixAi\\Properties\\launchSettings.json",
@@ -918,7 +1203,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 69,
               "Title": "WebApplicationBuilderExtensions.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Extensions\\WebApplicationBuilderExtensions.cs",
               "RelativeDocumentMoniker": "FlowtrixAi\\Extensions\\WebApplicationBuilderExtensions.cs",
@@ -930,7 +1215,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 70,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\appsettings.Development.json",
               "RelativeDocumentMoniker": "FlowtrixAi\\appsettings.Development.json",
@@ -942,19 +1227,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
-              "Title": "ErrorHandlingMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Middlewares\\ErrorHandlingMiddleware.cs",
-              "RelativeDocumentMoniker": "FlowtrixAi\\Middlewares\\ErrorHandlingMiddleware.cs",
-              "ToolTip": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAi\\Middlewares\\ErrorHandlingMiddleware.cs",
-              "RelativeToolTip": "FlowtrixAi\\Middlewares\\ErrorHandlingMiddleware.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAgwBkAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-05T14:34:54.177Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 71,
               "Title": "NotFoundException.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Exceptions\\NotFoundException.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Exceptions\\NotFoundException.cs",
@@ -966,7 +1239,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 72,
               "Title": "ForbidenException.cs",
               "DocumentMoniker": "C:\\Users\\USER\\OneDrive\\Desktop\\Visual Studio Folder\\vs Porjects\\Siraj App\\FlowtrixAi Solution\\FlowtrixAI.Domain\\Exceptions\\ForbidenException.cs",
               "RelativeDocumentMoniker": "FlowtrixAI.Domain\\Exceptions\\ForbidenException.cs",

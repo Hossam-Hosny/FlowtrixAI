@@ -1,18 +1,22 @@
 ﻿using FlowtrixAI.Application.Product.Dtos;
 using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System.Security.Claims;
 
 namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductController(IProductRepository _productRepository) : ControllerBase
     {
 
         // Create Product
-        [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto createProductDto)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> CreateProduct([FromForm] CreateProductDto createProductDto)
         {
             var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/products");
 
@@ -29,15 +33,20 @@ namespace FlowtrixAI.Api.Controllers
                     await createProductDto.Image.CopyToAsync(stream);
             }
 
+            //   var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-
+            var userId = 1;
 
 
             var product = new Product
             {
                 Name = createProductDto.Name,
+                CreatedAt= DateTime.UtcNow,
+                CreatedBy = userId.ToString(),
+                
                 Description = createProductDto.Description,
                 ImagePath =$"/images/products/{fileName}",
+                
             };
 
             await _productRepository.AddAsync(product);
@@ -46,7 +55,7 @@ namespace FlowtrixAI.Api.Controllers
 
         }
         // Get All Products
-        [HttpGet]
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetAllProducts()
         {
             var products = await _productRepository.GetAllAsync();
@@ -57,7 +66,7 @@ namespace FlowtrixAI.Api.Controllers
         }
 
         // Get Product by Id
-        [HttpGet("{id}")]
+        [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);

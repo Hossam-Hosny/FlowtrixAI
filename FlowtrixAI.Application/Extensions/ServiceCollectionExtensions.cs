@@ -4,6 +4,8 @@ using FlowtrixAI.Application.JWT.Interface;
 using FlowtrixAI.Application.JWT.Services;
 using FlowtrixAI.Application.Production.Interface;
 using FlowtrixAI.Application.Production.Services;
+using FlowtrixAI.Application.ProductionOrder.Interface;
+using FlowtrixAI.Application.ProductionOrder.Services;
 using FlowtrixAI.Application.Quality.Interface;
 using FlowtrixAI.Application.Quality.Services;
 using FlowtrixAI.Application.Reports.Interface;
@@ -26,6 +28,7 @@ namespace FlowtrixAI.Application.Extensions
             services.AddScoped<IReportService, ReportService>();
 
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IProductionOrderService, ProductionOrderService>();
             
 
 

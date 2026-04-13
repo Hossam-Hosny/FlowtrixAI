@@ -1,4 +1,5 @@
 ﻿using FlowtrixAI.Application.BoM.Dtos;
+using FlowtrixAI.Application.BoM.Interface;
 using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +8,7 @@ namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BOMController(IBomRepository _bomRepository) : ControllerBase
+    public class BOMController(IBoMService _boMService) : ControllerBase
     {
 
         // Add Component to BoM
@@ -17,19 +18,18 @@ namespace FlowtrixAI.Api.Controllers
         /// <param name="addBoMdto">The DTO containing the details of the component to be added to the BoM.</param>
         /// <returns>The added BoM component.</returns>
 
-        [HttpPost]
+        [HttpPost("[action]")]
         public async Task<IActionResult> AddBoMsForProduct(AddBoMdto addBoMdto)
         {
-            var bom = new BillOfMaterial
-            {
-                ProductId = addBoMdto.ProductId,
-                ComponentName = addBoMdto.ComponentName,
-                QuantityRequired = addBoMdto.Quantity,
-                Unit = addBoMdto.Unit.ToString()
-            };
+           if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            await _bomRepository.AddAsync(bom);
-            return Ok(bom);
+           var result = await _boMService.AddBoMForProduct(addBoMdto);
+
+            if (result ==false)
+                return BadRequest("No Product Found For This raw Materials");
+
+            return Ok("BoM Successfully added");
 
 
 
@@ -41,18 +41,18 @@ namespace FlowtrixAI.Api.Controllers
         /// </summary>
         /// <param name="productId">The ID of the product for which to retrieve the BoM.</param>
         /// <returns>The BoM components for the specified product.</returns>
-        [HttpGet("product/{productId}")]
-        public async Task<IActionResult> GetBoMsForProduct(int productId)
-        {
-            var boms = await _bomRepository.GetByIdAsync(productId);
+        //[HttpGet("product/{productId}")]
+        //public async Task<IActionResult> GetBoMsForProduct(int productId)
+        //{
+        //    var boms = await _bomRepository.GetByIdAsync(productId);
 
-            if (boms == null)
-            {
-                return NotFound();
-            }
-            return Ok(boms);
+        //    if (boms == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(boms);
 
-        }
+        //}
 
 
     }

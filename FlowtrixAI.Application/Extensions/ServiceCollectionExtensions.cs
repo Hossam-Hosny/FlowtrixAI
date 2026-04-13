@@ -1,4 +1,6 @@
-﻿using FlowtrixAI.Application.Inventory.Interface;
+﻿using FlowtrixAI.Application.BoM.Interface;
+using FlowtrixAI.Application.BoM.Services;
+using FlowtrixAI.Application.Inventory.Interface;
 using FlowtrixAI.Application.Inventory.Services;
 using FlowtrixAI.Application.JWT.Interface;
 using FlowtrixAI.Application.JWT.Services;
@@ -32,6 +34,7 @@ namespace FlowtrixAI.Application.Extensions
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IProductionOrderService, ProductionOrderService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IBoMService,BoMService>();
             
 
 

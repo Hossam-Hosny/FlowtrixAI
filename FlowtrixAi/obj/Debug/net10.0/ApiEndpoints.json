@@ -79,22 +79,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "FlowtrixAI.Api.Controllers.BOMController",
-    "Method": "GetBoMsForProduct",
-    "RelativePath": "api/BOM/product/{productId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "productId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "FlowtrixAI.Api.Controllers.InventoryController",
     "Method": "AddToInventory",
     "RelativePath": "api/Inventory/AddToInventory",

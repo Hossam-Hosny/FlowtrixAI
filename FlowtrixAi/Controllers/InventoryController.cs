@@ -1,6 +1,5 @@
 ﻿using FlowtrixAI.Application.Inventory.Dtos;
-using FlowtrixAI.Domain.Entities;
-using FlowtrixAI.Domain.Repositories;
+using FlowtrixAI.Application.Inventory.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -8,7 +7,7 @@ namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InventoryController(IInventoryRepository _inventoryRepository) : ControllerBase
+    public class InventoryController(IInventoryService _inventoryService) : ControllerBase
     {
 
         
@@ -20,22 +19,18 @@ namespace FlowtrixAI.Api.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> AddToInventory(CreateInventoryDto _inventoryDto)
         {
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
 
 
-            var item = new InventoryItem
-            {
-                ComponentName = _inventoryDto.MaterialName,
-                QuantityAvailable = _inventoryDto.Quantity,
-                Unit = _inventoryDto.unit.ToString(),
-                UpdatedById = userId,
-                UpdateAt = DateTime.UtcNow,
+            //var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userId = 3;
 
-            };
+           var result = await _inventoryService.AddItemAsync(_inventoryDto, userId);
 
-            await _inventoryRepository.AddAsync(item);
-            return Ok(item);
+            return Ok("Item Added to Inventory Successfully");
 
 
         }
@@ -48,7 +43,11 @@ namespace FlowtrixAI.Api.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAllInventory()
         {
-            var inventoryItems = await _inventoryRepository.GetAllAsync();
+            var inventoryItems = await _inventoryService.GetAllAsync();
+
+            if (inventoryItems is null)
+                return NotFound("No Inventory Items Found");
+
             return Ok(inventoryItems);
 
         }
@@ -66,22 +65,21 @@ namespace FlowtrixAI.Api.Controllers
         [HttpPut("[action]")]
         public async Task<IActionResult> UpdateInventory(UpdateInventoryDto _inventoryDto)
         {
-            var item = await _inventoryRepository.GetByIdAsync(_inventoryDto.ComponentId);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            // If you want to find by name instead, you can use
-           //   var item = await _inventoryRepository.GetByNameAsync(_inventoryDto.MaterialName);
+          //  var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+          var userId = 3;
 
-            if (item == null)
-            {
-                return NotFound();
-            }
+            var result = await _inventoryService.UpdateItemAsync(_inventoryDto,userId);
 
-            item.QuantityAvailable = _inventoryDto.Quantity;
-            item.UpdateAt = DateTime.UtcNow;
-            item.UpdatedById = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (result == false)
+                return NotFound("Inventory Item Not Found");
 
-            await _inventoryRepository.UpdateAsync(item);
-            return Ok(item);
+            return Ok("Inventory Item Updated Successfully");
+
+
+            
         }
     }
 }

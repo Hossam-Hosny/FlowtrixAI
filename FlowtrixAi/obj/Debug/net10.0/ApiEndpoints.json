@@ -65,7 +65,7 @@
   {
     "ContainingType": "FlowtrixAI.Api.Controllers.BOMController",
     "Method": "AddBoMsForProduct",
-    "RelativePath": "api/BOM",
+    "RelativePath": "api/BOM/AddBoMsForProduct",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

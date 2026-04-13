@@ -4,5 +4,5 @@ public class CreateInventoryDto
 {
     public string MaterialName { get; set; }
     public int Quantity { get; set; }
-    public int unit { get; set; }
+    public string unit { get; set; }
 }

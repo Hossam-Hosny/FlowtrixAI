@@ -1,17 +1,34 @@
-﻿using FlowtrixAI.Application.Inventory.Interface;
+﻿using FlowtrixAI.Application.Inventory.Dtos;
+using FlowtrixAI.Application.Inventory.Interface;
 using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Exceptions;
 using FlowtrixAI.Domain.Repositories;
+using System.Security.Claims;
 
 namespace FlowtrixAI.Application.Inventory.Services;
 
 internal class InventoryService(IInventoryRepository _inventoryRepository) 
     : IInventoryService
 {
-    public async Task AddItemAsync(InventoryItem item)
+    public async Task<bool> AddItemAsync(CreateInventoryDto _inventoryDto, int userId)
     {
-        item.UpdateAt = DateTime.UtcNow;
+
+
+        var item = new InventoryItem
+        {
+            ComponentName = _inventoryDto.MaterialName,
+            QuantityAvailable = _inventoryDto.Quantity,
+            Unit = _inventoryDto.unit.ToString(),
+            UpdatedById = userId,
+            UpdateAt = DateTime.UtcNow,
+          
+
+        };
+
+        
         await _inventoryRepository.AddAsync(item);
+
+        return true;
     }
 
     /// <summary>
@@ -40,7 +57,20 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
 
     }
 
-    public async Task<IEnumerable<InventoryItem>> GetAllAsync()=> await _inventoryRepository.GetAllAsync();
+    public async Task<IEnumerable<InventoryResponseDto>> GetAllAsync()
+    {
+        var items = await _inventoryRepository.GetAllAsync();
+        return items.Select(x => new InventoryResponseDto
+        {
+            ComponentId = x.Id,
+            ComponentName = x.ComponentName,
+            QuantityAvailable = x.QuantityAvailable,
+            Unit = x.Unit,
+            UpdateAt = x.UpdateAt,
+            UpdatedById = x.UpdatedById
+            
+        });
+    }
    
 
     public async Task<InventoryItem?> GetByIdAsync(int id)=> await _inventoryRepository.GetByIdAsync(id);
@@ -63,9 +93,25 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
         return item.QuantityAvailable >= requiredQuantity;
     }
 
-    public Task UpdateItemAsync(InventoryItem item)
+    public async Task<bool> UpdateItemAsync(UpdateInventoryDto _inventoryDto , int userId)
     {
+        var item = await _inventoryRepository.GetByIdAsync(_inventoryDto.ComponentId);
+
+        // If you want to find by name instead, you can use
+        //   var item = await _inventoryRepository.GetByNameAsync(_inventoryDto.MaterialName);
+
+        if (item is null)
+            return false;
+
+        item.ComponentName = _inventoryDto.MaterialName;
+        item.QuantityAvailable = _inventoryDto.Quantity;
         item.UpdateAt = DateTime.UtcNow;
-        return _inventoryRepository.UpdateAsync(item);
+        item.UpdatedById = userId;
+
+
+        await _inventoryRepository.UpdateAsync(item);
+        return true;
+
+       
     }
 }

@@ -135,6 +135,12 @@ internal class ProductionOrderService(IBomRepository _bomRepository
         
     }
 
+    public async Task<int> GetNumberOfAllFaildOrders()
+    {
+        var orders = await _productionOrderRepository.GetAllFaildOrdersAsync();
+        return orders.Count();
+    }
+
     public async Task<string> StartOrderAsync(int orderId)
     {
         var order = await _productionOrderRepository.GetByIdAsync(orderId);

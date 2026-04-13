@@ -338,6 +338,16 @@
   },
   {
     "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "GetNumberOfAllFaildOrders",
+    "RelativePath": "api/ProductionOrder/FaildOrdersNo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
     "Method": "GetAll",
     "RelativePath": "api/ProductionOrder/GetAll",
     "HttpMethod": "GET",

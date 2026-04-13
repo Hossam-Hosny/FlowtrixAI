@@ -9,4 +9,6 @@ public interface IProductionOrderRepository
     Task<List<ProductionOrder>> GetAllAsync();
     Task UpdateAsync (ProductionOrder order);
     Task<IEnumerable<ProductionOrder>> GetAllCompletedOrders();
+    Task<IEnumerable<ProductionOrder>> GetAllFaildOrdersAsync();
+
 }

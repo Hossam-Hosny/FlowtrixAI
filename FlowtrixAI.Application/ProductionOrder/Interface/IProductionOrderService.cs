@@ -13,6 +13,7 @@ public interface IProductionOrderService
     Task<string> FailOrderAsync(int orderId);
     Task<string> DeliverOrderAsync(int orderId);
     Task<int> GetNumberOfAllCompletedOrders();
+    Task<int> GetNumberOfAllFaildOrders();
     Task<IEnumerable<ProductionOrdersResponse>> GetAllOrdersAsync();
     
 }

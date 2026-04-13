@@ -17,7 +17,9 @@ internal class ProductionOrderRepository(AppDbContext _context) : IProductionOrd
     public async Task<List<ProductionOrder>> GetAllAsync()=> await _context.ProductionOrders.Include(o=>o.Product).ToListAsync();
 
     public async Task<IEnumerable<ProductionOrder>> GetAllCompletedOrders()=>await _context.ProductionOrders.Include(o=>o.Product).Where(x=>x.Status==OrderSteps.Completed).ToListAsync();
-    
+
+    public async Task<IEnumerable<ProductionOrder>> GetAllFaildOrdersAsync() => await _context.ProductionOrders.Where(o => o.Status == OrderSteps.Rejected).ToListAsync();
+   
 
     public async Task<ProductionOrder?> GetByIdAsync(int id)=> await _context.ProductionOrders.Include(o=>o.Product).FirstOrDefaultAsync(o=>o.Id==id);
 

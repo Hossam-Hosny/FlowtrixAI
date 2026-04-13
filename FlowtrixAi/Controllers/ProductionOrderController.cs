@@ -51,16 +51,28 @@ namespace FlowtrixAI.Api.Controllers
             return Ok(result);
         }
 
-        // get all Completed Products
+        // get all Completed Orders
         [HttpGet("CompletedOrdersNo")]
         public async Task<IActionResult> GetNumberOfAllCompletedOrders()
         {
             var result = await _productionOrderService.GetNumberOfAllCompletedOrders();
             if (result == 0)
-                return BadRequest("there is no Completed Orders Yet!");
+                return BadRequest(" 0 => there is no Completed Orders Yet!");
 
              return Ok(result);
         }
+
+        // get all Fail Orders
+        [HttpGet("FaildOrdersNo")]
+        public async Task<IActionResult> GetNumberOfAllFaildOrders()
+        {
+            var result = await _productionOrderService.GetNumberOfAllFaildOrders();
+            if (result == 0)
+                return BadRequest(" 0 => there is no Faild Orders Yet!");
+
+             return Ok(result);
+        }
+
 
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAll()

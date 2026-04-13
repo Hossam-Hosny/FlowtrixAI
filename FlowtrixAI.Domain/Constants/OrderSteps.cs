@@ -7,4 +7,5 @@ public class OrderSteps
     public const string Completed = "Completed";
     public const string Rejected = "Rejected";
     public const string Approved = "Approved";
+    public const string Delivered = "Delivered";
 }

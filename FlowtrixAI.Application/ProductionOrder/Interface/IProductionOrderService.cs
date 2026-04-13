@@ -1,4 +1,5 @@
-﻿using FlowtrixAI.Domain.Entities;
+﻿using FlowtrixAI.Application.ProductionOrder.Dtos;
+using FlowtrixAI.Domain.Entities;
 
 namespace FlowtrixAI.Application.ProductionOrder.Interface;
 
@@ -11,6 +12,7 @@ public interface IProductionOrderService
 
     Task<string> FailOrderAsync(int orderId);
     Task<string> DeliverOrderAsync(int orderId);
-    Task<int> GetAllCompletedOrders();
+    Task<int> GetNumberOfAllCompletedOrders();
+    Task<IEnumerable<ProductionOrdersResponse>> GetAllOrdersAsync();
     
 }

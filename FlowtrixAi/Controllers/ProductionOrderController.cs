@@ -11,10 +11,11 @@ namespace FlowtrixAI.Api.Controllers
     public class ProductionOrderController(IProductionOrderService _productionOrderService) : ControllerBase
     {
 
-        [HttpPost("/create")]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateProductionOrder(CreateProductionOrderDto createProductionOrderDto)
         {
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+          //  var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userId = 3; // Temporary hardcoded user ID for testing purposes
 
             var result = await _productionOrderService.CreateOrderAsync(createProductionOrderDto.ProductId, createProductionOrderDto.Quantity, userId);
             return Ok(result);
@@ -51,14 +52,23 @@ namespace FlowtrixAI.Api.Controllers
         }
 
         // get all Completed Products
-        [HttpGet]
-        public async Task<IActionResult> GetAllCompletedProducts()
+        [HttpGet("CompletedOrdersNo")]
+        public async Task<IActionResult> GetNumberOfAllCompletedOrders()
         {
-            var result = await _productionOrderService.GetAllCompletedOrders();
-            if (result == null)
+            var result = await _productionOrderService.GetNumberOfAllCompletedOrders();
+            if (result == 0)
                 return BadRequest("there is no Completed Orders Yet!");
 
              return Ok(result);
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAll()
+        {
+            var result = await _productionOrderService.GetAllOrdersAsync();
+            if (result == null || !result.Any())
+                return NotFound("No Production Orders Found");
+            return Ok(result);
         }
 
 

@@ -248,16 +248,6 @@
   },
   {
     "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
-    "Method": "GetAllCompletedProducts",
-    "RelativePath": "api/ProductionOrder",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
     "Method": "Complete",
     "RelativePath": "api/ProductionOrder/{id}/complete",
     "HttpMethod": "POST",
@@ -321,6 +311,42 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "GetNumberOfAllCompletedOrders",
+    "RelativePath": "api/ProductionOrder/CompletedOrdersNo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "CreateProductionOrder",
+    "RelativePath": "api/ProductionOrder/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createProductionOrderDto",
+        "Type": "FlowtrixAI.Application.ProductionOrder.Dtos.CreateProductionOrderDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
+    "Method": "GetAll",
+    "RelativePath": "api/ProductionOrder/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FlowtrixAI.Api.Controllers.QualityController",
     "Method": "Create",
     "RelativePath": "api/Quality",
@@ -344,22 +370,6 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FlowtrixAI.Api.Controllers.ProductionOrderController",
-    "Method": "CreateProductionOrder",
-    "RelativePath": "create",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "createProductionOrderDto",
-        "Type": "FlowtrixAI.Application.ProductionOrder.Dtos.CreateProductionOrderDto",
-        "IsRequired": true
-      }
-    ],
     "ReturnTypes": []
   }
 ]

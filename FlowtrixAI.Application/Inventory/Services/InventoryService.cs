@@ -12,23 +12,36 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
 {
     public async Task<bool> AddItemAsync(CreateInventoryDto _inventoryDto, int userId)
     {
+        var component = await _inventoryRepository.GetByNameAsync(_inventoryDto.MaterialName);
 
-
-        var item = new InventoryItem
+        if (component != null)
         {
-            ComponentName = _inventoryDto.MaterialName,
-            QuantityAvailable = _inventoryDto.Quantity,
-            Unit = _inventoryDto.unit.ToString(),
-            UpdatedById = userId,
-            UpdateAt = DateTime.UtcNow,
-          
+            component.QuantityAvailable += _inventoryDto.Quantity;
+            component.UpdatedById = userId;
+            component.UpdateAt = DateTime.UtcNow;
+            await _inventoryRepository.UpdateAsync(component);
+            return true;
+        }
+        else
+        {
+            var item = new InventoryItem
+            {
+                ComponentName = _inventoryDto.MaterialName,
+                QuantityAvailable = _inventoryDto.Quantity,
+                Unit = _inventoryDto.unit.ToString(),
+                UpdatedById = userId,
+                UpdateAt = DateTime.UtcNow,
 
-        };
 
-        
-        await _inventoryRepository.AddAsync(item);
+            };
 
-        return true;
+
+            await _inventoryRepository.AddAsync(item);
+
+            return true;
+        }
+
+      
     }
 
     /// <summary>

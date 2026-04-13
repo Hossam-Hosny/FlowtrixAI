@@ -1,80 +1,73 @@
 ﻿using FlowtrixAI.Application.Product.Dtos;
-using FlowtrixAI.Domain.Entities;
-using FlowtrixAI.Domain.Repositories;
-using Microsoft.AspNetCore.Authorization;
+using FlowtrixAI.Application.Product.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using System.Security.Claims;
 
 namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-    public class ProductController(IProductRepository _productRepository) : ControllerBase
+    //[Authorize]
+    public class ProductController(IProductService _productService) : ControllerBase
     {
 
-        // Create Product
+        /// <summary>
+        /// Create Product and save to db
+        /// </summary>
+        /// <param name="createProductDto"></param>
+        /// <returns></returns>
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateProduct([FromForm] CreateProductDto createProductDto)
         {
-            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/products");
+            //var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+           var userId = 1;
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            
 
-             if (!Directory.Exists(folderPath))
-              {
-                    Directory.CreateDirectory(folderPath);
-              }
+            var result = await _productService.CreateProductAsync(createProductDto, userId);
 
-             var fileName = Guid.NewGuid()+Path.GetExtension(createProductDto.Image.FileName);
-            var fullPath = Path.Combine(folderPath, fileName);
+            if (result==false)
+                return BadRequest("Failed to create product.");
 
-            using (var stream = new FileStream(fullPath, FileMode.Create))
-            {
-                    await createProductDto.Image.CopyToAsync(stream);
-            }
-
-            //   var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            var userId = 1;
-
-
-            var product = new Product
-            {
-                Name = createProductDto.Name,
-                CreatedAt= DateTime.UtcNow,
-                CreatedBy = userId.ToString(),
-                
-                Description = createProductDto.Description,
-                ImagePath =$"/images/products/{fileName}",
-                
-            };
-
-            await _productRepository.AddAsync(product);
-            return Ok(product);
-
+            return Ok("Product Created Successfully");
+            
 
         }
-        // Get All Products
+       
+        /// <summary>
+        /// Retrieves all available products.   
+        /// </summary>
+        /// <returns>An <see cref="IActionResult"/> containing the list of products if any exist; otherwise, a NotFound result if
+        /// no products are found.</returns>
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAllProducts()
         {
-            var products = await _productRepository.GetAllAsync();
+            var result = await _productService.GetAllProductsAsync();
+            if (result == null || !result.Any())
+                return NotFound("No Products found.");
+            
 
-            return Ok(products);
+            return Ok(result);
 
 
         }
 
         // Get Product by Id
+        /// <summary>
+        /// Retrieves the product with the specified identifier.    
+        /// </summary>
+        /// <param name="id">The unique identifier of the product to retrieve.</param>
+        /// <returns>An IActionResult containing the product data if found; otherwise, a NotFound result if no product exists
+        /// with the specified identifier.</returns>
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            var product = await _productRepository.GetByIdAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return Ok(product);
+            var result = await _productService.GetProductByIdAsync(id);
+
+            if (result == null)
+                return NotFound("Product not Found");
+            
+            return Ok(result);
         }
     }
 }

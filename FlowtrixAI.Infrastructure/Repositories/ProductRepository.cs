@@ -28,6 +28,10 @@ internal class ProductRepository(AppDbContext _context) : IProductRepository
     {
         Id = p.Id,
         Name = p.Name,
+        Description = p.Description,
+        ImagePath = p.ImagePath,
+        CreatedBy = p.CreatedBy,
+        CreatedAt = p.CreatedAt,
         BOMs = p.BOMs.Select(b => new BillOfMaterial
         {
             Id = b.Id,
@@ -39,7 +43,25 @@ internal class ProductRepository(AppDbContext _context) : IProductRepository
     })
         .ToListAsync();
 
-    public async Task<Product?> GetByIdAsync(int id)=> await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+    public async Task<Product?> GetByIdAsync(int id) => await _context.Products.Include(p => p.BOMs)
+        .Select(p => new Product
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Description = p.Description,
+            ImagePath = p.ImagePath,
+            CreatedBy = p.CreatedBy,
+            CreatedAt = p.CreatedAt,
+            BOMs = p.BOMs.Select(b => new BillOfMaterial
+            {
+                Id =b.Id,
+                ComponentName = b.ComponentName,
+                QuantityRequired = b.QuantityRequired,
+                Unit = b.Unit
+                
+            }).ToList()
+
+        }).FirstOrDefaultAsync(p => p.Id == id);
 
 
     public async Task UpdateAsync(Product product)

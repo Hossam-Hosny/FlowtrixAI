@@ -381,5 +381,15 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlowtrixAI.Api.Controllers.ReportController",
+    "Method": "GetReport",
+    "RelativePath": "api/Report/GetReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   }
 ]

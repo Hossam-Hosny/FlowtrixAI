@@ -1,7 +1,5 @@
 ﻿using FlowtrixAI.Application.BoM.Dtos;
 using FlowtrixAI.Application.BoM.Interface;
-using FlowtrixAI.Domain.Entities;
-using FlowtrixAI.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowtrixAI.Api.Controllers

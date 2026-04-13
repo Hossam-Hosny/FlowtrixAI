@@ -1,7 +1,6 @@
 ﻿using FlowtrixAI.Application.Inventory.Dtos;
 using FlowtrixAI.Application.Inventory.Interface;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace FlowtrixAI.Api.Controllers
 {

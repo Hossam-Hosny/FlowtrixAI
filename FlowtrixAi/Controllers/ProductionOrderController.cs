@@ -10,6 +10,14 @@ namespace FlowtrixAI.Api.Controllers
     
     public class ProductionOrderController(IProductionOrderService _productionOrderService) : ControllerBase
     {
+       
+        /// <summary>
+        /// Creates a new production order with the specified product and quantity.
+        /// </summary>
+        /// <param name="createProductionOrderDto">An object containing the details of the production order to create, including the product identifier and
+        /// quantity. Cannot be null.</param>
+        /// <returns>An IActionResult containing the result of the creation operation. Returns HTTP 200 (OK) with the created
+        /// production order details if successful.</returns>
 
         [HttpPost("create")]
         public async Task<IActionResult> CreateProductionOrder(CreateProductionOrderDto createProductionOrderDto)
@@ -21,7 +29,13 @@ namespace FlowtrixAI.Api.Controllers
             return Ok(result);
 
         }
-
+        
+        /// <summary>
+        /// Starts the production order with the specified identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the production order to start.</param>
+        /// <returns>An <see cref="IActionResult"/> that represents the result of the operation. Returns a success response with
+        /// the result of the start operation.</returns>
 
         [HttpPost("{id}/start")]
         public async Task<IActionResult> Start(int id)
@@ -29,6 +43,12 @@ namespace FlowtrixAI.Api.Controllers
             var result = await _productionOrderService.StartOrderAsync(id);
             return Ok(result);
         }
+        /// <summary>
+        /// Marks the specified production order as complete.
+        /// </summary>
+        /// <param name="id">The unique identifier of the production order to complete.</param>
+        /// <returns>An IActionResult that represents the result of the operation. Returns a 200 OK response with the completion
+        /// result if successful.</returns>
 
         [HttpPost("{id}/complete")]
         public async Task<IActionResult> Complete(int id)
@@ -36,6 +56,12 @@ namespace FlowtrixAI.Api.Controllers
             var result = await _productionOrderService.CompleteOrderAsync(id);
             return Ok(result);
         }
+        /// <summary>
+        /// Marks the specified production order as failed.
+        /// </summary>
+        /// <param name="id">The unique identifier of the production order to mark as failed.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="IActionResult"/>
+        /// indicating the outcome of the operation.</returns>
 
         [HttpPost("{id}/fail")]
         public async Task<IActionResult> Fail(int id)
@@ -43,6 +69,11 @@ namespace FlowtrixAI.Api.Controllers
             var result = await _productionOrderService.FailOrderAsync(id);
             return Ok(result);
         }
+        /// <summary>
+        /// Marks the specified production order as delivered.
+        /// </summary>
+        /// <param name="id">The unique identifier of the production order to deliver.</param>
+        /// <returns>An IActionResult containing the result of the delivery operation.</returns>
 
         [HttpPost("{id}/deliver")]
         public async Task<IActionResult> Deliver(int id)
@@ -50,6 +81,11 @@ namespace FlowtrixAI.Api.Controllers
             var result = await _productionOrderService.DeliverOrderAsync(id);
             return Ok(result);
         }
+        /// <summary>
+        /// Retrieves the total number of completed production orders.
+        /// </summary>
+        /// <returns>An HTTP 200 response containing the number of completed orders if any exist; otherwise, an HTTP 400 response
+        /// indicating that there are no completed orders.</returns>
 
         // get all Completed Orders
         [HttpGet("CompletedOrdersNo")]
@@ -61,6 +97,13 @@ namespace FlowtrixAI.Api.Controllers
 
              return Ok(result);
         }
+        /// <summary>
+        /// Retrieves the total number of failed production orders.
+        /// </summary>
+        /// <remarks>Use this endpoint to monitor the count of failed production orders. Returns a 400 Bad
+        /// Request response if there are no failed orders.</remarks>
+        /// <returns>An <see cref="IActionResult"/> containing the number of failed orders if any exist; otherwise, a bad request
+        /// result indicating that there are no failed orders.</returns>
 
         // get all Fail Orders
         [HttpGet("FaildOrdersNo")]
@@ -73,7 +116,11 @@ namespace FlowtrixAI.Api.Controllers
              return Ok(result);
         }
 
-
+        /// <summary>
+        /// Retrieves all production orders.
+        /// </summary>
+        /// <returns>An <see cref="IActionResult"/> containing the list of all production orders if any exist; otherwise, a
+        /// NotFound result if no production orders are found.</returns>
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAll()
         {

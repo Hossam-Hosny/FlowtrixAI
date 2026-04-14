@@ -35,6 +35,7 @@ namespace FlowtrixAI.Application.Extensions
             services.AddScoped<IProductionOrderService, ProductionOrderService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IBoMService,BoMService>();
+            services.AddScoped<IAiService, AiService>();
             
 
 

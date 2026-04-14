@@ -1,4 +1,6 @@
-﻿using FlowtrixAI.Application.Reports.Interface;
+﻿using FlowtrixAI.Application.Reports.Dtos;
+using FlowtrixAI.Application.Reports.Interface;
+using FlowtrixAI.Domain.Constants;
 using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
 
@@ -7,7 +9,8 @@ namespace FlowtrixAI.Application.Reports.Services;
 internal class ReportService(IReportRepository _reportRepository
     ,IProductionRecordRepository _productionRecordRepository
     ,IQualityCheckRepository _qualityCheckRepository 
-    , IInventoryRepository _inventoryRepository)
+    , IInventoryRepository _inventoryRepository
+    ,IProductionOrderRepository _productionOrderRepository)
 
     : IReportService
 {
@@ -58,5 +61,32 @@ internal class ReportService(IReportRepository _reportRepository
     }
 
     public async Task<IEnumerable<Report>> GetAllAsync()=> await _reportRepository.GetAllAsync();
-    
+
+    public async Task<ReportDto> GetSystemReportAsync()
+    {
+        var orders = await _productionOrderRepository.GetAllAsync();
+        var inventory = await _inventoryRepository.GetAllAsync();
+
+
+        var report = new ReportDto
+        {
+
+            TotalOrders = orders.Count,
+            TotalInventoryItems = inventory.Count(),
+
+            ApprovedOrders = orders.Count(o => o.Status == OrderSteps.Approved),
+            CompletedOrders = orders.Count(o=>o.Status == OrderSteps.Completed),
+            DeleverdOrders = orders.Count(o=>o.Status==OrderSteps.Delivered),
+            FaildOrders = orders.Count(o=>o.Status==OrderSteps.Rejected)
+            
+
+
+
+        };
+        return report;
+
+
+
+
+    }
 }

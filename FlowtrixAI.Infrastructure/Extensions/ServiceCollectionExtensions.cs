@@ -1,6 +1,9 @@
-﻿using FlowtrixAI.Domain.Repositories;
+﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Repositories;
 using FlowtrixAI.Infrastructure.Context;
 using FlowtrixAI.Infrastructure.Repositories;
+using FlowtrixAI.Infrastructure.Seeders;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +20,9 @@ namespace FlowtrixAI.Infrastructure.Extensions
                 options.UseSqlServer(connectionString);
             });
 
-
+            services.AddIdentity<AppUser,IdentityRole<int>>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
 
             services.AddScoped<IProductRepository, ProductRepository>();
@@ -28,6 +33,10 @@ namespace FlowtrixAI.Infrastructure.Extensions
             services.AddScoped<IProcessRepository, ProcessRepository>();
             services.AddScoped<IProductionRecordRepository, ProductionRecordRepository>();
             services.AddScoped<IQualityCheckRepository, QualityCheckRepository>();
+
+            services.AddScoped<IProductionOrderRepository, ProductionOrderRepository>();
+
+
 
 
         }

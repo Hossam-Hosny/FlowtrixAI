@@ -26,9 +26,13 @@ internal class BomRepository(AppDbContext _context) : IBomRepository
     }
 
     public async Task<IEnumerable<BillOfMaterial>> GetAllAsync()=> await _context.BoMs.ToListAsync();
-
-
-    public async Task<BillOfMaterial?> GetByIdAsync(int id)=> await _context.BoMs.FirstOrDefaultAsync(b => b.Id == id);
+    /// <summary>
+    /// retreives a list of BillOfMaterial for a specified Product Id. This is because a product can have multiple components in its bill of materials, so we return a list to accommodate all related entries.
+    /// </summary>
+    /// <param name="id">The unique identifier of the product for which to retrieve the bill of materials.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a list of bill of material entities
+    /// for the specified product, or an empty list if no matching records are found.</returns>
+    public async Task<List<BillOfMaterial>?> GetByIdAsync(int id)=> await _context.BoMs.Where(b => b.ProductId == id).ToListAsync();
 
 
     public async Task UpdateAsync(BillOfMaterial bom)

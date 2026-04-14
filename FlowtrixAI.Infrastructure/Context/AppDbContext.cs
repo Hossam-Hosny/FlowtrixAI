@@ -1,11 +1,11 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FlowtrixAI.Infrastructure.Context;
 
-internal class AppDbContext (DbContextOptions<AppDbContext> options)
+public class AppDbContext (DbContextOptions<AppDbContext> options)
             : IdentityDbContext<AppUser, IdentityRole<int>, int>(options)
 {
     

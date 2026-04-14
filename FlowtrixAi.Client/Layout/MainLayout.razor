@@ -1,0 +1,41 @@
+@inherits LayoutComponentBase
+@inject ThemeService ThemeService
+@implements IDisposable
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <button class="btn btn-link theme-toggle-btn" @onclick="ThemeService.ToggleThemeAsync" style="text-decoration: none; font-size: 1.2rem;">
+                @if (ThemeService.IsDarkMode)
+                {
+                    <span title="Switch to Light Mode">☀️</span>
+                }
+                else
+                {
+                    <span title="Switch to Dark Mode">🌙</span>
+                }
+            </button>
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        ThemeService.OnThemeChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ThemeService.OnThemeChanged -= StateHasChanged;
+    }
+}

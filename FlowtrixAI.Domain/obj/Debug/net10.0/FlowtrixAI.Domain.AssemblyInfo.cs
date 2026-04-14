@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlowtrixAI.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4138893b1bdc1b5dc2cfe9da67b7eebcfbf51b34")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fdfc9d3b7413d2765dfb341bbf6cc29ae9dec6d3")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlowtrixAI.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlowtrixAI.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

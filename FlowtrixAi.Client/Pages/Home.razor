@@ -1,0 +1,124 @@
+@page "/"
+@layout LandingLayout
+
+<PageTitle>نظام إدارة التصنيع MES</PageTitle>
+
+<div class="landing-container">
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6 0a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zM7 5a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0V5z"/>
+                <path d="M7 2a1 1 0 1 1 2 0v1h1a1 1 0 0 1 1 1v2.123l.321.803A.5.5 0 0 0 11.787 7H14.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2.713a.5.5 0 0 0-.466.32l-.321.803V13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.123l-.321-.803A.5.5 0 0 0 2.213 8H0V6a1 1 0 0 1 1-1h1V4a1 1 0 0 1 1-1h1V2z"/>
+            </svg>
+        </div>
+        <h1>نظام إدارة التصنيع MES</h1>
+        <p>حل متكامل لإدارة عمليات الإنتاج والمخزون والصادرات مصمم خصيصاً لتسهيل العمل داخل المصانع</p>
+        <button class="btn-primary-custom" @onclick="GoToApp">
+            <span>ابدأ الآن</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+        </button>
+    </header>
+
+    <!-- Features Section -->
+    <section>
+        <h2 class="section-title">المميزات الرئيسية</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon-wrapper" style="background-color: #f97316;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 .5c-.683 0-1.315.28-1.716.73L.5 8l1.414 1.414L8 3.328l6.086 6.086L15.5 8 9.716 1.23A2.321 2.321 0 0 0 8 .5z"/>
+                        <path d="M10.828 7H5.172C4.524 7 4 7.524 4 8.172v5.656C4 14.476 4.524 15 5.172 15h5.656c.648 0 1.172-.524 1.172-1.172V8.172C12 7.524 11.476 7 10.828 7z"/>
+                    </svg>
+                </div>
+                <h3>واجهة بسيطة وآمنة</h3>
+                <p>مصممة خصيصاً لعمال المصنع بواجهة سهلة الاستخدام</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrapper" style="background-color: #a855f7;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M3 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H3zm11 10H2V4h12v8z"/>
+                        <path d="M4 6h3v3H4V6zm5 0h3v1H9V6zm0 2h3v1H9V8z"/>
+                    </svg>
+                </div>
+                <h3>تتبع الإنتاج</h3>
+                <p>متابعة كل خطوة من خطوات الإنتاج بسهولة ودقة</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrapper" style="background-color: #22c55e;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.747L8.5 6.744v6.142l6.5-2.6V4.286zm-7.5 6.142V6.744L1.5 4.286v6.5l6.5 2.6z"/>
+                    </svg>
+                </div>
+                <h3>إدارة المخزون</h3>
+                <p>تحكم كامل في المواد الواردة والمتبقية مع تنبيهات ذكية</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrapper" style="background-color: #3b82f6;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5z"/>
+                        <circle cx="5.5" cy="14.5" r="1"/>
+                        <circle cx="12.5" cy="14.5" r="1"/>
+                    </svg>
+                </div>
+                <h3>لوحة تحكم شاملة</h3>
+                <p>تتبع جميع عمليات الإنتاج والطلبات في الوقت الفعلي</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section>
+        <h2 class="section-title">عمليات الإنتاج</h2>
+        <div class="process-grid">
+            <div class="process-card">
+                <img src="images/quality_control.png" alt="ضمان الجودة" class="process-image">
+                <div class="process-content">
+                    <h3>ضمان الجودة</h3>
+                    <p>معايير عالية لجودة المنتجات</p>
+                </div>
+            </div>
+            <div class="process-card">
+                <img src="images/warehouse.png" alt="إدارة المخزون" class="process-image">
+                <div class="process-content">
+                    <h3>إدارة المخزون</h3>
+                    <p>مراقبة دقيقة للمواد والمخزون</p>
+                </div>
+            </div>
+            <div class="process-card">
+                <img src="images/production_line.png" alt="إدارة الإنتاج" class="process-image">
+                <div class="process-content">
+                    <h3>إدارة الإنتاج</h3>
+                    <p>تتبع كل مراحل الإنتاج بدقة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <div class="footer-cta">
+        <h2>جاهز للبدء؟</h2>
+        <p>ابدأ في إدارة مصنعك بكفاءة أعلى اليوم</p>
+        <button class="btn-white" @onclick="GoToApp">
+            <span>الدخول إلى النظام</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+        </button>
+    </div>
+
+    <footer class="copyright">
+        &copy; 2026 نظام إدارة التصنيع MES - جميع الحقوق محفوظة
+    </footer>
+</div>
+
+@inject NavigationManager Navigation
+
+@code {
+    private void GoToApp()
+    {
+        // Navigation logic if needed, for now just a placeholder
+    }
+}

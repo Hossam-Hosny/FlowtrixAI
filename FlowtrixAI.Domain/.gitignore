@@ -2,13 +2,12 @@
 # This is a comprehensive list to ensure build artifacts and IDE files are not tracked.
 
 ## Build results
-[Bb]in/*
-[Oo]bj/*
+[Bb]in/
+[Oo]bj/
 [Ll]og/
 [Ll]ogs/
 dist/
 build/
-bin/*
 
 ## Visual Studio
 .vs/

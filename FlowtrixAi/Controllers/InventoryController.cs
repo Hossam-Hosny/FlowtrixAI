@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Application.Inventory.Dtos;
+using FlowtrixAI.Application.Inventory.Dtos;
 using FlowtrixAI.Application.Inventory.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,8 +15,8 @@ namespace FlowtrixAI.Api.Controllers
         /// </summary>
         /// <param name="_inventoryDto">The DTO containing the details of the material to be added to the inventory.</param>
         /// <returns>The created inventory item.</returns>
-        [HttpPost("[action]")]
-        public async Task<IActionResult> AddToInventory(CreateInventoryDto _inventoryDto)
+        [HttpPost("AddToInventory")]
+        public async Task<IActionResult> AddToInventory([FromBody] CreateInventoryDto _inventoryDto)
         {
 
             if (!ModelState.IsValid)
@@ -25,7 +25,7 @@ namespace FlowtrixAI.Api.Controllers
 
 
             //var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userId = 3;
+            var userId = 1;
 
            var result = await _inventoryService.AddItemAsync(_inventoryDto, userId);
 

@@ -1,0 +1,244 @@
+@page "/warehouse"
+@layout DashboardLayout
+@using FlowtrixAi.Client.Services
+@using FlowtrixAi.Client.Models
+@inject InventoryClientService InventoryService
+
+<PageTitle>المخزن - نظام MES</PageTitle>
+
+<div class="warehouse-container">
+    <div class="page-header d-flex justify-content-between align-items-center mb-4">
+        <h1 class="dashboard-title mb-0">المخزن</h1>
+        <button class="btn btn-primary d-flex align-items-center gap-2 px-4 py-2" style="border-radius: 12px;" @onclick="OpenAddModal">
+            <i class="bi bi-plus-lg"></i>
+            <span>إضافة مادة</span>
+        </button>
+    </div>
+
+    @if (stats == null)
+    {
+        <div class="text-center p-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">جاري التحميل...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="bi bi-box"></i>
+                </div>
+                <span class="stat-value">@stats.TotalItemsCount</span>
+                <span class="stat-label">إجمالي المواد</span>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="bi bi-arrow-down-left-circle"></i>
+                </div>
+                <span class="stat-value">@stats.TotalIncoming.ToString("N0")</span>
+                <span class="stat-label">إجمالي الوارد</span>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="bi bi-arrow-up-right-circle"></i>
+                </div>
+                <span class="stat-value">@stats.TotalUsed.ToString("N0")</span>
+                <span class="stat-label">إجمالي المستخدم</span>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon purple">
+                    <i class="bi bi-layers"></i>
+                </div>
+                <span class="stat-value">@stats.TotalRemaining.ToString("N0")</span>
+                <span class="stat-label">إجمالي المتبقي</span>
+            </div>
+        </div>
+
+        @if (stats.LowStockCount > 0)
+        {
+            <div class="alert alert-danger-custom d-flex align-items-center justify-content-between mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="alert-icon">
+                        <i class="bi bi-exclamation-octagon"></i>
+                    </div>
+                    <div>
+                        <h4 class="alert-title mb-1">تنبيه: مخزون منخفض</h4>
+                        <p class="alert-msg mb-0">يوجد @stats.LowStockCount مادة أقل من الحد الأدنى للمخزون</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="materials-list-section">
+            <div class="section-header d-flex justify-content-between align-items-center mb-3">
+                <h3 class="mb-0">جميع المواد المخزنة</h3>
+                <div class="search-filters d-flex gap-2">
+                    <div class="search-input-wrapper">
+                        <i class="bi bi-search"></i>
+                        <input type="text" @bind="searchTerm" @bind:event="oninput" placeholder="بحث باسم المادة..." class="form-control search-input" />
+                    </div>
+                    <div class="search-input-wrapper">
+                        <i class="bi bi-hash"></i>
+                        <input type="text" @bind="searchCode" @bind:event="oninput" placeholder="بحث بالكود..." class="form-control search-input" />
+                    </div>
+                </div>
+            </div>
+            
+            <div class="production-card p-0 overflow-hidden">
+                <table class="table table-hover mb-0 custom-table">
+                    <thead>
+                        <tr>
+                            <th>المادة</th>
+                            <th>الكود</th>
+                            <th>الكمية المتاحة</th>
+                            <th>إجمالي الوارد</th>
+                            <th>إجمالي المستخدم</th>
+                            <th>تاريخ التحديث</th>
+                            <th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (FilteredItems == null || !FilteredItems.Any())
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center py-5 text-muted">لا توجد مواد تطابق البحث</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var item in FilteredItems)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="fw-bold">@item.ComponentName</div>
+                                    </td>
+                                    <td>
+                                        <code class="order-number">@item.MaterialCode</code>
+                                    </td>
+                                    <td>
+                                        <span class="fw-bold">@item.QuantityAvailable.ToString("N0")</span>
+                                        <small class="text-muted ms-1">@item.Unit</small>
+                                    </td>
+                                    <td>@item.TotalIncoming.ToString("N0")</td>
+                                    <td>@item.TotalUsed.ToString("N0")</td>
+                                    <td>@item.UpdateAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</td>
+                                    <td>
+                                        @if (item.IsLowStock)
+                                        {
+                                            <span class="status-badge failed">مخزون منخفض</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="status-badge progressing">متوفر</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
+@if (isAddModalOpen)
+{
+    <div class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>إضافة مادة جديدة</h3>
+            </div>
+            
+            <EditForm Model="newItem" OnValidSubmit="HandleAddMaterial">
+                <div class="modal-body">
+                    <div class="form-group mb-4">
+                        <label>اسم المادة</label>
+                        <InputText @bind-Value="newItem.MaterialName" class="form-control figma-input" placeholder="أدخل اسم المادة" />
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label>الكود</label>
+                        <InputText @bind-Value="newItem.MaterialCode" class="form-control figma-input" placeholder="أدخل الكود" />
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <label>الوحدة</label>
+                            <div class="unit-select-wrapper">
+                                <InputSelect @bind-Value="newItem.Unit" class="form-select figma-input">
+                                    <option value="قطعة">قطعة</option>
+                                    <option value="كجم">كجم</option>
+                                    <option value="لتر">لتر</option>
+                                    <option value="متر">متر</option>
+                                </InputSelect>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <label>الكمية الواردة</label>
+                            <InputNumber @bind-Value="newItem.Quantity" class="form-control figma-input text-center" placeholder="الكمية" />
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-5">
+                        <label>الحد الأدنى للمخزون</label>
+                        <InputNumber @bind-Value="newItem.MinimumStockLevel" class="form-control figma-input" placeholder="الحد الأدنى" />
+                    </div>
+                </div>
+
+                <div class="modal-footer-custom">
+                    <button type="submit" class="btn btn-primary-figma">إضافة</button>
+                    <button type="button" class="btn btn-outline-figma" @onclick="CloseAddModal">إلغاء</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+}
+
+@code {
+    private WarehouseStats? stats;
+    private List<InventoryResponse>? inventoryItems;
+    private bool isAddModalOpen = false;
+    private CreateInventoryRequest newItem = new();
+    
+    private string searchTerm = "";
+    private string searchCode = "";
+
+    private IEnumerable<InventoryResponse>? FilteredItems => inventoryItems?
+        .Where(i => (string.IsNullOrEmpty(searchTerm) || i.ComponentName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrEmpty(searchCode) || i.MaterialCode.Contains(searchCode, StringComparison.OrdinalIgnoreCase)));
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        stats = await InventoryService.GetWarehouseStatsAsync();
+        inventoryItems = await InventoryService.GetAllInventoryAsync();
+    }
+
+    private void OpenAddModal()
+    {
+        newItem = new CreateInventoryRequest { Unit = "كجم" };
+        isAddModalOpen = true;
+    }
+
+    private void CloseAddModal() => isAddModalOpen = false;
+
+    private async Task HandleAddMaterial()
+    {
+        var success = await InventoryService.AddToInventoryAsync(newItem);
+        if (success)
+        {
+            CloseAddModal();
+            await LoadData();
+        }
+    }
+}

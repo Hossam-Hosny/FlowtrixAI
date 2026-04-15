@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Application.Inventory.Dtos;
+using FlowtrixAI.Application.Inventory.Dtos;
 using FlowtrixAI.Application.Inventory.Interface;
 using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Exceptions;
@@ -12,11 +12,15 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
 {
     public async Task<bool> AddItemAsync(CreateInventoryDto _inventoryDto, int userId)
     {
+        _inventoryDto.MaterialName = _inventoryDto.MaterialName.Trim().ToLower();
         var component = await _inventoryRepository.GetByNameAsync(_inventoryDto.MaterialName);
 
         if (component != null)
         {
             component.QuantityAvailable += _inventoryDto.Quantity;
+            component.TotalIncoming += _inventoryDto.Quantity;
+            component.MinimumStockLevel = _inventoryDto.MinimumStockLevel;
+            component.MaterialCode = _inventoryDto.MaterialCode;
             component.UpdatedById = userId;
             component.UpdateAt = DateTime.UtcNow;
             await _inventoryRepository.UpdateAsync(component);
@@ -27,17 +31,17 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
             var item = new InventoryItem
             {
                 ComponentName = _inventoryDto.MaterialName,
+                MaterialCode = _inventoryDto.MaterialCode,
                 QuantityAvailable = _inventoryDto.Quantity,
-                Unit = _inventoryDto.unit.ToString(),
+                TotalIncoming = _inventoryDto.Quantity,
+                TotalUsed = 0,
+                MinimumStockLevel = _inventoryDto.MinimumStockLevel,
+                Unit = _inventoryDto.Unit,
                 UpdatedById = userId,
                 UpdateAt = DateTime.UtcNow,
-
-
             };
 
-
             await _inventoryRepository.AddAsync(item);
-
             return true;
         }
 
@@ -63,6 +67,7 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
             throw new Exception($"Not enough Quantity for {componentName}");
 
         item.QuantityAvailable -= quantity;
+        item.TotalUsed += quantity;
         item.UpdateAt = DateTime.UtcNow;
 
         await _inventoryRepository.UpdateAsync(item);
@@ -77,7 +82,11 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
         {
             ComponentId = x.Id,
             ComponentName = x.ComponentName,
+            MaterialCode = x.MaterialCode,
             QuantityAvailable = x.QuantityAvailable,
+            TotalIncoming = x.TotalIncoming,
+            TotalUsed = x.TotalUsed,
+            MinimumStockLevel = x.MinimumStockLevel,
             Unit = x.Unit,
             UpdateAt = x.UpdateAt,
             UpdatedById = x.UpdatedById
@@ -117,7 +126,9 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
             return false;
 
         item.ComponentName = _inventoryDto.MaterialName;
+        item.MaterialCode = _inventoryDto.MaterialCode;
         item.QuantityAvailable = _inventoryDto.Quantity;
+        item.MinimumStockLevel = _inventoryDto.MinimumStockLevel;
         item.UpdateAt = DateTime.UtcNow;
         item.UpdatedById = userId;
 

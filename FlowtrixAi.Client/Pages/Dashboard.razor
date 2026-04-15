@@ -1,75 +1,134 @@
 @page "/dashboard"
 @layout DashboardLayout
+@using FlowtrixAi.Client.Services
+@using FlowtrixAi.Client.Models
+@inject ProductionOrderClientService ProductionService
 
 <PageTitle>لوحة التحكم - نظام MES</PageTitle>
 
 <div class="dashboard-container">
     <h1 class="dashboard-title">لوحة التحكم</h1>
 
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-icon blue">
-                <i class="bi bi-box-seam"></i>
+    @if (stats == null)
+    {
+        <div class="text-center p-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">جاري التحميل...</span>
             </div>
-            <span class="stat-value">24</span>
-            <span class="stat-label">إجمالي الطلبات</span>
         </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon orange">
-                <i class="bi bi-clock-history"></i>
+    }
+    else
+    {
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="bi bi-box-seam"></i>
+                </div>
+                <span class="stat-value">@stats.TotalOrders</span>
+                <span class="stat-label">إجمالي الطلبات</span>
             </div>
-            <span class="stat-value">8</span>
-            <span class="stat-label">قيد التشغيل</span>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon green">
-                <i class="bi bi-check-circle"></i>
+            
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="bi bi-clock-history"></i>
+                </div>
+                <span class="stat-value">@stats.InProgressCount</span>
+                <span class="stat-label">قيد التشغيل</span>
             </div>
-            <span class="stat-value">14</span>
-            <span class="stat-label">مكتمل</span>
-        </div>
-        
-        <div class="stat-card">
-            <div class="stat-icon red">
-                <i class="bi bi-exclamation-triangle"></i>
+            
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <span class="stat-value">@stats.CompletedCount</span>
+                <span class="stat-label">مكتمل</span>
             </div>
-            <span class="stat-value">2</span>
-            <span class="stat-label">مشاكل</span>
+            
+            <div class="stat-card">
+                <div class="stat-icon red">
+                    <i class="bi bi-exclamation-triangle"></i>
+                </div>
+                <span class="stat-value">@stats.FailedCount</span>
+                <span class="stat-label">مشاكل</span>
+            </div>
         </div>
-    </div>
 
-    <div class="production-orders">
-        <div class="section-header">
-            <h3>طلبات الإنتاج</h3>
-        </div>
-        
-        <div class="production-card">
-            <div class="order-item">
-                <div class="order-main">
-                    <div class="order-progress-circle">
-                        <svg width="60" height="60">
-                            <circle class="bg" cx="30" cy="30" r="26"></circle>
-                            <circle class="progress" cx="30" cy="30" r="26" style="stroke-dasharray: 163.36; stroke-dashoffset: 65.34;"></circle>
-                        </svg>
-                        <span>60%</span>
+        <div class="production-orders">
+            <div class="section-header">
+                <h3>طلبات الإنتاج</h3>
+            </div>
+            
+            <div class="production-card">
+                @if (orders == null || !orders.Any())
+                {
+                    <p class="text-center text-muted p-4">لا توجد طلبات إنتاج حالية</p>
+                }
+                else
+                {
+                    <div class="orders-list">
+                        @foreach (var order in orders)
+                        {
+                            <div class="order-item mb-3">
+                                <div class="order-main">
+                                    <div class="order-progress-circle">
+                                        <svg width="60" height="60">
+                                            <circle class="bg" cx="30" cy="30" r="26"></circle>
+                                            @{
+                                                var dashArray = 163.36;
+                                                var dashOffset = dashArray - (dashArray * order.Progress / 100);
+                                            }
+                                            <circle class="progress" cx="30" cy="30" r="26" style="stroke-dasharray: @dashArray; stroke-dashoffset: @dashOffset;"></circle>
+                                        </svg>
+                                        <span>@order.Progress%</span>
+                                    </div>
+                                    <div class="order-info">
+                                        <h4>@order.OrderName</h4>
+                                        <p>الكمية: @order.Quantity.ToString("N0") لتر</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="order-status">
+                                    <span class="status-badge @(GetStatusClass(order.Status))">@GetStatusAr(order.Status)</span>
+                                    <span class="order-number">#@order.OrderId</span>
+                                </div>
+                            </div>
+                        }
                     </div>
-                    <div class="order-info">
-                        <h4>عصير برتقال طبيعي - 1 لتر</h4>
-                        <p>الكمية: 5000 لتر</p>
-                    </div>
-                </div>
-                
-                <div class="order-status">
-                    <span class="status-badge progressing">قيد التشغيل</span>
-                    <span class="order-number">#101</span>
-                </div>
+                }
             </div>
         </div>
-    </div>
+    }
 </div>
 
 @code {
-    // Logic for dashboard data will go here later
+    private DashboardStats? stats;
+    private List<ProductionOrderResponse>? orders;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        stats = await ProductionService.GetDashboardStatsAsync();
+        orders = await ProductionService.GetAllOrdersAsync();
+    }
+
+    private string GetStatusClass(string status) => status?.ToLower() switch
+    {
+        "completed" => "completed",
+        "failed" => "failed",
+        "started" or "in progress" or "processing" => "progressing",
+        _ => "pending"
+    };
+
+    private string GetStatusAr(string status) => status?.ToLower() switch
+    {
+        "completed" => "مكتمل",
+        "failed" => "فشل",
+        "started" or "in progress" or "processing" => "قيد التشغيل",
+        "pending" => "قيد الانتظار",
+        _ => status ?? "غير معروف"
+    };
 }

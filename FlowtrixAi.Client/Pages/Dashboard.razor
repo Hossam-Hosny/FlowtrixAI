@@ -1,0 +1,75 @@
+@page "/dashboard"
+@layout DashboardLayout
+
+<PageTitle>لوحة التحكم - نظام MES</PageTitle>
+
+<div class="dashboard-container">
+    <h1 class="dashboard-title">لوحة التحكم</h1>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon blue">
+                <i class="bi bi-box-seam"></i>
+            </div>
+            <span class="stat-value">24</span>
+            <span class="stat-label">إجمالي الطلبات</span>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon orange">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            <span class="stat-value">8</span>
+            <span class="stat-label">قيد التشغيل</span>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon green">
+                <i class="bi bi-check-circle"></i>
+            </div>
+            <span class="stat-value">14</span>
+            <span class="stat-label">مكتمل</span>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon red">
+                <i class="bi bi-exclamation-triangle"></i>
+            </div>
+            <span class="stat-value">2</span>
+            <span class="stat-label">مشاكل</span>
+        </div>
+    </div>
+
+    <div class="production-orders">
+        <div class="section-header">
+            <h3>طلبات الإنتاج</h3>
+        </div>
+        
+        <div class="production-card">
+            <div class="order-item">
+                <div class="order-main">
+                    <div class="order-progress-circle">
+                        <svg width="60" height="60">
+                            <circle class="bg" cx="30" cy="30" r="26"></circle>
+                            <circle class="progress" cx="30" cy="30" r="26" style="stroke-dasharray: 163.36; stroke-dashoffset: 65.34;"></circle>
+                        </svg>
+                        <span>60%</span>
+                    </div>
+                    <div class="order-info">
+                        <h4>عصير برتقال طبيعي - 1 لتر</h4>
+                        <p>الكمية: 5000 لتر</p>
+                    </div>
+                </div>
+                
+                <div class="order-status">
+                    <span class="status-badge progressing">قيد التشغيل</span>
+                    <span class="order-number">#101</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    // Logic for dashboard data will go here later
+}

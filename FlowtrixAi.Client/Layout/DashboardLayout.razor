@@ -1,0 +1,82 @@
+@inherits LayoutComponentBase
+@inject ThemeService ThemeService
+@implements IDisposable
+
+<div class="app-container @(ThemeService.IsDarkMode ? "dark-mode" : "")" dir="rtl">
+    <aside class="sidebar-right">
+        <a href="/" class="sidebar-header">
+            <h2>نظام MES</h2>
+            <p>إدارة التصنيع</p>
+        </a>
+        
+        <nav class="sidebar-nav">
+            <NavLink class="nav-item" href="dashboard" Match="NavLinkMatch.All">
+                <i class="bi bi-grid-fill"></i>
+                <span>لوحة التحكم</span>
+            </NavLink>
+            <NavLink class="nav-item" href="warehouse">
+                <i class="bi bi-archive"></i>
+                <span>المخزن</span>
+            </NavLink>
+            <NavLink class="nav-item" href="products">
+                <i class="bi bi-box-seam"></i>
+                <span>المنتجات</span>
+            </NavLink>
+            <NavLink class="nav-item" href="add-order">
+                <i class="bi bi-plus-square"></i>
+                <span>إضافة طلبية</span>
+            </NavLink>
+            <NavLink class="nav-item" href="exports">
+                <i class="bi bi-truck"></i>
+                <span>الصادرات</span>
+            </NavLink>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button class="theme-toggle-nav" @onclick="ThemeService.ToggleThemeAsync">
+                @if (ThemeService.IsDarkMode)
+                {
+                    <i class="bi bi-sun"></i>
+                    <span>الوضع الفاتح</span>
+                }
+                else
+                {
+                    <i class="bi bi-moon-stars"></i>
+                    <span>الوضع الداكن</span>
+                }
+            </button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-bar">
+            <div class="user-info">
+                <div class="user-details">
+                    <span class="user-name">محمد أحمد</span>
+                    <span class="user-role">مشغل المصنع</span>
+                </div>
+                <div class="user-avatar">م</div>
+            </div>
+            <div class="time-info">
+                <span>2026/04/14</span>
+                <span>10:43 م</span>
+            </div>
+        </header>
+
+        <section class="content-wrapper">
+            @Body
+        </section>
+    </main>
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        ThemeService.OnThemeChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        ThemeService.OnThemeChanged -= StateHasChanged;
+    }
+}

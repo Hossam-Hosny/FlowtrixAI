@@ -38,13 +38,13 @@ public class CreateProductRequest
 public class CreateBOMItemRequest
 {
     public string ComponentName { get; set; } = string.Empty;
-    public decimal QuantityRequired { get; set; }
+    public decimal? QuantityRequired { get; set; }
     public string Unit { get; set; } = string.Empty;
 }
 
 public class CreateProcessStepRequest
 {
     public string StepName { get; set; } = string.Empty;
-    public int DurationMinutes { get; set; }
+    public int? DurationMinutes { get; set; }
     public int Sequence { get; set; } = 1;
 }

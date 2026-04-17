@@ -1,0 +1,365 @@
+@page "/production"
+@page "/add-order"
+@layout DashboardLayout
+@using FlowtrixAi.Client.Models
+@using FlowtrixAi.Client.Services
+@inject ProductClientService ProductService
+@inject ProductionOrderClientService ProductionService
+@inject NavigationManager NavigationManager
+
+<div class="production-container animate-fade-in">
+    <div class="production-header">
+        <h2>@(isExecuting ? "متابعة الإنتاج" : "إضافة طلبية")</h2>
+    </div>
+
+    @if (!isExecuting)
+    {
+        <div class="production-card">
+            <h3 class="card-title">بدء طلب إنتاج جديد</h3>
+            
+            <EditForm Model="orderRequest" OnValidSubmit="HandleSubmit">
+                <div class="form-group">
+                    <label class="figma-label">اختر المنتج</label>
+                    <InputSelect @bind-Value="orderRequest.ProductId" class="form-select figma-input">
+                        <option value="0">-- اختر المنتج --</option>
+                        @if (products != null)
+                        {
+                            @foreach (var p in products)
+                            {
+                                <option value="@p.Id">@p.Name</option>
+                            }
+                        }
+                    </InputSelect>
+                </div>
+
+                <div class="form-group">
+                    <label class="figma-label">الكمية</label>
+                    <InputNumber @bind-Value="orderRequest.Quantity" class="form-control figma-input text-center" placeholder="أدخل الكمية" />
+                </div>
+
+                @if (!string.IsNullOrEmpty(message))
+                {
+                    <div class="status-message @(isSuccess ? "status-success" : "status-error") animate-fade-in">
+                        @message
+                    </div>
+                }
+
+                <button type="submit" class="btn-start-production" disabled="@isSubmitting">
+                    @if (isSubmitting)
+                    {
+                        <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                        <span>جاري المعالجة...</span>
+                    }
+                    else
+                    {
+                        <i class="bi bi-play-fill"></i>
+                        <span>بدء الإنتاج</span>
+                    }
+                </button>
+            </EditForm>
+        </div>
+    }
+    else
+    {
+        <div class="execution-stats animate-slide-up">
+            <div class="stat-item">
+                <span class="stat-label-small">المنتج</span>
+                <span class="stat-value-mid">@executingProductName</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label-small">الكمية</span>
+                <span class="stat-value-mid">@orderRequest.Quantity</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label-small">التقدم</span>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="progress-stat">@calculateProgress%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="steps-progress-container mb-5">
+            @for (int i = 0; i < executionSteps.Count; i++)
+            {
+                var stepNum = i + 1;
+                <div class="progress-mini-bar @(stepNum < currentStepIndex + 1 ? "completed" : stepNum == currentStepIndex + 1 ? "active" : "")"></div>
+            }
+        </div>
+
+        @if (currentStepIndex < executionSteps.Count)
+        {
+            var currentStep = executionSteps[currentStepIndex];
+            <div class="current-step-card animate-slide-up">
+                <div class="step-badge-large">@currentStep.Sequence</div>
+                <h3 class="step-execution-name">@currentStep.StepName</h3>
+                <p class="step-execution-meta">المدة المتوقعة: @currentStep.DurationMinutes دقيقة</p>
+
+                <div class="step-controls">
+                    @if (!isStepInProgress)
+                    {
+                        <button class="btn-execute-step btn-start" @onclick="StartStepAction">
+                            <i class="bi bi-play-circle-fill"></i>
+                            <span>بدء الخطوة</span>
+                        </button>
+                    }
+                    else
+                    {
+                        <div class="d-flex gap-3 w-100">
+                            @* Swapped: Green on right, Red on left *@
+                            <button class="btn-execute-step btn-complete" @onclick="CompleteStepAction">
+                                <i class="bi bi-check-circle"></i>
+                                <span>إكمال الخطوة</span>
+                            </button>
+                            <button class="btn-execute-step btn-problem" @onclick="ReportProblem">
+                                <i class="bi bi-exclamation-circle"></i>
+                                <span>مشكلة</span>
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Detailed Steps List Below -->
+            <div class="all-steps-view mt-4 animate-slide-up">
+                <h4 class="section-title-ar mb-3">جميع الخطوات</h4>
+                <div class="steps-status-list">
+                    @foreach (var step in executionSteps.OrderBy(s => s.Sequence))
+                    {
+                        var statusClass = "";
+                        var statusText = "";
+                        var isCompleted = step.Sequence < executionSteps[currentStepIndex].Sequence;
+                        var isCurrent = step.Sequence == executionSteps[currentStepIndex].Sequence;
+
+                        if (isCompleted) { statusClass = "completed"; statusText = "مكتمل"; }
+                        else if (isCurrent) { statusClass = "in-progress"; statusText = "قيد التنفيذ"; }
+                        else { statusClass = "pending"; statusText = "قيد الانتظار"; }
+
+                        <div class="step-status-item @statusClass">
+                            <div class="step-status-info">
+                                <span class="status-label">@statusText</span>
+                                <span class="step-name">@step.StepName</span>
+                            </div>
+                            <div class="step-status-icon">
+                                @if (isCompleted)
+                                {
+                                    <i class="bi bi-check-circle-fill"></i>
+                                }
+                                else
+                                {
+                                    <span class="step-num-circle">@step.Sequence</span>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="current-step-card animate-slide-up">
+                <div class="step-badge-large" style="background: #10b981; color: white;"><i class="bi bi-check-lg"></i></div>
+                <h3 class="step-execution-name">اكتملت العملية</h3>
+                <p class="step-execution-meta">تم الانتهاء من جميع خطوات الإنتاج بنجاح</p>
+
+                <button class="btn-start-production" @onclick="ResetForm">
+                    <i class="bi bi-arrow-right"></i>
+                    <span>العودة للرئيسية</span>
+                </button>
+            </div>
+        }
+    }
+
+    @if (showProblemModal)
+    {
+        <div class="problem-modal-overlay">
+            <div class="problem-modal animate-slide-up">
+                <div class="modal-header">
+                    <h3>تقرير مشكلة في الإنتاج</h3>
+                    <button class="btn-close-modal" @onclick="() => showProblemModal = false">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mb-4">
+                        <label class="figma-label mb-2">وصف المشكلة</label>
+                        <textarea @bind="problemDescription" @bind:event="oninput" class="form-control figma-textarea" rows="4" placeholder="اكتب تفاصيل المشكلة هنا..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-cancel" @onclick="() => showProblemModal = false">إلغاء</button>
+                    <button class="btn-submit-problem" @onclick="SubmitProblem" disabled="@(string.IsNullOrWhiteSpace(problemDescription))">
+                        إرسال التقرير وإنهاء العملية
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@code {
+    private CreateProductionOrderRequest orderRequest = new() { Quantity = null };
+    private List<ProductResponse>? products;
+    private bool isSubmitting = false;
+    private string message = "";
+    private bool isSuccess = false;
+
+    // Execution state
+    private bool isExecuting = false;
+    private string executingProductName = "";
+    private List<ProcessStepResponse> executionSteps = new();
+    private int currentStepIndex = 0;
+    private bool isStepInProgress = false;
+    private int currentOrderId = 0;
+
+    // Problem reporting
+    private bool showProblemModal = false;
+    private string problemDescription = "";
+
+    private int calculateProgress => executionSteps.Count == 0 ? 0 : (currentStepIndex * 100 / executionSteps.Count);
+
+    [SupplyParameterFromQuery]
+    public int? ResumeOrderId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await ProductService.GetAllProductsAsync();
+        
+        if (ResumeOrderId.HasValue)
+        {
+            await LoadOrderForResume(ResumeOrderId.Value);
+        }
+    }
+
+    private async Task LoadOrderForResume(int orderId)
+    {
+        var order = await ProductionService.GetOrderByIdAsync(orderId);
+        if (order != null)
+        {
+            currentOrderId = orderId;
+            // Find the product
+            var product = products?.FirstOrDefault(p => p.Name == order.OrderName);
+            if (product != null)
+            {
+                var fullProduct = await ProductService.GetProductByIdAsync(product.Id);
+                if (fullProduct != null && fullProduct.ProductionSteps != null)
+                {
+                    executionSteps = fullProduct.ProductionSteps.OrderBy(p => p.Id).ToList();
+                    currentStepIndex = order.CurrentStepIndex;
+                    executingProductName = order.OrderName;
+                    orderRequest.Quantity = order.Quantity;
+                    isExecuting = true;
+                    isStepInProgress = false;
+                    StateHasChanged();
+                }
+            }
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        if (orderRequest.ProductId == 0)
+        {
+            message = "يرجى اختيار منتج أولاً";
+            isSuccess = false;
+            return;
+        }
+
+        if (orderRequest.Quantity == null || orderRequest.Quantity <= 0)
+        {
+            message = "يرجى إدخال كمية صحيحة";
+            isSuccess = false;
+            return;
+        }
+
+        isSubmitting = true;
+        message = "";
+        
+        try
+        {
+            var result = await ProductionService.CreateOrderAsync(orderRequest);
+            
+            if (result.Success)
+            {
+                currentOrderId = result.OrderId;
+                var product = products?.FirstOrDefault(p => p.Id == orderRequest.ProductId);
+                executingProductName = product?.Name ?? "";
+                executionSteps = product?.ProductionSteps ?? new();
+                
+                isSuccess = true;
+                message = "تم إنشاء الطلب بنجاح!";
+                
+                await Task.Delay(1000);
+                isExecuting = true;
+                isStepInProgress = false;
+                currentStepIndex = 0;
+            }
+            else
+            {
+                isSuccess = false;
+                message = result.Message;
+            }
+        }
+        catch (Exception ex)
+        {
+            isSuccess = false;
+            message = $"حدث خطأ في الاتصال: {ex.Message}";
+        }
+        finally
+        {
+            isSubmitting = false;
+        }
+    }
+
+    private async Task StartStepAction()
+    {
+        if (currentStepIndex == 0 && !isStepInProgress)
+        {
+            await ProductionService.StartOrderAsync(currentOrderId);
+        }
+        isStepInProgress = true;
+    }
+
+    private async Task CompleteStepAction()
+    {
+        if (currentStepIndex < executionSteps.Count)
+        {
+            currentStepIndex++;
+            isStepInProgress = false;
+
+            // Sync progress to backend
+            await ProductionService.UpdateOrderProgressAsync(currentOrderId, currentStepIndex);
+
+            // If this was the last step, complete the order
+            if (currentStepIndex >= executionSteps.Count)
+            {
+                await ProductionService.CompleteOrderAsync(currentOrderId);
+            }
+        }
+    }
+
+    private void ReportProblem()
+    {
+        problemDescription = "";
+        showProblemModal = true;
+    }
+
+    private async Task SubmitProblem()
+    {
+        if (string.IsNullOrWhiteSpace(problemDescription)) return;
+        
+        await ProductionService.FailOrderAsync(currentOrderId, problemDescription);
+        showProblemModal = false;
+        ResetForm();
+    }
+
+    private void ResetForm()
+    {
+        isExecuting = false;
+        orderRequest = new() { Quantity = null };
+        currentStepIndex = 0;
+        isStepInProgress = false;
+        message = "";
+        NavigationManager.NavigateTo("/dashboard");
+    }
+}
+
+

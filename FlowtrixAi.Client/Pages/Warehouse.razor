@@ -150,50 +150,67 @@
 @if (isAddModalOpen)
 {
     <div class="modal-overlay" @onclick="CloseAddModal">
-        <div class="modal-card" @onclick:stopPropagation="true">
-            <div class="modal-header">
-                <h3>إضافة مادة جديدة</h3>
+        <div class="modal-card modal-card-wide animate-slide-up" @onclick:stopPropagation="true">
+            <div class="ar-modal-header">
+                <h3 class="mb-0">إضافة مادة جديدة</h3>
+                <button class="btn-close" style="background: none; border: none; color: var(--text-dark);" @onclick="CloseAddModal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
             </div>
             
             <EditForm Model="newItem" OnValidSubmit="HandleAddMaterial">
-                <div class="modal-body">
-                    <div class="form-group mb-4">
-                        <label>اسم المادة</label>
-                        <InputText @bind-Value="newItem.MaterialName" class="form-control figma-input" placeholder="أدخل اسم المادة" />
-                    </div>
-
-                    <div class="form-group mb-4">
-                        <label>الكود</label>
-                        <InputText @bind-Value="newItem.MaterialCode" class="form-control figma-input" placeholder="أدخل الكود" />
-                    </div>
-
-                    <div class="row mb-4">
-                        <div class="col-6">
-                            <label>الوحدة</label>
-                            <div class="unit-select-wrapper">
-                                <InputSelect @bind-Value="newItem.Unit" class="form-select figma-input">
-                                    <option value="قطعة">قطعة</option>
-                                    <option value="كجم">كجم</option>
-                                    <option value="لتر">لتر</option>
-                                    <option value="متر">متر</option>
-                                </InputSelect>
-                            </div>
+                <div class="ar-modal-body">
+                    <h4 class="section-title-ar">معلومات المادة</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="figma-label">اسم المادة</label>
+                            <input list="materialNamesList" @bind="newItem.MaterialName" @bind:event="oninput" 
+                                   class="form-control figma-input" placeholder="أدخل اسم المادة" onfocus="this.select()" />
+                            <datalist id="materialNamesList">
+                                @foreach (var name in existingMaterialNames)
+                                {
+                                    <option value="@name" />
+                                }
+                            </datalist>
                         </div>
-                        <div class="col-6">
-                            <label>الكمية الواردة</label>
-                            <InputNumber @bind-Value="newItem.Quantity" class="form-control figma-input text-center" placeholder="الكمية" />
+                        <div class="col-md-6">
+                            <label class="figma-label">الكود</label>
+                            <InputText @bind-Value="newItem.MaterialCode" class="form-control figma-input" 
+                                       placeholder="أدخل الكود" onfocus="this.select()" />
                         </div>
                     </div>
 
-                    <div class="form-group mb-5">
-                        <label>الحد الأدنى للمخزون</label>
-                        <InputNumber @bind-Value="newItem.MinimumStockLevel" class="form-control figma-input" placeholder="الحد الأدنى" />
+                    <h4 class="section-title-ar">الكميات والوحدات</h4>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-4">
+                            <label class="figma-label">الوحدة</label>
+                            <input list="unitsList" @bind="newItem.Unit" @bind:event="oninput" 
+                                   class="form-control figma-input" placeholder="أدخل الوحدة" onfocus="this.select()" />
+                            <datalist id="unitsList">
+                                @foreach (var unit in existingUnits)
+                                {
+                                    <option value="@unit" />
+                                }
+                            </datalist>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="figma-label">الكمية الواردة</label>
+                            <InputNumber @bind-Value="newItem.Quantity" min="0" class="form-control figma-input text-center" 
+                                         placeholder="الكمية" onfocus="this.select()" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="figma-label">الحد الأدنى للمخزون</label>
+                            <InputNumber @bind-Value="newItem.MinimumStockLevel" min="0" class="form-control figma-input text-center" 
+                                         placeholder="الحد الأدنى" onfocus="this.select()" />
+                        </div>
                     </div>
                 </div>
 
-                <div class="modal-footer-custom">
-                    <button type="submit" class="btn btn-primary-figma">إضافة</button>
-                    <button type="button" class="btn btn-outline-figma" @onclick="CloseAddModal">إلغاء</button>
+                <div class="ar-modal-footer">
+                    <button type="submit" class="btn-save-ar">إضافة المادة</button>
+                    <button type="button" class="btn-close-ar" @onclick="CloseAddModal">إلغاء</button>
                 </div>
             </EditForm>
         </div>
@@ -208,6 +225,8 @@
     
     private string searchTerm = "";
     private string searchCode = "";
+    private List<string> existingMaterialNames = new();
+    private List<string> existingUnits = new();
 
     private IEnumerable<InventoryResponse>? FilteredItems => inventoryItems?
         .Where(i => (string.IsNullOrEmpty(searchTerm) || i.ComponentName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) &&
@@ -222,6 +241,11 @@
     {
         stats = await InventoryService.GetWarehouseStatsAsync();
         inventoryItems = await InventoryService.GetAllInventoryAsync();
+        if (inventoryItems != null)
+        {
+            existingMaterialNames = inventoryItems.Select(i => i.ComponentName).Distinct().OrderBy(n => n).ToList();
+            existingUnits = inventoryItems.Select(i => i.Unit).Distinct().OrderBy(u => u).ToList();
+        }
     }
 
     private void OpenAddModal()
@@ -234,6 +258,10 @@
 
     private async Task HandleAddMaterial()
     {
+        // Prevent negative numbers
+        newItem.Quantity = Math.Max(0, newItem.Quantity);
+        newItem.MinimumStockLevel = Math.Max(0, newItem.MinimumStockLevel);
+
         var success = await InventoryService.AddToInventoryAsync(newItem);
         if (success)
         {

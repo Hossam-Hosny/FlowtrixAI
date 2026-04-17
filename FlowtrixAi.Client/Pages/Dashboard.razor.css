@@ -1,0 +1,233 @@
+.stat-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.stat-card.active {
+    border-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+/* Progress Circle Styles */
+.order-progress-circle {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-progress-circle svg {
+    transform: rotate(-90deg);
+}
+
+.order-progress-circle circle {
+    fill: none;
+    stroke-width: 5;
+    stroke-linecap: round;
+}
+
+.order-progress-circle .bg {
+    stroke: #f1f5f9;
+}
+
+.order-progress-circle .progress {
+    stroke: #3b82f6; /* Default Blue */
+    transition: stroke-dashoffset 0.8s ease;
+}
+
+.dark-mode .order-progress-circle .bg {
+    stroke: #1e293b;
+}
+
+/* Status based coloring for progress circle */
+.order-item.processing .progress {
+    stroke: #3b82f6;
+}
+
+.order-item.completed-order .progress {
+    stroke: #10b981;
+}
+
+.order-item.failed-order .progress {
+    stroke: #ef4444;
+}
+
+.order-progress-circle span {
+    position: absolute;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #334155;
+}
+
+.dark-mode .order-progress-circle span {
+    color: #f1f5f9;
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+.order-item.clickable {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.order-item.clickable:hover {
+    background: rgba(239, 68, 68, 0.03);
+}
+
+/* Problem Detail Modal Styles */
+.problem-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.problem-modal {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 15px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #1e293b;
+    font-size: 1.4rem;
+}
+
+.btn-close-modal {
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: #94a3b8;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.detail-row {
+    display: flex;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.detail-label {
+    font-weight: 700;
+    color: #64748b;
+}
+
+.problem-description-box {
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    border-radius: 12px;
+    padding: 15px;
+    color: #9f1239;
+}
+
+.description-content {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.reporter-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #475569;
+    font-size: 0.95rem;
+    background: #f8fafc;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+}
+
+.btn-cancel {
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dark-mode .problem-modal {
+    background: #1e293b;
+}
+
+.dark-mode .modal-header {
+    border-color: #334155;
+}
+
+.dark-mode .modal-header h3 {
+    color: #f1f5f9;
+}
+
+.dark-mode .problem-description-box {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #fda4af;
+}
+
+.dark-mode .reporter-info {
+    background: #334155;
+    color: #cbd5e1;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-cancel-mini {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-cancel-mini:hover {
+    background: #ef4444;
+    color: white;
+    transform: scale(1.1);
+}
+

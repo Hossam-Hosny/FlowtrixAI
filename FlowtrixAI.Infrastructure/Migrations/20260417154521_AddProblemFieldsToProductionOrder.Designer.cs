@@ -4,6 +4,7 @@ using FlowtrixAI.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlowtrixAI.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260417154521_AddProblemFieldsToProductionOrder")]
+    partial class AddProblemFieldsToProductionOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,9 +262,6 @@ namespace FlowtrixAI.Infrastructure.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("CurrentStepIndex")
-                        .HasColumnType("int");
-
                     b.Property<string>("ProblemDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -281,8 +281,6 @@ namespace FlowtrixAI.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
-
-                    b.HasIndex("ReportedByUserId");
 
                     b.ToTable("ProductionOrders");
                 });
@@ -560,14 +558,7 @@ namespace FlowtrixAI.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FlowtrixAI.Domain.Entities.AppUser", "ReportedBy")
-                        .WithMany()
-                        .HasForeignKey("ReportedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("Product");
-
-                    b.Navigation("ReportedBy");
                 });
 
             modelBuilder.Entity("FlowtrixAI.Domain.Entities.ProductionRecord", b =>

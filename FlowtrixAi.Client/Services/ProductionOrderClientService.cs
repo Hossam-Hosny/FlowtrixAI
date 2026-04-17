@@ -54,15 +54,102 @@ public class ProductionOrderClientService(HttpClient http)
     public async Task<DashboardStats> GetDashboardStatsAsync()
     {
         var orders = await GetAllOrdersAsync();
-        var completed = await GetCompletedOrdersCountAsync();
-        var failed = await GetFailedOrdersCountAsync();
         
         return new DashboardStats
         {
             TotalOrders = orders.Count,
-            InProgressCount = orders.Count(o => o.Status?.ToLower() == "started" || o.Status?.ToLower() == "in progress" || o.Status?.ToLower() == "processing"),
-            CompletedCount = completed,
-            FailedCount = failed
+            ReadyToStartCount = orders.Count(o => o.Status?.ToLower() == "approved"),
+            InProgressCount = orders.Count(o => o.Status?.ToLower() == "started" || o.Status?.ToLower() == "inprogress" || o.Status?.ToLower() == "in progress" || o.Status?.ToLower() == "processing"),
+            CompletedCount = orders.Count(o => o.Status?.ToLower() == "completed"),
+            FailedCount = orders.Count(o => o.Status?.ToLower() == "failed" || o.Status?.ToLower() == "rejected")
         };
+    }
+    public async Task<ProductionOrderOperationResponse> CreateOrderAsync(CreateProductionOrderRequest request)
+    {
+        try
+        {
+            var response = await http.PostAsJsonAsync($"{BaseUrl}/create", request);
+            return await response.Content.ReadFromJsonAsync<ProductionOrderOperationResponse>() 
+                ?? new ProductionOrderOperationResponse { Success = false, Message = "فشل في فك تشفير البيانات" };
+        }
+        catch (Exception ex)
+        {
+            return new ProductionOrderOperationResponse { Success = false, Message = ex.Message };
+        }
+    }
+
+    public async Task<string> StartOrderAsync(int orderId)
+    {
+        try
+        {
+            var response = await http.PostAsync($"{BaseUrl}/{orderId}/start", null);
+            return await response.Content.ReadAsStringAsync();
+        }
+        catch (Exception ex)
+        {
+            return $"Error: {ex.Message}";
+        }
+    }
+
+    public async Task<string> CompleteOrderAsync(int orderId)
+    {
+        try
+        {
+            var response = await http.PostAsync($"{BaseUrl}/{orderId}/complete", null);
+            return await response.Content.ReadAsStringAsync();
+        }
+        catch (Exception ex)
+        {
+            return $"Error: {ex.Message}";
+        }
+    }
+
+    public async Task<string> FailOrderAsync(int orderId, string problemDescription)
+    {
+        try
+        {
+            var response = await http.PostAsJsonAsync($"{BaseUrl}/{orderId}/fail", new { ProblemDescription = problemDescription });
+            return await response.Content.ReadAsStringAsync();
+        }
+        catch (Exception ex)
+        {
+            return $"Error: {ex.Message}";
+        }
+    }
+    public async Task<string> UpdateOrderProgressAsync(int orderId, int stepIndex)
+    {
+        try
+        {
+            var response = await http.PostAsync($"{BaseUrl}/{orderId}/progress?stepIndex={stepIndex}", null);
+            return await response.Content.ReadAsStringAsync();
+        }
+        catch (Exception ex)
+        {
+            return $"Error: {ex.Message}";
+        }
+    }
+    public async Task<ProductionOrderResponse?> GetOrderByIdAsync(int id)
+    {
+        try
+        {
+            return await http.GetFromJsonAsync<ProductionOrderResponse>($"{BaseUrl}/{id}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching order {id}: {ex.Message}");
+            return null;
+        }
+    }
+    public async Task<string> CancelOrderAsync(int orderId)
+    {
+        try
+        {
+            var response = await http.DeleteAsync($"{BaseUrl}/{orderId}/cancel");
+            return await response.Content.ReadAsStringAsync();
+        }
+        catch (Exception ex)
+        {
+            return $"Error: {ex.Message}";
+        }
     }
 }

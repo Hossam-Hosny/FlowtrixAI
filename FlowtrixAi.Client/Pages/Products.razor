@@ -116,7 +116,7 @@
                                     @foreach (var bom in selectedProduct.BillOfMaterials)
                                     {
                                         <tr>
-                                            <td class="fw-bold text-dark">@bom.ComponentName</td>
+                                            <td class="fw-bold">@bom.ComponentName</td>
                                             <td class="text-primary fw-bold">@bom.QuantityRequired</td>
                                             <td class="text-muted">@bom.Unit</td>
                                         </tr>
@@ -160,14 +160,17 @@
 @if (isEditModalOpen)
 {
     <div class="modal-overlay" @onclick="CloseEditModal">
-        <div class="modal-card products-modal-wide animate-slide-up" @onclick:stopPropagation="true">
-            <div class="modal-header ar-modal-header">
-                <h3>تعديل منتج: @editProduct.Name</h3>
-                <button class="btn-close-ar" @onclick="CloseEditModal"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-card modal-card-wide animate-slide-up" @onclick:stopPropagation="true">
+            <div class="ar-modal-header">
+                <h3 class="mb-0">تعديل منتج: @editProduct.Name</h3>
+                <button class="btn-close" style="background: none; border: none; color: var(--text-dark);" @onclick="CloseEditModal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
             </div>
             
             <EditForm Model="editProduct" OnValidSubmit="HandleEditProduct">
-                <div class="modal-body ar-modal-body">
+                <div class="ar-modal-body">
+                    <h4 class="section-title-ar">معلومات أساسية</h4>
                     <div class="row g-4 mb-4">
                         <div class="col-md-8">
                             <label class="figma-label">اسم المنتج</label>
@@ -184,10 +187,11 @@
                         <InputTextArea @bind-Value="editProduct.Description" class="form-control figma-input" rows="2" />
                     </div>
 
+                    <h4 class="section-title-ar">قائمة المواد (BOM)</h4>
                     <div class="bom-builder-card mb-4">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="mb-0">مكونات المنتج (BOM)</h4>
-                            <button type="button" class="btn btn-add-row" @onclick="AddEditBOMRow">
+                            <button type="button" class="btn-add-row" @onclick="AddEditBOMRow">
                                 <i class="bi bi-plus-circle"></i> إضافة مكون
                             </button>
                         </div>
@@ -218,8 +222,16 @@
                                                     }
                                                 </InputSelect>
                                             </td>
-                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="form-control bom-input" min="0" step="0.1" /></td>
-                                            <td><InputText @bind-Value="bom.Unit" class="form-control bom-input-readonly" readonly /></td>
+                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="form-control bom-input" min="0" step="0.1" placeholder="0" /></td>
+                                            <td>
+                                                <InputSelect @bind-Value="bom.Unit" class="form-select bom-input">
+                                                    <option value="">-- الوحدة --</option>
+                                                    @foreach (var unit in SystemUnits)
+                                                    {
+                                                        <option value="@unit">@unit</option>
+                                                    }
+                                                </InputSelect>
+                                            </td>
                                             <td class="text-center">
                                                 <button type="button" class="btn-remove-row" @onclick="() => RemoveEditBOMRow(bom)">
                                                     <i class="bi bi-trash3"></i>
@@ -232,10 +244,11 @@
                         </div>
                     </div>
 
+                    <h4 class="section-title-ar">خطوات العملية</h4>
                     <div class="steps-builder-card">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="mb-0">خطوات العملية</h4>
-                            <button type="button" class="btn btn-add-step" @onclick="AddEditStepRow">
+                            <button type="button" class="btn-add-step" @onclick="AddEditStepRow">
                                 <i class="bi bi-plus-circle"></i> إضافة خطوة
                             </button>
                         </div>
@@ -246,7 +259,7 @@
                                 <div class="step-edit-row mb-2 animate-fade-in">
                                     <div class="step-seq">@step.Sequence</div>
                                     <InputText @bind-Value="step.StepName" class="form-control step-input flex-grow-1" placeholder="اسم الخطوة..." />
-                                    <InputNumber @bind-Value="step.DurationMinutes" class="form-control step-input text-center" style="width: 110px;" placeholder="المدة (دقيقة)" />
+                                    <InputNumber @bind-Value="step.DurationMinutes" class="form-control step-input text-center" style="width: 110px;" placeholder="0" />
                                     <button type="button" class="btn-remove-row" @onclick="() => RemoveEditStepRow(step)">
                                         <i class="bi bi-trash3"></i>
                                     </button>
@@ -256,9 +269,9 @@
                     </div>
                 </div>
 
-                <div class="modal-footer ar-modal-footer">
-                    <button type="submit" class="btn btn-primary-figma-ar">تحديث المنتج</button>
-                    <button type="button" class="btn btn-outline-figma-ar" @onclick="CloseEditModal">إلغاء</button>
+                <div class="ar-modal-footer">
+                    <button type="submit" class="btn-save-ar">تحديث المنتج</button>
+                    <button type="button" class="btn-close-ar" @onclick="CloseEditModal">إلغاء</button>
                 </div>
             </EditForm>
         </div>
@@ -268,27 +281,30 @@
 @if (isAddModalOpen)
 {
     <div class="modal-overlay" @onclick="CloseAddModal">
-        <div class="modal-card products-modal-wide" @onclick:stopPropagation="true">
-            <div class="modal-header ar-modal-header">
-                <h3>إضافة منتج جديد</h3>
-                <button class="btn-close-ar" @onclick="CloseAddModal"><i class="bi bi-x-lg"></i></button>
+        <div class="modal-card modal-card-wide animate-slide-up" @onclick:stopPropagation="true">
+            <div class="ar-modal-header">
+                <h3 class="mb-0">إضافة منتج جديد</h3>
+                <button class="btn-close" style="background: none; border: none; color: var(--text-dark);" @onclick="CloseAddModal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
             </div>
             
             <EditForm Model="newProduct" OnValidSubmit="HandleAddProduct">
-                <div class="modal-body ar-modal-body">
+                <div class="ar-modal-body">
+                    <h4 class="section-title-ar">معلومات أساسية</h4>
                     <div class="row g-4 mb-4">
                         <div class="col-md-8">
-                            <label class="figma-label">اسم المنتج</label>
+                            <label class="figma-label text-white">اسم المنتج</label>
                             <InputText @bind-Value="newProduct.Name" class="form-control figma-input" placeholder="مثال: عصير برتقال طبيعي" />
                         </div>
                         <div class="col-md-4">
-                            <label class="figma-label">كود المنتج</label>
+                            <label class="figma-label text-white">كود المنتج</label>
                             <InputText @bind-Value="newProduct.ProductCode" class="form-control figma-input text-center" placeholder="JCE-ORG-1L" />
                         </div>
                     </div>
 
                     <div class="form-group mb-4">
-                        <label class="figma-label">الوصف</label>
+                        <label class="figma-label text-white">الوصف</label>
                         <InputTextArea @bind-Value="newProduct.Description" class="form-control figma-input" rows="2" placeholder="أضف وصفاً مختصراً للمنتج..." />
                     </div>
 
@@ -326,8 +342,16 @@
                                                     }
                                                 </InputSelect>
                                             </td>
-                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="form-control bom-input" min="0" step="0.1" /></td>
-                                            <td><InputText @bind-Value="bom.Unit" class="form-control bom-input-readonly" readonly /></td>
+                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="form-control bom-input" min="0" step="0.1" placeholder="0" /></td>
+                                            <td>
+                                                <InputSelect @bind-Value="bom.Unit" class="form-select bom-input">
+                                                    <option value="">-- الوحدة --</option>
+                                                    @foreach (var unit in SystemUnits)
+                                                    {
+                                                        <option value="@unit">@unit</option>
+                                                    }
+                                                </InputSelect>
+                                            </td>
                                             <td class="text-center">
                                                 <button type="button" class="btn-remove-row" @onclick="() => RemoveBOMRow(bom)">
                                                     <i class="bi bi-trash3"></i>
@@ -354,7 +378,7 @@
                                 <div class="step-edit-row mb-2 animate-fade-in">
                                     <div class="step-seq">@step.Sequence</div>
                                     <InputText @bind-Value="step.StepName" class="form-control step-input flex-grow-1" placeholder="اسم الخطوة..." />
-                                    <InputNumber @bind-Value="step.DurationMinutes" class="form-control step-input text-center" style="width: 110px;" placeholder="المدة (دقيقة)" />
+                                    <InputNumber @bind-Value="step.DurationMinutes" class="form-control step-input text-center" style="width: 110px;" placeholder="0" />
                                     <button type="button" class="btn-remove-row" @onclick="() => RemoveStepRow(step)">
                                         <i class="bi bi-trash3"></i>
                                     </button>
@@ -364,9 +388,9 @@
                     </div>
                 </div>
 
-                <div class="modal-footer ar-modal-footer">
-                    <button type="submit" class="btn btn-success-ar">حفظ المنتج</button>
-                    <button type="button" class="btn btn-outline-figma-ar" @onclick="CloseAddModal">إلغاء</button>
+                <div class="ar-modal-footer">
+                    <button type="submit" class="btn-save-ar">حفظ المنتج</button>
+                    <button type="button" class="btn-close-ar" @onclick="CloseAddModal">إلغاء</button>
                 </div>
             </EditForm>
         </div>
@@ -382,6 +406,12 @@
     private CreateProductRequest newProduct = new();
     private CreateProductRequest editProduct = new();
     private string searchTerm = "";
+    
+    private List<string> SystemUnits => inventoryItems?
+        .Where(i => !string.IsNullOrEmpty(i.Unit))
+        .Select(i => i.Unit)
+        .Distinct()
+        .ToList() ?? new List<string>();
 
     private IEnumerable<ProductResponse>? FilteredProducts => products?
         .Where(p => string.IsNullOrEmpty(searchTerm) || 
@@ -436,16 +466,16 @@
     private void OpenAddModal()
     {
         newProduct = new CreateProductRequest();
-        newProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "" });
-        newProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = 1 });
+        newProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "", QuantityRequired = null });
+        newProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = 1, DurationMinutes = null });
         isAddModalOpen = true;
     }
 
     private void CloseAddModal() => isAddModalOpen = false;
-    private void AddBOMRow() => newProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "" });
+    private void AddBOMRow() => newProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "", QuantityRequired = null });
     private void RemoveBOMRow(CreateBOMItemRequest row) => newProduct.BOMs.Remove(row);
     
-    private void AddStepRow() => newProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = newProduct.ProductionSteps.Count + 1 });
+    private void AddStepRow() => newProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = newProduct.ProductionSteps.Count + 1, DurationMinutes = null });
     private void RemoveStepRow(CreateProcessStepRequest row) => newProduct.ProductionSteps.Remove(row);
 
     private async Task HandleAddProduct()
@@ -498,10 +528,10 @@
     }
 
     private void CloseEditModal() => isEditModalOpen = false;
-    private void AddEditBOMRow() => editProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "" });
+    private void AddEditBOMRow() => editProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "", QuantityRequired = null });
     private void RemoveEditBOMRow(CreateBOMItemRequest row) => editProduct.BOMs.Remove(row);
     
-    private void AddEditStepRow() => editProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = editProduct.ProductionSteps.Count + 1 });
+    private void AddEditStepRow() => editProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = editProduct.ProductionSteps.Count + 1, DurationMinutes = null });
     private void RemoveEditStepRow(CreateProcessStepRequest row) => editProduct.ProductionSteps.Remove(row);
 
     private async Task HandleEditProduct()

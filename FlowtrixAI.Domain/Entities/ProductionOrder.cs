@@ -1,4 +1,4 @@
-﻿namespace FlowtrixAI.Domain.Entities;
+namespace FlowtrixAI.Domain.Entities;
 
 public class ProductionOrder
 {
@@ -10,4 +10,10 @@ public class ProductionOrder
 
     public int ProductId { get; set; }
     public Product Product { get; set; }
+
+    public string? ProblemDescription { get; set; }
+    public int? ReportedByUserId { get; set; }
+    public AppUser? ReportedBy { get; set; }
+
+    public int CurrentStepIndex { get; set; }
 }

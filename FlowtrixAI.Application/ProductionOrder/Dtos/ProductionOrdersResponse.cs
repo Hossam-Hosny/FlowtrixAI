@@ -1,4 +1,4 @@
-﻿namespace FlowtrixAI.Application.ProductionOrder.Dtos;
+namespace FlowtrixAI.Application.ProductionOrder.Dtos;
 
 public class ProductionOrdersResponse
 {
@@ -7,4 +7,8 @@ public class ProductionOrdersResponse
     public decimal Quantity { get; set; }
     public DateTime OrderdAt { get; set; }
     public string Status { get; set; }
+    public string? ProblemDescription { get; set; }
+    public int? ReportedByUserId { get; set; }
+    public string? ReportedByUserName { get; set; }
+    public int Progress { get; set; }
 }

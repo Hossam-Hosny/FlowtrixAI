@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
 using FlowtrixAI.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -23,45 +23,15 @@ internal class ProductRepository(AppDbContext _context) : IProductRepository
         }
     }
 
-    public async Task<List<Product>> GetAllAsync() => await _context.Products.Include(p => p.BOMs)
-    .Select(p => new Product
-    {
-        Id = p.Id,
-        Name = p.Name,
-        Description = p.Description,
-        ImagePath = p.ImagePath,
-        CreatedBy = p.CreatedBy,
-        CreatedAt = p.CreatedAt,
-        BOMs = p.BOMs.Select(b => new BillOfMaterial
-        {
-            Id = b.Id,
-            ComponentName = b.ComponentName,
-            QuantityRequired = b.QuantityRequired,
-            Unit = b.Unit
-            
-        }).ToList()
-    })
+    public async Task<List<Product>> GetAllAsync() => await _context.Products
+        .Include(p => p.BOMs)
+        .Include(p => p.Processes)
         .ToListAsync();
 
-    public async Task<Product?> GetByIdAsync(int id) => await _context.Products.Include(p => p.BOMs)
-        .Select(p => new Product
-        {
-            Id = p.Id,
-            Name = p.Name,
-            Description = p.Description,
-            ImagePath = p.ImagePath,
-            CreatedBy = p.CreatedBy,
-            CreatedAt = p.CreatedAt,
-            BOMs = p.BOMs.Select(b => new BillOfMaterial
-            {
-                Id =b.Id,
-                ComponentName = b.ComponentName,
-                QuantityRequired = b.QuantityRequired,
-                Unit = b.Unit
-                
-            }).ToList()
-
-        }).FirstOrDefaultAsync(p => p.Id == id);
+    public async Task<Product?> GetByIdAsync(int id) => await _context.Products
+        .Include(p => p.BOMs)
+        .Include(p => p.Processes)
+        .FirstOrDefaultAsync(p => p.Id == id);
 
 
     public async Task UpdateAsync(Product product)

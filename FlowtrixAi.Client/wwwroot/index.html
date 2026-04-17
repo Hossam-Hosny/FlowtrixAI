@@ -25,11 +25,174 @@
 
 <body>
     <div id="app">
-        <svg class="loading-progress">
-            <circle r="40%" cx="50%" cy="50%" />
-            <circle r="40%" cx="50%" cy="50%" />
-        </svg>
-        <div class="loading-progress-text"></div>
+        <style>
+            .loading-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                width: 100vw;
+                background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+                font-family: 'Cairo', sans-serif;
+                color: white;
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 9999;
+                transition: background 0.5s ease;
+            }
+
+            /* Manual Light Mode via JS */
+            .loading-container.is-light {
+                background: radial-gradient(circle at center, #f8fafc 0%, #f1f5f9 100%);
+                color: #1e293b;
+            }
+            .loading-container.is-light .brand-subtitle {
+                color: #64748b !important;
+            }
+            .loading-container.is-light .progress-container {
+                background: rgba(0, 0, 0, 0.05) !important;
+            }
+            .loading-container.is-light .logo-circle {
+                border-top-color: #2563eb !important;
+            }
+            .loading-container.is-light .logo-circle-inner {
+                border-top-color: #059669 !important;
+            }
+
+            /* System Light Mode Fallback */
+            @media (prefers-color-scheme: light) {
+                .loading-container:not(.is-dark) {
+                    background: radial-gradient(circle at center, #f8fafc 0%, #f1f5f9 100%);
+                    color: #1e293b;
+                }
+                .loading-container:not(.is-dark) .brand-subtitle {
+                    color: #64748b !important;
+                }
+                .loading-container:not(.is-dark) .progress-container {
+                    background: rgba(0, 0, 0, 0.05) !important;
+                }
+            }
+
+            .logo-animation {
+                position: relative;
+                width: 120px;
+                height: 120px;
+                margin-bottom: 2rem;
+            }
+
+            .logo-circle {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border: 4px solid transparent;
+                border-top-color: #3b82f6;
+                border-radius: 50%;
+                animation: spin 1.5s linear infinite;
+            }
+
+            .logo-circle-inner {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                right: 15px;
+                bottom: 15px;
+                border: 4px solid transparent;
+                border-top-color: #10b981;
+                border-radius: 50%;
+                animation: spin 2s linear infinite reverse;
+            }
+
+            .logo-icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 3rem;
+                filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+            .brand-name {
+                font-size: 2.5rem;
+                font-weight: 800;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                letter-spacing: 2px;
+            }
+
+            .brand-subtitle {
+                font-size: 1.1rem;
+                color: #94a3b8;
+                margin-bottom: 3rem;
+                font-weight: 300;
+            }
+
+            .progress-container {
+                width: 250px;
+                height: 6px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .progress-bar-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #3b82f6, #10b981);
+                width: var(--blazor-load-percentage, 0%);
+                transition: width 0.3s ease;
+                box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+            }
+
+            .progress-text {
+                margin-top: 1rem;
+                font-size: 0.9rem;
+                color: #64748b;
+                font-weight: 600;
+            }
+
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            @keyframes pulse {
+                0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+                50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+            }
+        </style>
+        
+        <script>
+            (function() {
+                var theme = localStorage.getItem('theme');
+                if (theme === 'light') {
+                    document.write('<div id="loading-root" class="loading-container is-light">');
+                } else {
+                    document.write('<div id="loading-root" class="loading-container">');
+                }
+            })();
+        </script>
+            <div class="logo-animation">
+                <div class="logo-circle"></div>
+                <div class="logo-circle-inner"></div>
+                <div class="logo-icon">
+                    <i class="bi bi-cpu"></i>
+                </div>
+            </div>
+            
+            <h1 class="brand-name">Flowtrix AI</h1>
+            <p class="brand-subtitle">جيل جديد من إدارة الإنتاج الذكي</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar-fill"></div>
+            </div>
+            
+            <div class="progress-text">جاري تحضير النظام... <span class="loading-progress-text"></span></div>
+        </div>
     </div>
 
     <div id="blazor-error-ui">

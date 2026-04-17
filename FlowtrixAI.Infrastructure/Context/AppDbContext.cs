@@ -48,6 +48,12 @@ public class AppDbContext (DbContextOptions<AppDbContext> options)
             .HasForeignKey(r => r.GeneratedById)
             .OnDelete(DeleteBehavior.Restrict);
 
+        modelBuilder.Entity<ProductionOrder>()
+            .HasOne(p => p.ReportedBy)
+            .WithMany()
+            .HasForeignKey(p => p.ReportedByUserId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         modelBuilder.Ignore<IdentityPasskeyData>();
 
 

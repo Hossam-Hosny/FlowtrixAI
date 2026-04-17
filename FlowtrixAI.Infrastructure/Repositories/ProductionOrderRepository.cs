@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Constants;
+using FlowtrixAI.Domain.Constants;
 using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
 using FlowtrixAI.Infrastructure.Context;
@@ -14,7 +14,7 @@ internal class ProductionOrderRepository(AppDbContext _context) : IProductionOrd
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<ProductionOrder>> GetAllAsync()=> await _context.ProductionOrders.Include(o=>o.Product).ToListAsync();
+    public async Task<List<ProductionOrder>> GetAllAsync()=> await _context.ProductionOrders.Include(o=>o.Product).ThenInclude(p=>p.Processes).Include(o=>o.ReportedBy).ToListAsync();
 
     public async Task<IEnumerable<ProductionOrder>> GetAllCompletedOrders()=>await _context.ProductionOrders.Include(o=>o.Product).Where(x=>x.Status==OrderSteps.Completed).ToListAsync();
 
@@ -27,6 +27,11 @@ internal class ProductionOrderRepository(AppDbContext _context) : IProductionOrd
     public async Task UpdateAsync(ProductionOrder order)
     {
         _context.ProductionOrders.Update(order);
+        await _context.SaveChangesAsync();
+    }
+    public async Task DeleteAsync(ProductionOrder order)
+    {
+        _context.ProductionOrders.Remove(order);
         await _context.SaveChangesAsync();
     }
 }

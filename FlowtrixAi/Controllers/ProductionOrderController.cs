@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Application.ProductionOrder.Dtos;
+using FlowtrixAI.Application.ProductionOrder.Dtos;
 using FlowtrixAI.Application.ProductionOrder.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -64,9 +64,10 @@ namespace FlowtrixAI.Api.Controllers
         /// indicating the outcome of the operation.</returns>
 
         [HttpPost("{id}/fail")]
-        public async Task<IActionResult> Fail(int id)
+        public async Task<IActionResult> Fail(int id, [FromBody] FailOrderRequest request)
         {
-            var result = await _productionOrderService.FailOrderAsync(id);
+            var userId = 1; // Temporary
+            var result = await _productionOrderService.FailOrderAsync(id, request.ProblemDescription, userId);
             return Ok(result);
         }
         /// <summary>
@@ -79,6 +80,13 @@ namespace FlowtrixAI.Api.Controllers
         public async Task<IActionResult> Deliver(int id)
         {
             var result = await _productionOrderService.DeliverOrderAsync(id);
+            return Ok(result);
+        }
+
+        [HttpPost("{id}/progress")]
+        public async Task<IActionResult> UpdateProgress(int id, [FromQuery] int stepIndex)
+        {
+            var result = await _productionOrderService.UpdateOrderProgressAsync(id, stepIndex);
             return Ok(result);
         }
         /// <summary>
@@ -121,6 +129,15 @@ namespace FlowtrixAI.Api.Controllers
         /// </summary>
         /// <returns>An <see cref="IActionResult"/> containing the list of all production orders if any exist; otherwise, a
         /// NotFound result if no production orders are found.</returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = await _productionOrderService.GetOrderByIdAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
+        }
+
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAll()
         {
@@ -135,6 +152,12 @@ namespace FlowtrixAI.Api.Controllers
 
 
 
+        [HttpDelete("{id}/cancel")]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            var result = await _productionOrderService.CancelOrderAsync(id);
+            return Ok(result);
+        }
     }
 }
 

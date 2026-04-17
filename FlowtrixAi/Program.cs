@@ -65,6 +65,10 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
+    // Automatic Migration & Database Creation
+    var dbContext = scope.ServiceProvider.GetRequiredService<FlowtrixAI.Infrastructure.Context.AppDbContext>();
+    await Microsoft.EntityFrameworkCore.RelationalDatabaseFacadeExtensions.MigrateAsync(dbContext.Database);
+
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
     await RoleSeeder.SeedRolesAsync(roleManager);
 }

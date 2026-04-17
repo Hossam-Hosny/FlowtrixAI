@@ -3,6 +3,7 @@
 @using FlowtrixAi.Client.Services
 @using FlowtrixAi.Client.Models
 @inject ProductionOrderClientService ProductionService
+@inject NavigationManager NavigationManager
 
 <PageTitle>لوحة التحكم - نظام MES</PageTitle>
 
@@ -20,7 +21,7 @@
     else
     {
         <div class="stats-grid">
-            <div class="stat-card">
+            <div class="stat-card @(selectedStatus == "all" ? "active" : "")" @onclick='() => SetFilter("all")'>
                 <div class="stat-icon blue">
                     <i class="bi bi-box-seam"></i>
                 </div>
@@ -28,7 +29,15 @@
                 <span class="stat-label">إجمالي الطلبات</span>
             </div>
             
-            <div class="stat-card">
+            <div class="stat-card @(selectedStatus == "ready" ? "active" : "")" @onclick='() => SetFilter("ready")'>
+                <div class="stat-icon purple">
+                    <i class="bi bi-play-circle"></i>
+                </div>
+                <span class="stat-value">@stats.ReadyToStartCount</span>
+                <span class="stat-label">جاهزة للبدء</span>
+            </div>
+
+            <div class="stat-card @(selectedStatus == "progress" ? "active" : "")" @onclick='() => SetFilter("progress")'>
                 <div class="stat-icon orange">
                     <i class="bi bi-clock-history"></i>
                 </div>
@@ -36,7 +45,7 @@
                 <span class="stat-label">قيد التشغيل</span>
             </div>
             
-            <div class="stat-card">
+            <div class="stat-card @(selectedStatus == "completed" ? "active" : "")" @onclick='() => SetFilter("completed")'>
                 <div class="stat-icon green">
                     <i class="bi bi-check-circle"></i>
                 </div>
@@ -44,7 +53,7 @@
                 <span class="stat-label">مكتمل</span>
             </div>
             
-            <div class="stat-card">
+            <div class="stat-card @(selectedStatus == "failed" ? "active" : "")" @onclick='() => SetFilter("failed")'>
                 <div class="stat-icon red">
                     <i class="bi bi-exclamation-triangle"></i>
                 </div>
@@ -59,16 +68,25 @@
             </div>
             
             <div class="production-card">
-                @if (orders == null || !orders.Any())
+                @if (FilteredOrders == null || !FilteredOrders.Any())
                 {
-                    <p class="text-center text-muted p-4">لا توجد طلبات إنتاج حالية</p>
+                    <p class="text-center text-muted p-4">لا توجد طلبات إنتاج ضمن هذه الفئة</p>
                 }
                 else
                 {
                     <div class="orders-list">
-                        @foreach (var order in orders)
+                        @foreach (var order in FilteredOrders)
                         {
-                            <div class="order-item mb-3">
+                            var statusClass = GetStatusClass(order.Status);
+                            var isFailed = statusClass == "failed";
+                            var orderItemClass = statusClass switch {
+                                "completed" => "completed-order",
+                                "failed" => "failed-order",
+                                "progressing" => "processing",
+                                _ => ""
+                            };
+                            
+                            <div class="order-item mb-3 animate-fade-in @orderItemClass cursor-pointer" @onclick="() => HandleOrderClick(order)">
                                 <div class="order-main">
                                     <div class="order-progress-circle">
                                         <svg width="60" height="60">
@@ -88,7 +106,13 @@
                                 </div>
                                 
                                 <div class="order-status">
-                                    <span class="status-badge @(GetStatusClass(order.Status))">@GetStatusAr(order.Status)</span>
+                                    <span class="status-badge @statusClass">@GetStatusAr(order.Status)</span>
+                                    @if (order.Status?.ToLower() == "approved" || order.Status?.ToLower() == "جاهزة للبدء")
+                                    {
+                                        <button class="btn-cancel-mini ms-2" title="إلغاء الطلبية وإرجاع المخزون" @onclick:stopPropagation="true" @onclick="() => CancelOrder(order)">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    }
                                     <span class="order-number">#@order.OrderId</span>
                                 </div>
                             </div>
@@ -98,16 +122,57 @@
             </div>
         </div>
     }
+
+    @if (selectedOrder != null)
+    {
+        <div class="problem-modal-overlay" @onclick="CloseDetails">
+            <div class="problem-modal animate-slide-up" @onclick:stopPropagation>
+                <div class="modal-header">
+                    <h3>تفاصيل المشكلة</h3>
+                    <button class="btn-close-modal" @onclick="CloseDetails">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="detail-row mb-4">
+                        <span class="detail-label">المنتج:</span>
+                        <span class="detail-text">@selectedOrder.OrderName</span>
+                    </div>
+                    <div class="problem-description-box">
+                        <label class="figma-label mb-2">وصف العطل:</label>
+                        <p class="description-content">@selectedOrder.ProblemDescription</p>
+                    </div>
+                    <div class="reporter-info mt-4">
+                        <i class="bi bi-person-circle"></i>
+                        <span>تم التبليغ بواسطة: @(selectedOrder.ReportedByUserName ?? "الموظف رقم " + selectedOrder.ReportedByUserId)</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-cancel" @onclick="CloseDetails">إغلاق</button>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 @code {
     private DashboardStats? stats;
     private List<ProductionOrderResponse>? orders;
+    private string selectedStatus = "all";
+
+    private IEnumerable<ProductionOrderResponse> FilteredOrders => orders?
+        .Where(o => selectedStatus == "all" || 
+                   (selectedStatus == "completed" && o.Status?.ToLower() == "completed") ||
+                   (selectedStatus == "ready" && o.Status?.ToLower() == "approved") ||
+                   (selectedStatus == "failed" && (o.Status?.ToLower() == "failed" || o.Status?.ToLower() == "rejected")) ||
+                   (selectedStatus == "progress" && (o.Status?.ToLower() == "started" || o.Status?.ToLower() == "inprogress" || o.Status?.ToLower() == "in progress" || o.Status?.ToLower() == "processing")))
+        .OrderByDescending(o => o.OrderId)
+        ?? Enumerable.Empty<ProductionOrderResponse>();
 
     protected override async Task OnInitializedAsync()
     {
         await LoadData();
     }
+
+    private void SetFilter(string status) => selectedStatus = status;
 
     private async Task LoadData()
     {
@@ -115,19 +180,50 @@
         orders = await ProductionService.GetAllOrdersAsync();
     }
 
+    private ProductionOrderResponse? selectedOrder;
+    private async Task CancelOrder(ProductionOrderResponse order)
+    {
+        var result = await ProductionService.CancelOrderAsync(order.OrderId);
+        await LoadData();
+        StateHasChanged();
+    }
+
+    private void HandleOrderClick(ProductionOrderResponse order)
+    {
+        var status = order.Status?.ToLower();
+        if (status == "started" || status == "inprogress" || status == "in progress" || status == "approved")
+        {
+            NavigationManager.NavigateTo($"/production?ResumeOrderId={order.OrderId}");
+        }
+        else if (status == "failed" || status == "rejected")
+        {
+            ShowDetails(order);
+        }
+    }
+
+    private void ShowDetails(ProductionOrderResponse order)
+    {
+        if (order.Status?.ToLower() == "failed" || order.Status?.ToLower() == "rejected")
+        {
+            selectedOrder = order;
+        }
+    }
+    private void CloseDetails() => selectedOrder = null;
+
     private string GetStatusClass(string status) => status?.ToLower() switch
     {
         "completed" => "completed",
-        "failed" => "failed",
-        "started" or "in progress" or "processing" => "progressing",
+        "failed" or "rejected" => "failed",
+        "started" or "in progress" or "processing" or "inprogress" or "approved" => "progressing",
         _ => "pending"
     };
 
     private string GetStatusAr(string status) => status?.ToLower() switch
     {
         "completed" => "مكتمل",
-        "failed" => "فشل",
-        "started" or "in progress" or "processing" => "قيد التشغيل",
+        "failed" or "rejected" => "مشكلة",
+        "started" or "in progress" or "processing" or "inprogress" => "قيد التشغيل",
+        "approved" => "جاهزة للبدء",
         "pending" => "قيد الانتظار",
         _ => status ?? "غير معروف"
     };

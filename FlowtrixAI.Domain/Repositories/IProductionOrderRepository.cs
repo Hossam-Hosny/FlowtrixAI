@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 
 namespace FlowtrixAI.Domain.Repositories;
 
@@ -10,5 +10,5 @@ public interface IProductionOrderRepository
     Task UpdateAsync (ProductionOrder order);
     Task<IEnumerable<ProductionOrder>> GetAllCompletedOrders();
     Task<IEnumerable<ProductionOrder>> GetAllFaildOrdersAsync();
-
+    Task DeleteAsync(ProductionOrder order);
 }

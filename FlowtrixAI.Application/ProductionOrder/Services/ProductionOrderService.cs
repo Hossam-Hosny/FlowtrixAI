@@ -12,7 +12,7 @@ internal class ProductionOrderService(IBomRepository _bomRepository
 {
     public async Task<string> CompleteOrderAsync(int orderId)
     {
-        var order =  _productionOrderRepository.GetByIdAsync(orderId).Result;
+        var order = await _productionOrderRepository.GetByIdAsync(orderId);
 
         if (order == null)
             return "الطلب غير موجود";
@@ -23,8 +23,15 @@ internal class ProductionOrderService(IBomRepository _bomRepository
         order.Status = OrderSteps.Completed;
         await _productionOrderRepository.UpdateAsync(order);
 
-        return "تم اكتمال الطلب";
+        // Inventory Logic: Add finished products to stock
+        var product = await _productRepository.GetByIdAsync(order.ProductId);
+        if (product != null)
+        {
+            product.StockQuantity += order.Quantity;
+            await _productRepository.UpdateAsync(product);
+        }
 
+        return "تم اكتمال الطلب";
     }
 
     public async Task<ProductionOrderOperationResponse> CreateOrderAsync(int productId, int quantity, int createdBy)

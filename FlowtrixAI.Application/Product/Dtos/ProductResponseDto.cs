@@ -7,7 +7,7 @@ public class ProductResponseDto
     public string? ProductCode { get; set; }
     public string? Description { get; set; }
     public string? ImagePath { get; set; }
-
+    public decimal StockQuantity { get; set; }
 
     public List<BoMsDto>? BillOfMaterials { get; set; } 
     public List<ProcessResponseDto>? ProductionSteps { get; set; }

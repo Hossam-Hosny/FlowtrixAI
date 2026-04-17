@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
 using FlowtrixAI.Infrastructure.Context;
 using FlowtrixAI.Infrastructure.Repositories;
@@ -35,6 +35,7 @@ namespace FlowtrixAI.Infrastructure.Extensions
             services.AddScoped<IQualityCheckRepository, QualityCheckRepository>();
 
             services.AddScoped<IProductionOrderRepository, ProductionOrderRepository>();
+            services.AddScoped<IExportRepository, ExportRepository>();
 
 
 

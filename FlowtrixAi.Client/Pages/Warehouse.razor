@@ -61,7 +61,8 @@
 
         @if (stats.LowStockCount > 0)
         {
-            <div class="alert alert-danger-custom d-flex align-items-center justify-content-between mb-4">
+            <div class="alert alert-danger-custom d-flex align-items-center justify-content-between mb-4 clickable-alert @(showLowStockOnly ? "active-filter" : "")" 
+                 @onclick="ToggleLowStockFilter" title="اضغط لفلترة المواد منخفضة المخزون">
                 <div class="d-flex align-items-center gap-3">
                     <div class="alert-icon">
                         <i class="bi bi-exclamation-octagon"></i>
@@ -76,7 +77,16 @@
 
         <div class="materials-list-section">
             <div class="section-header d-flex justify-content-between align-items-center mb-3">
-                <h3 class="mb-0">جميع المواد المخزنة</h3>
+                <div class="d-flex align-items-center gap-3">
+                    <h3 class="mb-0">جميع المواد المخزنة</h3>
+                    @if (showLowStockOnly)
+                    {
+                        <button class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1" @onclick="() => showLowStockOnly = false">
+                            <i class="bi bi-x-circle"></i>
+                            عرض الكل
+                        </button>
+                    }
+                </div>
                 <div class="search-filters d-flex gap-2">
                     <div class="search-input-wrapper">
                         <i class="bi bi-search"></i>
@@ -228,9 +238,17 @@
     private List<string> existingMaterialNames = new();
     private List<string> existingUnits = new();
 
+    private bool showLowStockOnly = false;
+
     private IEnumerable<InventoryResponse>? FilteredItems => inventoryItems?
         .Where(i => (string.IsNullOrEmpty(searchTerm) || i.ComponentName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)) &&
-                    (string.IsNullOrEmpty(searchCode) || i.MaterialCode.Contains(searchCode, StringComparison.OrdinalIgnoreCase)));
+                    (string.IsNullOrEmpty(searchCode) || i.MaterialCode.Contains(searchCode, StringComparison.OrdinalIgnoreCase)) &&
+                    (!showLowStockOnly || i.IsLowStock));
+
+    private void ToggleLowStockFilter()
+    {
+        showLowStockOnly = !showLowStockOnly;
+    }
 
     protected override async Task OnInitializedAsync()
     {

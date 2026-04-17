@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Application.BoM.Interface;
+using FlowtrixAI.Application.BoM.Interface;
 using FlowtrixAI.Application.BoM.Services;
 using FlowtrixAI.Application.Inventory.Interface;
 using FlowtrixAI.Application.Inventory.Services;
@@ -14,6 +14,9 @@ using FlowtrixAI.Application.Quality.Interface;
 using FlowtrixAI.Application.Quality.Services;
 using FlowtrixAI.Application.Reports.Interface;
 using FlowtrixAI.Application.Reports.Services;
+using FlowtrixAI.Application.Export.Interface;
+using FlowtrixAI.Application.Export.Services;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,6 +39,8 @@ namespace FlowtrixAI.Application.Extensions
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IBoMService,BoMService>();
             services.AddScoped<IAiService, AiService>();
+            services.AddScoped<IExportService, ExportService>();
+
             
 
 

@@ -7,6 +7,7 @@ public class ProductResponse
     public string ProductCode { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string ImagePath { get; set; } = string.Empty;
+    public decimal StockQuantity { get; set; }
     public List<BOMItemResponse> BillOfMaterials { get; set; } = new();
     public List<ProcessStepResponse> ProductionSteps { get; set; } = new();
 }

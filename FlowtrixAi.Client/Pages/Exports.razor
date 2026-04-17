@@ -1,0 +1,352 @@
+@page "/exports"
+@using FlowtrixAi.Client.Models
+@layout DashboardLayout
+@inject HttpClient Http
+
+<div class="exports-page animate-fade-in">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h2 class="page-title">الصادرات</h2>
+        <button class="btn-primary-figma" @onclick="OpenAddModal">
+            <i class="bi bi-plus-lg me-2"></i> إضافة صادر
+        </button>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="stats-row mb-5">
+        <div class="stat-card-premium">
+            <div class="stat-icon-wrapper" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                <i class="bi bi-truck"></i>
+            </div>
+            <div class="stat-info">
+                <h3>@exports.Count()</h3>
+                <p>إجمالي الطلبات</p>
+            </div>
+        </div>
+        <div class="stat-card-premium">
+            <div class="stat-icon-wrapper" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+                <i class="bi bi-currency-dollar"></i>
+            </div>
+            <div class="stat-info">
+                <h3>$@exports.Sum(e => e.TotalAmount).ToString("N0")</h3>
+                <p>إجمالي المبيعات ($)</p>
+            </div>
+        </div>
+        <div class="stat-card-premium">
+            <div class="stat-icon-wrapper" style="background: rgba(168, 85, 247, 0.1); color: #a855f7;">
+                <i class="bi bi-box-seam"></i>
+            </div>
+            <div class="stat-info">
+                <h3>@exports.Sum(e => e.Quantity).ToString("N0")</h3>
+                <p>إجمالي الكمية المصدرة</p>
+            </div>
+        </div>
+        <div class="stat-card-premium">
+            <div class="stat-icon-wrapper" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                <i class="bi bi-clock-history"></i>
+            </div>
+            <div class="stat-info">
+                <h3>@exports.Count(e => e.Status == "Pending")</h3>
+                <p>طلبات قيد الانتظار</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filters Row -->
+    <div class="search-filters-bar animate-fade-in mb-4">
+        <div class="search-input-wrapper">
+            <i class="bi bi-search"></i>
+            <input type="text" class="search-control" placeholder="بحث باسم المنتج، المشتري، أو الدولة..." @bind="searchTerm" @bind:event="oninput" />
+        </div>
+    </div>
+
+    <!-- Status Filters Row -->
+    <div class="filters-row animate-fade-in mb-4">
+        <div class="filter-card @(statusFilter == "All" ? "active" : "")" @onclick='() => statusFilter = "All"'>
+            <div class="filter-dot all"></div>
+            <div class="filter-info">
+                <span class="label">الكل</span>
+                <span class="count">@exports.Count</span>
+            </div>
+        </div>
+        <div class="filter-card @(statusFilter == "Pending" ? "active" : "")" @onclick='() => statusFilter = "Pending"'>
+            <div class="filter-dot pending"></div>
+            <div class="filter-info">
+                <span class="label">قيد الانتظار</span>
+                <span class="count">@exports.Count(e => e.Status == "Pending")</span>
+            </div>
+        </div>
+        <div class="filter-card @(statusFilter == "Shipped" ? "active" : "")" @onclick='() => statusFilter = "Shipped"'>
+            <div class="filter-dot shipped"></div>
+            <div class="filter-info">
+                <span class="label">تم الشحن</span>
+                <span class="count">@exports.Count(e => e.Status == "Shipped")</span>
+            </div>
+        </div>
+        <div class="filter-card @(statusFilter == "Delivered" ? "active" : "")" @onclick='() => statusFilter = "Delivered"'>
+            <div class="filter-dot delivered"></div>
+            <div class="filter-info">
+                <span class="label">تم التوصيل</span>
+                <span class="count">@exports.Count(e => e.Status == "Delivered")</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exports Table -->
+    <div class="figma-table-container">
+        <div class="table-header-ar">
+            <h3>جميع الصادرات</h3>
+        </div>
+        <div class="table-responsive">
+            <table class="figma-table">
+                <thead>
+                    <tr>
+                        <th>رقم الطلب</th>
+                        <th>التاريخ</th>
+                        <th>المنتج</th>
+                        <th>الكمية</th>
+                        <th>السعر/وحدة ($)</th>
+                        <th>الإجمالي ($)</th>
+                        <th>المشتري</th>
+                        <th>الدولة</th>
+                        <th>الحالة</th>
+                        <th class="text-center">الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (exports == null || !exports.Any())
+                    {
+                        <tr>
+                            <td colspan="10" class="text-center py-5">
+                                <div class="empty-state">
+                                    <i class="bi bi-inbox fs-1 opacity-50"></i>
+                                    <p class="mt-2 text-muted">لا يوجد صادرات مضافة حالياً</p>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        @foreach (var exp in FilteredExports)
+                        {
+                            <tr>
+                                <td class="fw-bold text-primary">@exp.OrderNumber</td>
+                                <td style="font-size: 0.85rem; color: #64748b;">
+                                    <div>@exp.OrderDate.ToShortDateString()</div>
+                                    <div class="fw-bold">@exp.OrderDate.ToShortTimeString()</div>
+                                </td>
+                                <td class="fw-bold">@exp.ProductName</td>
+                                <td>@exp.Quantity @exp.Unit</td>
+                                <td class="text-secondary">$@exp.UnitPrice.ToString("N2")</td>
+                                <td class="fw-bold text-success">$@exp.TotalAmount.ToString("N2")</td>
+                                <td>@exp.BuyerName</td>
+                                <td>@exp.DestinationCountry</td>
+                                <td>
+                                    <span class="badge-status @exp.Status.ToLower()">
+                                        @GetStatusArabic(exp.Status)
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        @if (exp.Status == "Pending")
+                                        {
+                                            <button class="btn btn-sm btn-outline-primary" @onclick='() => UpdateStatus(exp.Id, "Shipped")' title="تم الشحن">
+                                                <i class="bi bi-truck"></i>
+                                            </button>
+                                        }
+                                        else if (exp.Status == "Shipped")
+                                        {
+                                            <button class="btn btn-sm btn-outline-success" @onclick='() => UpdateStatus(exp.Id, "Delivered")' title="تم التوصيل">
+                                                <i class="bi bi-check-circle"></i>
+                                            </button>
+                                        }
+                                        <button class="btn btn-sm btn-outline-danger" @onclick="() => DeleteExport(exp.Id)" title="إلغاء الطلبية وإرجاع المنتج للمخزن">
+                                            <i class="bi bi-x-circle"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Add Export Modal -->
+@if (isAddModalOpen)
+{
+    <div class="modal-overlay" @onclick="CloseAddModal">
+        <div class="modal-card modal-card-wide animate-slide-up" @onclick:stopPropagation="true">
+            <div class="ar-modal-header">
+                <h3 class="mb-0">إضافة طلب تصدير جديد</h3>
+                <button class="btn-close" style="background: none; border: none; color: var(--text-dark);" @onclick="CloseAddModal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            
+            <EditForm Model="newExport" OnValidSubmit="HandleAddExport">
+                <div class="ar-modal-body">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="figma-label">رقم الطلب</label>
+                            <InputText @bind-Value="newExport.OrderNumber" class="form-control figma-input" placeholder="EXP-001" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="figma-label">المنتج</label>
+                            <InputSelect @bind-Value="newExport.ProductId" class="form-select figma-input">
+                                <option value="0">-- اختر المنتج --</option>
+                                @foreach (var p in availableProducts)
+                                {
+                                    <option value="@p.Id">@p.Name</option>
+                                }
+                            </InputSelect>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="figma-label">الكمية</label>
+                            <InputNumber @bind-Value="newExport.Quantity" class="form-control figma-input" min="0" step="1" onfocus="this.select()" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="figma-label">السعر للوحدة ($)</label>
+                            <InputNumber @bind-Value="newExport.UnitPrice" class="form-control figma-input" min="0" step="0.01" onfocus="this.select()" />
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="figma-label">الوحدة</label>
+                            <InputText @bind-Value="newExport.Unit" class="form-control figma-input" placeholder="القطعة، زجاجة إلخ" list="unit-list" />
+                            <datalist id="unit-list">
+                                @foreach (var unit in exports.Select(e => e.Unit).Distinct())
+                                {
+                                    <option value="@unit"></option>
+                                }
+                            </datalist>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="figma-label">المشتري</label>
+                            <InputText @bind-Value="newExport.BuyerName" class="form-control figma-input" placeholder="اسم الشركة أو العميل" list="buyer-list" />
+                            <datalist id="buyer-list">
+                                @foreach (var buyer in exports.Select(e => e.BuyerName).Distinct())
+                                {
+                                    <option value="@buyer"></option>
+                                }
+                            </datalist>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="figma-label">الدولة</label>
+                            <InputText @bind-Value="newExport.DestinationCountry" class="form-control figma-input" placeholder="دولة الوجهة" list="country-list" />
+                            <datalist id="country-list">
+                                @foreach (var country in exports.Select(e => e.DestinationCountry).Distinct())
+                                {
+                                    <option value="@country"></option>
+                                }
+                            </datalist>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="figma-label">حالة التوصيل</label>
+                            <InputSelect @bind-Value="newExport.Status" class="form-select figma-input">
+                                <option value="Pending">قيد الانتظار</option>
+                                <option value="Shipped">تم الشحن</option>
+                                <option value="Delivered">تم التوصيل</option>
+                            </InputSelect>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ar-modal-footer">
+                    <button type="submit" class="btn-save-ar">إضافة</button>
+                    <button type="button" class="btn-close-ar" @onclick="CloseAddModal">إلغاء</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+}
+
+@code {
+    private List<ExportResponse> exports = new();
+    private List<ProductResponse> availableProducts = new();
+    private CreateExportRequest newExport = new();
+    private bool isAddModalOpen = false;
+    private string statusFilter = "All";
+    private string searchTerm = "";
+
+    private IEnumerable<ExportResponse> FilteredExports => 
+        exports.Where(e => 
+            (statusFilter == "All" || e.Status == statusFilter) &&
+            (string.IsNullOrWhiteSpace(searchTerm) || 
+             e.ProductName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+             e.BuyerName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+             e.DestinationCountry.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+        );
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        try 
+        {
+            exports = await Http.GetFromJsonAsync<List<ExportResponse>>("api/Export") ?? new();
+            availableProducts = await Http.GetFromJsonAsync<List<ProductResponse>>("api/Product/GetAllProducts") ?? new();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private void OpenAddModal()
+    {
+        newExport = new CreateExportRequest { OrderNumber = $"EXP-{(exports.Count + 1).ToString("D3")}" };
+        isAddModalOpen = true;
+    }
+
+    private void CloseAddModal() => isAddModalOpen = false;
+
+    private async Task HandleAddExport()
+    {
+        if (newExport.ProductId == 0) return;
+
+        var response = await Http.PostAsJsonAsync("api/Export", newExport);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadData();
+            CloseAddModal();
+        }
+    }
+
+    private async Task UpdateStatus(int id, string status)
+    {
+        var response = await Http.PatchAsJsonAsync($"api/Export/{id}/status", status);
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadData();
+        }
+    }
+
+    private async Task DeleteExport(int id)
+    {
+        var response = await Http.DeleteAsync($"api/Export/{id}");
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadData();
+        }
+    }
+
+    private string GetStatusArabic(string status) => status switch
+    {
+        "Pending" => "قيد الانتظار",
+        "Shipped" => "تم الشحن",
+        "Delivered" => "تم التوصيل",
+        _ => status
+    };
+}

@@ -107,6 +107,7 @@ internal class ProductService(IProductRepository _productRepository) : IProductS
             ProductCode = product.ProductCode,
             Description = product.Description,
             ImagePath = product.ImagePath,
+            StockQuantity = product.StockQuantity,
             
             BillOfMaterials = product.BOMs?.Select(bom => new BoMsDto
             {
@@ -137,6 +138,7 @@ internal class ProductService(IProductRepository _productRepository) : IProductS
             ProductCode = product.ProductCode,
             Description = product.Description,
             ImagePath = product.ImagePath,
+            StockQuantity = product.StockQuantity,
             BillOfMaterials = product.BOMs?.Select(bom => new BoMsDto
             {
                 ComponentName = bom.ComponentName,

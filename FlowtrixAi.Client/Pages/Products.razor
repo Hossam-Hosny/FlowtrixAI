@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="p-details">
                                     <div class="p-name">@p.Name</div>
-                                    <div class="p-code">@p.ProductCode</div>
+                                    <div class="p-stock-mini">متوفر: @p.StockQuantity</div>
                                 </div>
                             </div>
                         }
@@ -79,6 +79,10 @@
                         <div class="view-title-group">
                             <h2 class="view-name">@selectedProduct.Name</h2>
                             <div class="view-code">الكود: <span>@selectedProduct.ProductCode</span></div>
+                            <div class="stock-badge-premium mt-3">
+                                <i class="bi bi-box-fill me-2"></i>
+                                المنتجات الجاهزة المتاحة: <span class="stock-number">@selectedProduct.StockQuantity</span>
+                            </div>
                         </div>
                         <button class="btn btn-edit-ar" @onclick="() => OpenEditModal(selectedProduct)">
                             <i class="bi bi-pencil-square"></i>

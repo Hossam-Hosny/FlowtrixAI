@@ -19,6 +19,7 @@ public class Product
     public string? UpdatedBy { get; set; }
     public DateTime? UpdatedAt { get; set; }
 
+    public decimal StockQuantity { get; set; }
     public ICollection<BillOfMaterial> BOMs { get; set; }
     public ICollection<Process> Processes { get; set; }
 

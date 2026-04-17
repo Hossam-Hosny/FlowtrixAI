@@ -17,6 +17,7 @@ public class AppDbContext (DbContextOptions<AppDbContext> options)
     public DbSet<Report> Reports { get; set; }
     public DbSet<InventoryItem> Inventory { get; set; }
     public DbSet<ProductionOrder> ProductionOrders { get; set; }
+    public DbSet<Export> Exports { get; set; }
 
 
 

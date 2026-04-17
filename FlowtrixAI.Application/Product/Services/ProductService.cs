@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Application.Product.Dtos;
+using FlowtrixAI.Application.Product.Dtos;
 using FlowtrixAI.Application.Product.Interface;
 using FlowtrixAI.Domain.Repositories;
 
@@ -8,39 +8,92 @@ internal class ProductService(IProductRepository _productRepository) : IProductS
 {
     public async Task<bool> CreateProductAsync(CreateProductDto createProductDto , int userId)
     {
-        var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/products");
-
-        if (!Directory.Exists(folderPath))
-        {
-            Directory.CreateDirectory(folderPath);
-        }
-
-        var fileName = Guid.NewGuid() + Path.GetExtension(createProductDto.Image.FileName);
-        var fullPath = Path.Combine(folderPath, fileName);
-
-        using (var stream = new FileStream(fullPath, FileMode.Create))
-        {
-            await createProductDto.Image.CopyToAsync(stream);
-        }
-
-
-       
-
-
         var product = new Domain.Entities.Product
         {
             Name = createProductDto.Name,
+            ProductCode = createProductDto.ProductCode,
             CreatedAt = DateTime.UtcNow,
             CreatedBy = userId.ToString(),
-
             Description = createProductDto.Description,
-            ImagePath = $"/images/products/{fileName}",
-
+            ImagePath = "",
         };
 
-        await _productRepository.AddAsync(product);
-        return (true);
+        if (createProductDto.BOMs != null && createProductDto.BOMs.Any())
+        {
+            foreach (var bomDto in createProductDto.BOMs)
+            {
+                product.BOMs.Add(new Domain.Entities.BillOfMaterial
+                {
+                    ComponentName = bomDto.ComponentName,
+                    QuantityRequired = bomDto.QuantityRequired,
+                    Unit = bomDto.Unit
+                });
+            }
+        }
 
+        if (createProductDto.ProductionSteps != null && createProductDto.ProductionSteps.Any())
+        {
+            foreach (var stepDto in createProductDto.ProductionSteps)
+            {
+                product.Processes.Add(new Domain.Entities.Process
+                {
+                    StepName = stepDto.StepName,
+                    Sequence = stepDto.Sequence,
+                    DurationMinutes = stepDto.DurationMinutes,
+                    Resource = "" // Default
+                });
+            }
+        }
+
+        await _productRepository.AddAsync(product);
+        return true;
+
+    }
+
+    public async Task<bool> UpdateProductAsync(int id, CreateProductDto updateProductDto, int userId)
+    {
+        var product = await _productRepository.GetByIdAsync(id);
+        if (product == null) return false;
+
+        product.Name = updateProductDto.Name;
+        product.ProductCode = updateProductDto.ProductCode;
+        product.Description = updateProductDto.Description;
+        product.UpdatedAt = DateTime.UtcNow;
+        product.UpdatedBy = userId.ToString();
+
+        // Update BOMs - Simplest way is to clear and re-add
+        product.BOMs.Clear();
+        product.Processes.Clear();
+
+        if (updateProductDto.BOMs != null)
+        {
+            foreach (var bomDto in updateProductDto.BOMs)
+            {
+                product.BOMs.Add(new Domain.Entities.BillOfMaterial
+                {
+                    ComponentName = bomDto.ComponentName,
+                    QuantityRequired = bomDto.QuantityRequired,
+                    Unit = bomDto.Unit
+                });
+            }
+        }
+
+        if (updateProductDto.ProductionSteps != null)
+        {
+            foreach (var stepDto in updateProductDto.ProductionSteps)
+            {
+                product.Processes.Add(new Domain.Entities.Process
+                {
+                    StepName = stepDto.StepName,
+                    Sequence = stepDto.Sequence,
+                    DurationMinutes = stepDto.DurationMinutes,
+                    Resource = ""
+                });
+            }
+        }
+
+        await _productRepository.UpdateAsync(product);
+        return true;
     }
 
     public async Task<IEnumerable<ProductResponseDto>> GetAllProductsAsync()
@@ -51,6 +104,7 @@ internal class ProductService(IProductRepository _productRepository) : IProductS
         {
             Id = product.Id,
             Name = product.Name,
+            ProductCode = product.ProductCode,
             Description = product.Description,
             ImagePath = product.ImagePath,
             
@@ -59,6 +113,13 @@ internal class ProductService(IProductRepository _productRepository) : IProductS
                 ComponentName = bom.ComponentName,
                 QuantityRequired = bom.QuantityRequired,
                 Unit = bom.Unit
+            }).ToList(),
+            ProductionSteps = product.Processes?.OrderBy(p => p.Sequence).Select(p => new ProcessResponseDto
+            {
+                Id = p.Id,
+                StepName = p.StepName,
+                Sequence = p.Sequence,
+                DurationMinutes = p.DurationMinutes
             }).ToList()
         });
 
@@ -73,6 +134,7 @@ internal class ProductService(IProductRepository _productRepository) : IProductS
         {
             Id = product.Id,
             Name = product.Name,
+            ProductCode = product.ProductCode,
             Description = product.Description,
             ImagePath = product.ImagePath,
             BillOfMaterials = product.BOMs?.Select(bom => new BoMsDto
@@ -80,6 +142,13 @@ internal class ProductService(IProductRepository _productRepository) : IProductS
                 ComponentName = bom.ComponentName,
                 QuantityRequired = bom.QuantityRequired,
                 Unit = bom.Unit
+            }).ToList(),
+            ProductionSteps = product.Processes?.OrderBy(p => p.Sequence).Select(p => new ProcessResponseDto
+            {
+                Id = p.Id,
+                StepName = p.StepName,
+                Sequence = p.Sequence,
+                DurationMinutes = p.DurationMinutes
             }).ToList()
         };
     }

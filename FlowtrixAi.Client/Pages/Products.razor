@@ -1,0 +1,520 @@
+@page "/products"
+@layout DashboardLayout
+@using FlowtrixAi.Client.Services
+@using FlowtrixAi.Client.Models
+@inject ProductClientService ProductService
+@inject InventoryClientService InventoryService
+
+<PageTitle>المنتجات - نظام MES</PageTitle>
+
+<div class="products-container">
+    <div class="products-header-row d-flex justify-content-between align-items-center mb-4">
+        <h1 class="page-title-ar">المنتجات</h1>
+        <button class="btn btn-primary-ar" @onclick="OpenAddModal">
+            <i class="bi bi-plus-lg"></i>
+            <span>منتج جديد</span>
+        </button>
+    </div>
+
+    <div class="products-grid-layout">
+        <!-- Sidebar: Product List & Filtering (Right Side in RTL) -->
+        <div class="product-sidebar-card">
+            <div class="sidebar-card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">قائمة المنتجات</h3>
+                <span class="product-count-badge">@FilteredProducts?.Count()</span>
+            </div>
+
+            <div class="sidebar-search-box">
+                <i class="bi bi-search"></i>
+                <input type="text" @bind="searchTerm" @bind:event="oninput" placeholder="بحث باسم المنتج أو الكود..." />
+            </div>
+            
+            <div class="product-items-list">
+                @if (products == null)
+                {
+                    <div class="text-center py-5">
+                        <div class="loader-spinner"></div>
+                    </div>
+                }
+                else if (!FilteredProducts.Any())
+                {
+                    <div class="text-center py-5 text-muted empty-state-box">
+                        <i class="bi bi-search mb-2 d-block fs-2"></i>
+                        <span>لا توجد منتجات تطابق البحث</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="items-grid">
+                        @foreach (var p in FilteredProducts)
+                        {
+                            <div class="product-item @(selectedProduct?.Id == p.Id ? "active" : "")" @onclick="() => SelectProduct(p)">
+                                <div class="p-icon">
+                                    <i class="bi bi-box-seam"></i>
+                                </div>
+                                <div class="p-details">
+                                    <div class="p-name">@p.Name</div>
+                                    <div class="p-code">@p.ProductCode</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Main View: Product Details (Left Side in RTL) -->
+        <div class="product-main-view">
+            @if (selectedProduct == null)
+            {
+                <div class="empty-view-placeholder">
+                    <i class="bi bi-box-seam"></i>
+                    <p>يرجى اختيار منتج من القائمة لعرض التفاصيل</p>
+                </div>
+            }
+            else
+            {
+                <div class="view-header-card animate-fade-in">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="view-title-group">
+                            <h2 class="view-name">@selectedProduct.Name</h2>
+                            <div class="view-code">الكود: <span>@selectedProduct.ProductCode</span></div>
+                        </div>
+                        <button class="btn btn-edit-ar" @onclick="() => OpenEditModal(selectedProduct)">
+                            <i class="bi bi-pencil-square"></i>
+                            <span>تعديل</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="view-bom-card animate-slide-up">
+                    <div class="bom-header">
+                        <h3>قائمة المواد (BOM)</h3>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table ar-table">
+                            <thead>
+                                <tr>
+                                    <th>المكون</th>
+                                    <th>الكمية</th>
+                                    <th>الوحدة</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (selectedProduct.BillOfMaterials == null || !selectedProduct.BillOfMaterials.Any())
+                                {
+                                    <tr>
+                                        <td colspan="3" class="text-center py-5 text-muted">
+                                            <i class="bi bi-info-circle me-2"></i>
+                                            لا توجد مواد مضافة لهذا المنتج
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    @foreach (var bom in selectedProduct.BillOfMaterials)
+                                    {
+                                        <tr>
+                                            <td class="fw-bold text-dark">@bom.ComponentName</td>
+                                            <td class="text-primary fw-bold">@bom.QuantityRequired</td>
+                                            <td class="text-muted">@bom.Unit</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="view-steps-card animate-slide-up mt-4">
+                    <div class="bom-header">
+                        <h3>خطوات العملية</h3>
+                    </div>
+                    <div class="steps-list-vertical p-4">
+                        @if (selectedProduct.ProductionSteps == null || !selectedProduct.ProductionSteps.Any())
+                        {
+                            <p class="text-center text-muted m-0">لا توجد خطوات عمل مضافة</p>
+                        }
+                        else
+                        {
+                            @foreach (var step in selectedProduct.ProductionSteps.OrderBy(s => s.Sequence))
+                            {
+                                <div class="step-horizontal-item">
+                                    <div class="step-number">@step.Sequence</div>
+                                    <div class="step-info">
+                                        <div class="step-name">@step.StepName</div>
+                                        <div class="step-meta">المدة المتوقعة: <span>@step.DurationMinutes دقيقة</span></div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Edit Product Modal -->
+@if (isEditModalOpen)
+{
+    <div class="modal-overlay" @onclick="CloseEditModal">
+        <div class="modal-card products-modal-wide animate-slide-up" @onclick:stopPropagation="true">
+            <div class="modal-header ar-modal-header">
+                <h3>تعديل منتج: @editProduct.Name</h3>
+                <button class="btn-close-ar" @onclick="CloseEditModal"><i class="bi bi-x-lg"></i></button>
+            </div>
+            
+            <EditForm Model="editProduct" OnValidSubmit="HandleEditProduct">
+                <div class="modal-body ar-modal-body">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-8">
+                            <label class="figma-label">اسم المنتج</label>
+                            <InputText @bind-Value="editProduct.Name" class="form-control figma-input" placeholder="اسم المنتج" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="figma-label">كود المنتج</label>
+                            <InputText @bind-Value="editProduct.ProductCode" class="form-control figma-input text-center" />
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="figma-label">الوصف</label>
+                        <InputTextArea @bind-Value="editProduct.Description" class="form-control figma-input" rows="2" />
+                    </div>
+
+                    <div class="bom-builder-card mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">مكونات المنتج (BOM)</h4>
+                            <button type="button" class="btn btn-add-row" @onclick="AddEditBOMRow">
+                                <i class="bi bi-plus-circle"></i> إضافة مكون
+                            </button>
+                        </div>
+                        
+                        <div class="bom-rows-container">
+                            <table class="table bom-edit-table">
+                                <thead>
+                                    <tr>
+                                        <th>اسم المكون</th>
+                                        <th style="width: 120px;">الكمية</th>
+                                        <th style="width: 120px;">الوحدة</th>
+                                        <th style="width: 50px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var bom in editProduct.BOMs)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <InputSelect @bind-Value="bom.ComponentName" class="form-select bom-select" @onchange="() => OnComponentSelectedForEdit(bom)">
+                                                    <option value="">-- اختر مادة --</option>
+                                                    @if (inventoryItems != null)
+                                                    {
+                                                        @foreach (var item in inventoryItems)
+                                                        {
+                                                            <option value="@item.ComponentName">@item.ComponentName</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                            </td>
+                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="form-control bom-input" min="0" step="0.1" /></td>
+                                            <td><InputText @bind-Value="bom.Unit" class="form-control bom-input-readonly" readonly /></td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn-remove-row" @onclick="() => RemoveEditBOMRow(bom)">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="steps-builder-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">خطوات العملية</h4>
+                            <button type="button" class="btn btn-add-step" @onclick="AddEditStepRow">
+                                <i class="bi bi-plus-circle"></i> إضافة خطوة
+                            </button>
+                        </div>
+                        
+                        <div class="steps-rows-container">
+                            @foreach (var step in editProduct.ProductionSteps)
+                            {
+                                <div class="step-edit-row mb-2 animate-fade-in">
+                                    <div class="step-seq">@step.Sequence</div>
+                                    <InputText @bind-Value="step.StepName" class="form-control step-input flex-grow-1" placeholder="اسم الخطوة..." />
+                                    <InputNumber @bind-Value="step.DurationMinutes" class="form-control step-input text-center" style="width: 110px;" placeholder="المدة (دقيقة)" />
+                                    <button type="button" class="btn-remove-row" @onclick="() => RemoveEditStepRow(step)">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer ar-modal-footer">
+                    <button type="submit" class="btn btn-primary-figma-ar">تحديث المنتج</button>
+                    <button type="button" class="btn btn-outline-figma-ar" @onclick="CloseEditModal">إلغاء</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+}
+
+@if (isAddModalOpen)
+{
+    <div class="modal-overlay" @onclick="CloseAddModal">
+        <div class="modal-card products-modal-wide" @onclick:stopPropagation="true">
+            <div class="modal-header ar-modal-header">
+                <h3>إضافة منتج جديد</h3>
+                <button class="btn-close-ar" @onclick="CloseAddModal"><i class="bi bi-x-lg"></i></button>
+            </div>
+            
+            <EditForm Model="newProduct" OnValidSubmit="HandleAddProduct">
+                <div class="modal-body ar-modal-body">
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-8">
+                            <label class="figma-label">اسم المنتج</label>
+                            <InputText @bind-Value="newProduct.Name" class="form-control figma-input" placeholder="مثال: عصير برتقال طبيعي" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="figma-label">كود المنتج</label>
+                            <InputText @bind-Value="newProduct.ProductCode" class="form-control figma-input text-center" placeholder="JCE-ORG-1L" />
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="figma-label">الوصف</label>
+                        <InputTextArea @bind-Value="newProduct.Description" class="form-control figma-input" rows="2" placeholder="أضف وصفاً مختصراً للمنتج..." />
+                    </div>
+
+                    <div class="bom-builder-card mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">مكونات المنتج (BOM)</h4>
+                            <button type="button" class="btn btn-add-row" @onclick="AddBOMRow">
+                                <i class="bi bi-plus-circle"></i> إضافة مكون
+                            </button>
+                        </div>
+                        
+                        <div class="bom-rows-container">
+                            <table class="table bom-edit-table">
+                                <thead>
+                                    <tr>
+                                        <th>اسم المكون من المخزن</th>
+                                        <th style="width: 120px;">الكمية</th>
+                                        <th style="width: 120px;">الوحدة</th>
+                                        <th style="width: 50px;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var bom in newProduct.BOMs)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <InputSelect @bind-Value="bom.ComponentName" class="form-select bom-select" @onchange="() => OnComponentSelected(bom)">
+                                                    <option value="">-- اختر مادة --</option>
+                                                    @if (inventoryItems != null)
+                                                    {
+                                                        @foreach (var item in inventoryItems)
+                                                        {
+                                                            <option value="@item.ComponentName">@item.ComponentName</option>
+                                                        }
+                                                    }
+                                                </InputSelect>
+                                            </td>
+                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="form-control bom-input" min="0" step="0.1" /></td>
+                                            <td><InputText @bind-Value="bom.Unit" class="form-control bom-input-readonly" readonly /></td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn-remove-row" @onclick="() => RemoveBOMRow(bom)">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="steps-builder-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">خطوات العملية</h4>
+                            <button type="button" class="btn btn-add-step" @onclick="AddStepRow">
+                                <i class="bi bi-plus-circle"></i> إضافة خطوة
+                            </button>
+                        </div>
+                        
+                        <div class="steps-rows-container">
+                            @foreach (var step in newProduct.ProductionSteps)
+                            {
+                                <div class="step-edit-row mb-2 animate-fade-in">
+                                    <div class="step-seq">@step.Sequence</div>
+                                    <InputText @bind-Value="step.StepName" class="form-control step-input flex-grow-1" placeholder="اسم الخطوة..." />
+                                    <InputNumber @bind-Value="step.DurationMinutes" class="form-control step-input text-center" style="width: 110px;" placeholder="المدة (دقيقة)" />
+                                    <button type="button" class="btn-remove-row" @onclick="() => RemoveStepRow(step)">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer ar-modal-footer">
+                    <button type="submit" class="btn btn-success-ar">حفظ المنتج</button>
+                    <button type="button" class="btn btn-outline-figma-ar" @onclick="CloseAddModal">إلغاء</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+}
+
+@code {
+    private List<ProductResponse>? products;
+    private List<InventoryResponse>? inventoryItems;
+    private ProductResponse? selectedProduct;
+    private bool isAddModalOpen = false;
+    private bool isEditModalOpen = false;
+    private CreateProductRequest newProduct = new();
+    private CreateProductRequest editProduct = new();
+    private string searchTerm = "";
+
+    private IEnumerable<ProductResponse>? FilteredProducts => products?
+        .Where(p => string.IsNullOrEmpty(searchTerm) || 
+                   p.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) || 
+                   p.ProductCode.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+
+    private async Task LoadData()
+    {
+        products = await ProductService.GetAllProductsAsync();
+        inventoryItems = await InventoryService.GetAllInventoryAsync();
+        
+        if (products != null && products.Any() && selectedProduct == null)
+        {
+            selectedProduct = products.First();
+        }
+    }
+
+    private void SelectProduct(ProductResponse p)
+    {
+        selectedProduct = p;
+    }
+
+    private void OnComponentSelected(CreateBOMItemRequest bom)
+    {
+        if (inventoryItems != null)
+        {
+            var item = inventoryItems.FirstOrDefault(i => i.ComponentName == bom.ComponentName);
+            if (item != null)
+            {
+                bom.Unit = item.Unit;
+            }
+        }
+    }
+
+    private void OnComponentSelectedForEdit(CreateBOMItemRequest bom)
+    {
+        if (inventoryItems != null)
+        {
+            var item = inventoryItems.FirstOrDefault(i => i.ComponentName == bom.ComponentName);
+            if (item != null)
+            {
+                bom.Unit = item.Unit;
+            }
+        }
+    }
+
+    private void OpenAddModal()
+    {
+        newProduct = new CreateProductRequest();
+        newProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "" });
+        newProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = 1 });
+        isAddModalOpen = true;
+    }
+
+    private void CloseAddModal() => isAddModalOpen = false;
+    private void AddBOMRow() => newProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "" });
+    private void RemoveBOMRow(CreateBOMItemRequest row) => newProduct.BOMs.Remove(row);
+    
+    private void AddStepRow() => newProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = newProduct.ProductionSteps.Count + 1 });
+    private void RemoveStepRow(CreateProcessStepRequest row) => newProduct.ProductionSteps.Remove(row);
+
+    private async Task HandleAddProduct()
+    {
+        var success = await ProductService.CreateProductAsync(newProduct);
+        if (success)
+        {
+            CloseAddModal();
+            selectedProduct = null;
+            await LoadData();
+        }
+    }
+
+    private void OpenEditModal(ProductResponse p)
+    {
+        editProduct = new CreateProductRequest
+        {
+            Name = p.Name,
+            ProductCode = p.ProductCode,
+            Description = p.Description ?? ""
+        };
+        
+        if (p.BillOfMaterials != null)
+        {
+            foreach (var bom in p.BillOfMaterials)
+            {
+                editProduct.BOMs.Add(new CreateBOMItemRequest
+                {
+                    ComponentName = bom.ComponentName,
+                    QuantityRequired = bom.QuantityRequired,
+                    Unit = bom.Unit
+                });
+            }
+        }
+        
+        if (p.ProductionSteps != null)
+        {
+            foreach (var step in p.ProductionSteps)
+            {
+                editProduct.ProductionSteps.Add(new CreateProcessStepRequest
+                {
+                    StepName = step.StepName,
+                    DurationMinutes = step.DurationMinutes,
+                    Sequence = step.Sequence
+                });
+            }
+        }
+        
+        isEditModalOpen = true;
+    }
+
+    private void CloseEditModal() => isEditModalOpen = false;
+    private void AddEditBOMRow() => editProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "" });
+    private void RemoveEditBOMRow(CreateBOMItemRequest row) => editProduct.BOMs.Remove(row);
+    
+    private void AddEditStepRow() => editProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = editProduct.ProductionSteps.Count + 1 });
+    private void RemoveEditStepRow(CreateProcessStepRequest row) => editProduct.ProductionSteps.Remove(row);
+
+    private async Task HandleEditProduct()
+    {
+        if (selectedProduct == null) return;
+        
+        var success = await ProductService.UpdateProductAsync(selectedProduct.Id, editProduct);
+        if (success)
+        {
+            CloseEditModal();
+            // Update the selected product local data or reload
+            await LoadData();
+            selectedProduct = products?.FirstOrDefault(p => p.Id == selectedProduct.Id);
+        }
+    }
+}

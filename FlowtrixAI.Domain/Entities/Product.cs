@@ -1,4 +1,4 @@
-﻿namespace FlowtrixAI.Domain.Entities;
+namespace FlowtrixAI.Domain.Entities;
 
 public class Product
 {
@@ -11,11 +11,13 @@ public class Product
 
     public int Id { get; set; }
     public string Name { get; set; }
+    public string ProductCode { get; set; }
     public string ImagePath { get; set; }
     public string Description { get; set; }
     public string CreatedBy { get; set; }
     public DateTime CreatedAt { get; set; }
-
+    public string? UpdatedBy { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
     public ICollection<BillOfMaterial> BOMs { get; set; }
     public ICollection<Process> Processes { get; set; }

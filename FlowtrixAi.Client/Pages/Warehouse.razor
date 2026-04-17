@@ -149,8 +149,8 @@
 
 @if (isAddModalOpen)
 {
-    <div class="modal-overlay">
-        <div class="modal-card">
+    <div class="modal-overlay" @onclick="CloseAddModal">
+        <div class="modal-card" @onclick:stopPropagation="true">
             <div class="modal-header">
                 <h3>إضافة مادة جديدة</h3>
             </div>

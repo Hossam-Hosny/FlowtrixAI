@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Application.Product.Dtos;
+using FlowtrixAI.Application.Product.Dtos;
 using FlowtrixAI.Application.Product.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +16,7 @@ namespace FlowtrixAI.Api.Controllers
         /// <param name="createProductDto"></param>
         /// <returns></returns>
         [HttpPost("[action]")]
-        public async Task<IActionResult> CreateProduct([FromForm] CreateProductDto createProductDto)
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto createProductDto)
         {
             //var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
            var userId = 1;
@@ -68,6 +68,21 @@ namespace FlowtrixAI.Api.Controllers
                 return NotFound("Product not Found");
             
             return Ok(result);
+        }
+
+        [HttpPut("[action]/{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] CreateProductDto updateProductDto)
+        {
+            var userId = 1; // Simulation
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _productService.UpdateProductAsync(id, updateProductDto, userId);
+
+            if (!result)
+                return BadRequest("Failed to update product.");
+
+            return Ok("Product Updated Successfully");
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FlowtrixAI.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,36 +29,36 @@ builder.Services.AddCors(options =>
 
 
 
+// Add application , infrastructure and presentation services
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.AddPresentation();
+
 var key = builder.Configuration["Jwt:Key"];
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 })
     .AddJwtBearer(options =>
     {
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
-
-
-
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
-            ClockSkew = TimeSpan.Zero
+            ClockSkew = TimeSpan.Zero,
+            RoleClaimType = System.Security.Claims.ClaimTypes.Role 
         };
     });
 builder.Services.AddAuthorization();
-
-// Add application , infrastructure and presentation services
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
-builder.AddPresentation();
 
 
 
@@ -71,6 +72,9 @@ using (var scope = app.Services.CreateScope())
 
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
     await RoleSeeder.SeedRolesAsync(roleManager);
+
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+    await UserSeeder.SeedAdminUserAsync(userManager);
 }
 
 app.UseCors("AllowBlazorClient");

@@ -1,78 +1,177 @@
 @inherits LayoutComponentBase
 @inject ThemeService ThemeService
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
 @implements IDisposable
 
-<div class="app-container @(ThemeService.IsDarkMode ? "dark-mode" : "")" dir="rtl">
-    <aside class="sidebar-right">
-        <a href="/" class="sidebar-header">
-            <h2>نظام MES</h2>
-            <p>إدارة التصنيع</p>
-        </a>
-        
-        <nav class="sidebar-nav">
-            <NavLink class="nav-item" href="dashboard" Match="NavLinkMatch.All">
-                <i class="bi bi-grid-fill"></i>
-                <span>لوحة التحكم</span>
-            </NavLink>
-            <NavLink class="nav-item" href="warehouse">
-                <i class="bi bi-archive"></i>
-                <span>المخزن</span>
-            </NavLink>
-            <NavLink class="nav-item" href="products">
-                <i class="bi bi-box-seam"></i>
-                <span>المنتجات</span>
-            </NavLink>
-            <NavLink class="nav-item" href="add-order">
-                <i class="bi bi-plus-square"></i>
-                <span>إضافة طلبية</span>
-            </NavLink>
-            <NavLink class="nav-item" href="exports">
-                <i class="bi bi-truck"></i>
-                <span>الصادرات</span>
-            </NavLink>
-        </nav>
-        
-        <div class="sidebar-footer">
-            <button class="theme-toggle-nav" @onclick="ThemeService.ToggleThemeAsync">
-                @if (ThemeService.IsDarkMode)
-                {
-                    <i class="bi bi-sun"></i>
-                    <span>الوضع الفاتح</span>
-                }
-                else
-                {
-                    <i class="bi bi-moon-stars"></i>
-                    <span>الوضع الداكن</span>
-                }
-            </button>
-        </div>
-    </aside>
+@if (_isCheckingAuth)
+{
+    <div class="auth-loading">
+        <div class="spinner"></div>
+        <p>جاري التحقق من الصلاحيات...</p>
+    </div>
+}
+else
+{
+    <div class="app-container @(ThemeService.IsDarkMode ? "dark-mode" : "")" dir="rtl">
+        <aside class="sidebar-right">
+            <a href="/" class="sidebar-header">
+                <h2>نظام MES</h2>
+                <p>إدارة التصنيع</p>
+            </a>
+            
+            <nav class="sidebar-nav">
+                <NavLink class="nav-item" href="dashboard" Match="NavLinkMatch.All">
+                    <i class="bi bi-grid-fill"></i>
+                    <span>لوحة التحكم</span>
+                </NavLink>
+                <NavLink class="nav-item" href="warehouse">
+                    <i class="bi bi-archive"></i>
+                    <span>المخزن</span>
+                </NavLink>
+                <NavLink class="nav-item" href="products">
+                    <i class="bi bi-box-seam"></i>
+                    <span>المنتجات</span>
+                </NavLink>
+                <NavLink class="nav-item" href="add-order">
+                    <i class="bi bi-plus-square"></i>
+                    <span>إضافة طلبية</span>
+                </NavLink>
+                <NavLink class="nav-item" href="exports">
+                    <i class="bi bi-truck"></i>
+                    <span>الصادرات</span>
+                </NavLink>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="theme-toggle-nav" @onclick="ThemeService.ToggleThemeAsync">
+                    @if (ThemeService.IsDarkMode)
+                    {
+                        <i class="bi bi-sun"></i>
+                        <span>الوضع الفاتح</span>
+                    }
+                    else
+                    {
+                        <i class="bi bi-moon-stars"></i>
+                        <span>الوضع الداكن</span>
+                    }
+                </button>
+                <button class="logout-btn" @onclick="HandleLogout">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>تسجيل الخروج</span>
+                </button>
+            </div>
+        </aside>
 
-    <main class="main-content">
-        <header class="top-bar">
-            <div class="user-info">
-                <div class="user-details">
-                    <span class="user-name">محمد أحمد</span>
-                    <span class="user-role">مشغل المصنع</span>
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="user-info">
+                    <div class="user-avatar">@(_userName?.FirstOrDefault().ToString().ToUpper())</div>
+                    <div class="user-details">
+                        <span class="user-name">@_userName</span>
+                        <span class="user-role @(_userRole == "مسؤول النظام" ? "admin" : "engineer")">@_userRole</span>
+                    </div>
                 </div>
-                <div class="user-avatar">م</div>
-            </div>
-            <div class="time-info">
-                <span>2026/04/14</span>
-                <span>10:43 م</span>
-            </div>
-        </header>
+                <div class="time-info">
+                    @if (_userRole == "مسؤول النظام")
+                    {
+                        <div class="admin-badge-premium">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M1 1.81l7 .71 7-.71V8c0 3.12-2.14 5.86-5 6.78V16l-2-1-2 1v-1.22c-2.86-.92-5-3.66-5-6.78V1.81zM8 1.12L1 2v6c0 3.25 2.15 6.13 5.42 7.15L8 16l1.58-.85C12.85 14.13 15 11.25 15 8V2l-7-.88z"/>
+                                <path d="M8 4a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z"/>
+                            </svg>
+                            <span>ADMIN</span>
+                        </div>
+                    }
+                    <div class="date-time-group">
+                        <span class="current-date">@DateTime.Now.ToString("yyyy/MM/dd")</span>
+                        <span class="current-time">@DateTime.Now.ToString("hh:mm tt")</span>
+                    </div>
+                </div>
+            </header>
 
-        <section class="content-wrapper">
-            @Body
-        </section>
-    </main>
-</div>
+            <section class="content-wrapper">
+                @Body
+            </section>
+        </main>
+    </div>
+}
 
 @code {
+    private bool _isCheckingAuth = true;
+    private string _userName = "المستخدم";
+    private string _userRole = "زائر";
+
     protected override void OnInitialized()
     {
         ThemeService.OnThemeChanged += StateHasChanged;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var token = await JS.InvokeAsync<string>("localStorage.getItem", "authToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                Navigation.NavigateTo("/login");
+            }
+            else
+            {
+                try 
+                {
+                    ParseTokenInfo(token);
+                }
+                catch (Exception)
+                {
+                    // If token is invalid or corrupt
+                    await HandleLogout();
+                    return;
+                }
+
+                _isCheckingAuth = false;
+                StateHasChanged();
+            }
+        }
+    }
+
+    private void ParseTokenInfo(string token)
+    {
+        var payload = token.Split('.')[1];
+        var jsonBytes = ParseBase64WithoutPadding(payload);
+        var keyValuePairs = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
+
+        if (keyValuePairs != null)
+        {
+            // Extract Name
+            if (keyValuePairs.TryGetValue("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", out var name))
+                _userName = name.ToString();
+            else if (keyValuePairs.TryGetValue("unique_name", out var uname))
+                _userName = uname.ToString();
+
+            // Extract Role
+            if (keyValuePairs.TryGetValue("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", out var role))
+            {
+                var roleStr = role.ToString();
+                _userRole = roleStr == "Admin" ? "مسؤول النظام" : "مهندس مشروع";
+            }
+        }
+    }
+
+    private byte[] ParseBase64WithoutPadding(string base64)
+    {
+        switch (base64.Length % 4)
+        {
+            case 2: base64 += "=="; break;
+            case 3: base64 += "="; break;
+        }
+        return Convert.FromBase64String(base64);
+    }
+
+    private async Task HandleLogout()
+    {
+        await JS.InvokeVoidAsync("localStorage.removeItem", "authToken");
+        Navigation.NavigateTo("/", forceLoad: true);
     }
 
     public void Dispose()

@@ -154,17 +154,34 @@
 .user-details {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-start; /* لضبط النص بجانب الدائرة في RTL */
+    gap: 2px;
 }
 
 .user-name {
-    font-weight: 700;
-    font-size: 0.95rem;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--text-dark);
 }
 
 .user-role {
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 2px 10px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.user-role.admin {
+    background: rgba(245, 158, 11, 0.15); /* لون ذهبي للأدمن */
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.user-role.engineer {
+    background: rgba(16, 185, 129, 0.15); /* لون أخضر للمهندس */
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .user-avatar {
@@ -690,6 +707,37 @@
     font-weight: 700;
     margin: 0;
     color: var(--text-dark);
+}
+
+.time-info {
+    display: flex;
+    flex-direction: row-reverse; /* يجعل التاريخ والوقت في أقصى اليسار */
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.date-time-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 1rem;
+}
+
+.current-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.current-time {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    font-weight: 800;
+}
+
+.admin-badge-premium {
+    margin: 0; /* تم إزالة الهامش لأننا نستخدم الـ Gap الآن */
 }
 
 .product-code {
@@ -1279,3 +1327,293 @@
     border-radius: 50%;
 }
 
+/* Auth and Logout Styles */
+.auth-loading {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-main);
+}
+
+.auth-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--primary-blue);
+    border-radius: 50%;
+    animation: spin-auth 1s linear infinite;
+    margin-bottom: 1.5rem;
+}
+
+@keyframes spin-auth {
+    to { transform: rotate(360deg); }
+}
+
+.logout-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: 0.75rem;
+    border: none;
+    background: rgba(239, 68, 68, 0.05);
+    color: var(--danger-red);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--danger-red);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.dark-mode .logout-btn {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    border-color: var(--primary-blue);
+}
+
+.filter-card.active {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: white !important;
+}
+
+.filter-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.filter-dot.all { background: #64748b; }
+.filter-dot.pending { background: #f59e0b; }
+.filter-dot.shipped { background: #3b82f6; }
+.filter-dot.delivered { background: #22c55e; }
+
+.filter-card.active .filter-dot {
+    background: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.filter-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-info .label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.filter-card.active .filter-info .label {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.filter-info .count {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+.filter-card.active .filter-info .count {
+    color: white !important;
+}
+
+/* Search Bar Styles */
+.search-filters-bar {
+    width: 100%;
+}
+
+.search-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.search-input-wrapper i {
+    position: absolute;
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.search-control {
+    width: 100%;
+    padding: 1rem 3.5rem 1rem 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    font-size: 1rem;
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.search-control:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    background: white;
+}
+
+.dark-mode .search-control:focus {
+    background: var(--input-bg);
+}
+
+/* Warehouse Interactive Alerts */
+.clickable-alert {
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.clickable-alert:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 20px -5px rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.clickable-alert::after {
+    content: '\F309'; /* bi-funnel */
+    font-family: inherit;
+    position: absolute;
+    left: 1.5rem;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.clickable-alert:hover::after {
+    opacity: 0.5;
+}
+
+.clickable-alert.active-filter {
+    background: #fef2f2;
+    border-color: var(--danger-red);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.dark-mode .clickable-alert.active-filter {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--danger-red);
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.active-filter .alert-icon {
+    animation: pulse-red 2s infinite;
+    border-radius: 50%;
+}
+
+/* Auth and Logout Styles */
+.auth-loading {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-main);
+}
+
+.auth-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--primary-blue);
+    border-radius: 50%;
+    animation: spin-auth 1s linear infinite;
+    margin-bottom: 1.5rem;
+}
+
+@keyframes spin-auth {
+    to { transform: rotate(360deg); }
+}
+
+.logout-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: 0.75rem;
+    border: none;
+    background: rgba(239, 68, 68, 0.05);
+    color: var(--danger-red);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--danger-red);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.dark-mode .logout-btn {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.dark-mode .logout-btn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.admin-badge-premium {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(59, 130, 246, 0.2));
+    border: 1px solid rgba(6, 182, 212, 0.5);
+    backdrop-filter: blur(8px);
+    color: #06b6d4;
+    font-size: 0.85rem;
+    font-weight: 900;
+    border-radius: 12px;
+    letter-spacing: 1.5px;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+    animation: dashboard-admin-pulse 2.5s infinite;
+    cursor: default;
+    user-select: none;
+    margin-right: 1.5rem;
+}
+
+@keyframes dashboard-admin-pulse {
+    0% {
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+        border-color: rgba(6, 182, 212, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+        border-color: rgba(6, 182, 212, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+        border-color: rgba(6, 182, 212, 0.5);
+    }
+}
+
+.admin-badge-premium svg {
+    filter: drop-shadow(0 0 5px rgba(6, 182, 212, 0.8));
+}

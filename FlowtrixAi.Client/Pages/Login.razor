@@ -1,0 +1,122 @@
+@page "/login"
+@layout LandingLayout
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<div class="login-wrapper" @onclick='() => Navigation.NavigateTo("/")'>
+    <div class="login-card" @onclick:stopPropagation="true">
+        <div class="login-header">
+            <div class="login-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                </svg>
+            </div>
+            <h1>تسجيل الدخول</h1>
+            <p>مرحباً بك مجدداً في FlowtrixAI</p>
+        </div>
+
+        <EditForm Model="@_loginModel" OnValidSubmit="HandleLogin">
+            <DataAnnotationsValidator />
+
+            <div class="form-group">
+                <label>الاسم</label>
+                <div class="input-wrapper">
+                    <InputText @bind-Value="_loginModel.Name" placeholder="أدخل اسمك كما أضافه الأدمن" class="form-input" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>كلمة المرور</label>
+                <div class="input-wrapper password-wrapper">
+                    <InputText @bind-Value="_loginModel.Password" type="@(_showPassword ? "text" : "password")" placeholder="••••••••" class="form-input" />
+                    <button type="button" class="toggle-password" @onclick="() => _showPassword = !_showPassword">
+                        @if (_showPassword)
+                        {
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                                <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                                <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                            </svg>
+                        }
+                        else
+                        {
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                            </svg>
+                        }
+                    </button>
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(_errorMessage))
+            {
+                <div class="error-msg">@_errorMessage</div>
+            }
+
+            <button type="submit" class="submit-btn @(_isSubmitting ? "loading" : "")" disabled="@_isSubmitting">
+                @if (_isSubmitting)
+                {
+                    <span class="spinner"></span>
+                    <span>جاري التحقق...</span>
+                }
+                else
+                {
+                    <span>دخول</span>
+                }
+            </button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private LoginModel _loginModel = new();
+    private string _errorMessage = "";
+    private bool _isSubmitting = false;
+    private bool _showPassword = false;
+
+    private async Task HandleLogin()
+    {
+        _isSubmitting = true;
+        _errorMessage = "";
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("api/Auth/login", _loginModel);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<LoginResponse>();
+                if (result != null && !string.IsNullOrEmpty(result.Token))
+                {
+                    await JS.InvokeVoidAsync("localStorage.setItem", "authToken", result.Token);
+                    Navigation.NavigateTo("/dashboard", forceLoad: true);
+                }
+            }
+            else
+            {
+                _errorMessage = "الاسم أو كلمة المرور غير صحيحة";
+            }
+        }
+        catch (Exception)
+        {
+            _errorMessage = "حدث خطأ أثناء الاتصال بالسيرفر";
+        }
+        finally
+        {
+            _isSubmitting = false;
+        }
+    }
+
+    public class LoginModel
+    {
+        public string Name { get; set; } = "";
+        public string Password { get; set; } = "";
+    }
+
+    public class LoginResponse
+    {
+        public string Token { get; set; } = "";
+    }
+}

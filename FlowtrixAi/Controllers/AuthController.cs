@@ -34,7 +34,7 @@ namespace FlowtrixAI.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(string userName, string password)
         {
-            var user = new AppUser { UserName = userName, Name = userName };
+            var user = new AppUser { UserName = userName, Name = userName, CreatedAt = DateTime.UtcNow };
 
             var result = await _userManager.CreateAsync(user, password);
 
@@ -50,7 +50,7 @@ namespace FlowtrixAI.Api.Controllers
         [HttpPost("register-admin")]
         public async Task<IActionResult> RegisterAdmin(string userName, string password)
         {
-            var user = new AppUser { UserName = userName, Name = userName };
+            var user = new AppUser { UserName = userName, Name = userName, CreatedAt = DateTime.UtcNow };
 
             var result = await _userManager.CreateAsync(user, password);
 

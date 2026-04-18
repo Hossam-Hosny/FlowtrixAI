@@ -1,11 +1,13 @@
 using FlowtrixAI.Application.Export.Dtos;
 using FlowtrixAI.Application.Export.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ExportController : ControllerBase
     {
         private readonly IExportService _exportService;

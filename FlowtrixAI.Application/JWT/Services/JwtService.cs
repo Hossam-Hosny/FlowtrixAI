@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Application.JWT.Interface;
+using FlowtrixAI.Application.JWT.Interface;
 using FlowtrixAI.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +17,8 @@ internal class JwtService(IConfiguration _config, UserManager<AppUser> _userMana
         var Claims = new List<Claim>
         {
           new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-          new Claim(ClaimTypes.Name, user.UserName)
+          new Claim(ClaimTypes.Name, user.Name),
+          new Claim("UserName", user.UserName)
         };
 
         var roles = await _userManager.GetRolesAsync(user);

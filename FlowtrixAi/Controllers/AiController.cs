@@ -1,10 +1,12 @@
-﻿using FlowtrixAI.Application.Reports.Interface;
+using FlowtrixAI.Application.Reports.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AiController(IAiService _aiService) : ControllerBase
     {
         /// <summary>

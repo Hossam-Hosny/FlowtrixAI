@@ -1,0 +1,527 @@
+@page "/manage-users"
+@layout DashboardLayout
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<div class="manage-users-container">
+    <div class="page-header">
+        <div class="header-text">
+            <h1>إدارة فريق العمل</h1>
+            <p>تحكم في صلاحيات المهندسين والمشرفين على النظام</p>
+        </div>
+        <button class="add-user-btn" @onclick="OpenAddModal">
+            <i class="bi bi-person-plus-fill"></i> إضافة مستخدم جديد
+        </button>
+    </div>
+
+    @if (!string.IsNullOrEmpty(_errorMsg) && !_showAddModal && !_showEditModal)
+    {
+        <div class="alert alert-danger" style="margin-bottom: 1.5rem; border-radius: 12px;">
+            <i class="bi bi-exclamat-triangle-fill"></i> @_errorMsg
+        </div>
+    }
+
+    @if (_isLoading)
+    {
+        <div class="loader-container">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p>جاري تحميل قائمة المستخدمين...</p>
+        </div>
+    }
+    else
+    {
+        <div class="users-table-card">
+            <div class="table-filters">
+                <div class="filters-group">
+                    <div class="search-box">
+                        <i class="bi bi-search"></i>
+                        <input type="text" placeholder="بحث باسم المستخدم..." @bind="_searchTerm" @bind:event="oninput" />
+                    </div>
+                    <div class="role-filter">
+                        <i class="bi bi-filter"></i>
+                        <select @bind="_selectedRole" class="form-select-filter">
+                            <option value="All">جميع الأدوار</option>
+                            <option value="Admin">مسؤول النظام</option>
+                            <option value="Engineer">مهندس مشروع</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>الاسم</th>
+                        <th>الدور</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in FilteredUsers)
+                    {
+                        <tr>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar-small">@(user.Name?.FirstOrDefault().ToString().ToUpper())</div>
+                                    <span>@user.Name</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="role-badge @(user.Role == "Admin" ? "admin" : "engineer")">
+                                    @(user.Role == "Admin" ? "مسؤول النظام" : "مهندس مشروع")
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-btns">
+                                    <button class="edit-btn" @onclick="() => OpenEditModal(user)" title="تعديل البيانات">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button class="delete-btn" @onclick="() => ConfirmDelete(user)" title="حذف المستخدم">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+@if (_showAddModal || _showEditModal)
+{
+    <div class="modal-backdrop">
+        <div class="modal-content" @onclick:stopPropagation="true">
+            <div class="modal-header">
+                <h2>@(_showAddModal ? "إضافة مهندس جديد" : "تعديل بيانات المستخدم")</h2>
+                <button class="close-btn" @onclick="CloseModals">×</button>
+            </div>
+            <div class="modal-body">
+                @if (!string.IsNullOrEmpty(_errorMsg))
+                {
+                    <div class="alert alert-danger">@_errorMsg</div>
+                }
+                
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" @bind="_userForm.Name" placeholder="أدخل اسم المستخدم الثلاثي..." />
+                </div>
+
+                @if (_showEditModal)
+                {
+                    <div class="form-group">
+                        <label>الدور الوظيفي</label>
+                        @if (_userForm.Role == "Admin")
+                        {
+                            <div class="role-readonly-badge">
+                                <i class="bi bi-shield-check"></i> مسؤول نظام (لا يمكن إنقاص الرتبة)
+                            </div>
+                        }
+                        else
+                        {
+                            <select @bind="_userForm.Role" class="form-select-custom">
+                                <option value="Engineer">مهندس مشروع (Engineer)</option>
+                                <option value="Admin">ترقية إلى مسؤول نظام (Admin)</option>
+                            </select>
+                            <small class="form-text text-muted">ترقية المستخدم إلى مسؤول ستمنحه صلاحيات كاملة.</small>
+                        }
+                    </div>
+                }
+
+                <div class="form-group">
+                    <label>كلمة المرور @(_showEditModal ? "(اتركها فارغة إذا كنت لا تريد التغيير)" : "")</label>
+                    <div class="password-input-wrapper">
+                        <input type="@(_showPassword ? "text" : "password")" @bind="_userForm.Password" placeholder="أدخل كلمة مرور قوية..." />
+                        <i class="bi @(_showPassword ? "bi-eye-slash" : "bi-eye")" @onclick="() => _showPassword = !_showPassword"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-btn" @onclick="CloseModals">إلغاء</button>
+                <button class="save-btn" @onclick="HandleSubmit" disabled="@_isSubmitting">
+                    @if (_isSubmitting)
+                    {
+                        <span class="spinner-border spinner-border-sm"></span>
+                    }
+                    else
+                    {
+                        @(_showAddModal ? "إضافة المستخدم" : "حفظ التعديلات")
+                    }
+                </button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+/* Modal Styles Improved Clarity */
+.modal-backdrop { 
+    position: fixed; 
+    inset: 0; 
+    background: rgba(0,0,0,0.6); 
+    backdrop-filter: blur(8px); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 1000; 
+}
+
+.modal-content { 
+    background: #1e293b; 
+    color: white; 
+    width: 100%; 
+    max-width: 500px; 
+    border-radius: 24px; 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+    border: 1px solid rgba(255,255,255,0.1);
+    animation: modalIn 0.3s ease-out;
+    overflow: hidden;
+}
+
+.modal-header { 
+    padding: 1.5rem 2rem; 
+    border-bottom: 1px solid rgba(255,255,255,0.05); 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+.modal-header h2 { 
+    font-weight: 800; 
+    font-size: 1.4rem; 
+    color: #f8fafc; 
+    margin: 0; 
+}
+
+.modal-body { padding: 2rem; }
+
+.form-group { margin-bottom: 1.5rem; }
+
+.form-group label { 
+    display: block; 
+    margin-bottom: 0.7rem; 
+    font-weight: 700; 
+    color: #cbd5e1; 
+    font-size: 0.95rem;
+}
+
+.form-group input, .form-select-custom { 
+    width: 100%; 
+    padding: 1rem 1.2rem; 
+    border-radius: 12px; 
+    border: 2px solid rgba(255,255,255,0.1); 
+    background: rgba(15, 23, 42, 0.6); 
+    color: #ffffff !important; 
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, .form-select-custom:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: rgba(15, 23, 42, 0.8);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+.role-readonly-badge {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 700;
+}
+.role-readonly-badge i { font-size: 1.2rem; }
+.form-text { display: block; margin-top: 0.5rem; font-size: 0.8rem; }
+
+.password-input-wrapper { position: relative; }
+.password-input-wrapper i { 
+    position: absolute; 
+    left: 1.2rem; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    cursor: pointer; 
+    color: #64748b; 
+    font-size: 1.2rem; 
+}
+
+.modal-footer { 
+    padding: 1.5rem 2rem; 
+    border-top: 1px solid rgba(255,255,255,0.05); 
+    display: flex; 
+    justify-content: flex-end; 
+    gap: 1rem; 
+}
+
+.cancel-btn { 
+    background: rgba(255,255,255,0.05); 
+    border: 1px solid rgba(255,255,255,0.1); 
+    color: #94a3b8; 
+    padding: 0.8rem 1.8rem; 
+    border-radius: 12px; 
+    font-weight: 700;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.cancel-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+
+.save-btn { 
+    background: #2563eb; 
+    color: white; 
+    border: none; 
+    padding: 0.8rem 2rem; 
+    border-radius: 12px; 
+    font-weight: 800; 
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    cursor: pointer;
+}
+
+.close-btn { 
+    color: white; 
+    opacity: 0.7; 
+    font-size: 1.5rem; 
+    background: none; 
+    border: none; 
+    cursor: pointer;
+}
+
+.close-btn:hover { opacity: 1; }
+
+@@keyframes modalIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.manage-users-container { padding: 2rem; }
+.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.header-text h1 { font-weight: 800; color: var(--text-dark); margin-bottom: 0.5rem; }
+.header-text p { color: var(--text-muted); }
+.add-user-btn { background: #2563eb; color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 12px; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; cursor: pointer; }
+.add-user-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(37, 99, 235, 0.2); }
+.users-table-card { background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+.table-filters { padding: 1.5rem; border-bottom: 1px solid var(--border-color); }
+.search-box { position: relative; width: 320px; }
+.search-box i { position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 1.1rem; z-index: 5; }
+.search-box input { 
+    width: 100%; 
+    padding: 0.8rem 3.4rem 0.8rem 1.2rem; 
+    border-radius: 14px; 
+    border: 2px solid rgba(255,255,255,0.05); 
+    background: rgba(15, 23, 42, 0.9); 
+    color: #ffffff !important; 
+    font-weight: 600; 
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.search-box input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: #0f172a;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+.filters-group { display: flex; gap: 1rem; align-items: center; width: 100%; }
+.role-filter { position: relative; display: flex; align-items: center; gap: 0.5rem; }
+.role-filter i { position: absolute; right: 1rem; color: #64748b; font-size: 1.1rem; }
+.form-select-filter { 
+    padding: 0.8rem 2.8rem 0.8rem 1rem; 
+    border-radius: 14px; 
+    border: 2px solid rgba(255,255,255,0.05); 
+    background: rgba(15, 23, 42, 0.9); 
+    color: white; 
+    font-weight: 600; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+.form-select-filter:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); }
+.users-table { width: 100%; border-collapse: collapse; }
+.users-table th { background: rgba(0,0,0,0.02); padding: 1.2rem; text-align: right; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; }
+.users-table td { padding: 1.2rem; border-bottom: 1px solid var(--border-color); }
+.user-cell { display: flex; align-items: center; gap: 1rem; }
+.user-avatar-small { width: 32px; height: 32px; border-radius: 50%; background: #2563eb; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; }
+.role-badge { padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
+.role-badge.admin { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+.role-badge.engineer { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+.action-btns { display: flex; gap: 0.5rem; }
+.action-btns button { width: 34px; height: 34px; border-radius: 8px; border: none; display: flex; align-items: center; justify-content: center; transition: all 0.2s; cursor: pointer; }
+.edit-btn { background: rgba(37, 99, 235, 0.05); color: #2563eb; }
+.edit-btn:hover { background: #2563eb; color: white; }
+.delete-btn { background: rgba(239, 68, 68, 0.05); color: #ef4444; }
+.delete-btn:hover { background: #ef4444; color: white; }
+</style>
+
+@code {
+    private List<UserViewModel> _users = new();
+    private string _searchTerm = "";
+    private string _selectedRole = "All";
+    private bool _isLoading = true;
+    private bool _showAddModal = false;
+    private bool _showEditModal = false;
+    private bool _isSubmitting = false;
+    private bool _showPassword = false;
+    private string _errorMsg = "";
+    private UserFormModel _userForm = new();
+    private string _token = "";
+
+    private IEnumerable<UserViewModel> FilteredUsers => 
+        _users.Where(u => 
+            (string.IsNullOrWhiteSpace(_searchTerm) || u.Name.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase)) &&
+            (_selectedRole == "All" || u.Role == _selectedRole))
+        .OrderByDescending(u => u.CreatedAt);
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _token = await JS.InvokeAsync<string>("localStorage.getItem", "authToken");
+            await LoadUsers();
+        }
+    }
+
+    private async Task LoadUsers()
+    {
+        try
+        {
+            _isLoading = true;
+            _errorMsg = "";
+            StateHasChanged();
+            
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/Admin/users");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _token);
+            
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                var options = new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+                _users = await response.Content.ReadFromJsonAsync<List<UserViewModel>>(options) ?? new();
+            }
+            else
+            {
+                _errorMsg = $"فشل جلب المستخدمين: {response.StatusCode}";
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMsg = $"خطأ في الاتصال: {ex.Message}";
+        }
+        finally
+        {
+            _isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void OpenAddModal()
+    {
+        _userForm = new UserFormModel();
+        _errorMsg = "";
+        _showAddModal = true;
+        _showPassword = false;
+    }
+
+    private void OpenEditModal(UserViewModel user)
+    {
+        _userForm = new UserFormModel { Id = user.Id?.ToString() ?? "", Name = user.Name, Role = user.Role };
+        _errorMsg = "";
+        _showEditModal = true;
+        _showPassword = false;
+    }
+
+    private void CloseModals()
+    {
+        _showAddModal = false;
+        _showEditModal = false;
+    }
+
+    private async Task HandleSubmit()
+    {
+        if (string.IsNullOrWhiteSpace(_userForm.Name)) { _errorMsg = "الاسم مطلوب"; return; }
+        if (_showAddModal && string.IsNullOrWhiteSpace(_userForm.Password)) { _errorMsg = "كلمة المرور مطلوبة"; return; }
+
+        _isSubmitting = true;
+        _errorMsg = "";
+
+        try
+        {
+            HttpResponseMessage response;
+            if (_showAddModal)
+            {
+                var content = JsonContent.Create(new { Name = _userForm.Name, Password = _userForm.Password });
+                var request = new HttpRequestMessage(HttpMethod.Post, "api/Admin/add-engineer") { Content = content };
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _token);
+                response = await Http.SendAsync(request);
+            }
+            else
+            {
+                var content = JsonContent.Create(new { Id = _userForm.Id, Name = _userForm.Name, Password = _userForm.Password, Role = _userForm.Role });
+                var request = new HttpRequestMessage(HttpMethod.Put, "api/Admin/update-user") { Content = content };
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _token);
+                response = await Http.SendAsync(request);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadUsers();
+                CloseModals();
+            }
+            else
+            {
+                var error = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
+                _errorMsg = error?.ContainsKey("message") == true ? error["message"].ToString() : "حدث خطأ أثناء المعالجة";
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMsg = "خطأ في الاتصال بالسيرفر";
+        }
+        finally
+        {
+            _isSubmitting = false;
+        }
+    }
+
+    private async Task ConfirmDelete(UserViewModel user)
+    {
+        bool confirmed = await JS.InvokeAsync<bool>("confirm", $"هل أنت متأكد من حذف المستخدم {user.Name}؟");
+        if (confirmed)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, $"api/Admin/delete-user/{user.Id?.ToString()}");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _token);
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadUsers();
+            }
+            else
+            {
+                var error = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
+                await JS.InvokeVoidAsync("alert", error?["message"]?.ToString() ?? "فشل الحذف");
+            }
+        }
+    }
+
+    public class UserViewModel
+    {
+        public object? Id { get; set; }
+        public string Name { get; set; } = "";
+        public string UserName { get; set; } = "";
+        public string Role { get; set; } = "";
+        public DateTime CreatedAt { get; set; }
+    }
+
+    public class UserFormModel
+    {
+        public string Id { get; set; } = "";
+        public string Name { get; set; } = "";
+        public string Password { get; set; } = "";
+        public string Role { get; set; } = "";
+    }
+}

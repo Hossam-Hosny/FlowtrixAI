@@ -41,6 +41,14 @@ else
                     <i class="bi bi-truck"></i>
                     <span>الصادرات</span>
                 </NavLink>
+
+                @if (_userRole == "مسؤول النظام")
+                {
+                    <NavLink class="nav-item" href="manage-users">
+                        <i class="bi bi-people-fill"></i>
+                        <span>إدارة المستخدمين</span>
+                    </NavLink>
+                }
             </nav>
             
             <div class="sidebar-footer">

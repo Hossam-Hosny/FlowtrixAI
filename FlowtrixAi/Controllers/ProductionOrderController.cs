@@ -1,5 +1,6 @@
 using FlowtrixAI.Application.ProductionOrder.Dtos;
 using FlowtrixAI.Application.ProductionOrder.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -7,9 +8,10 @@ namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize]
     public class ProductionOrderController(IProductionOrderService _productionOrderService) : ControllerBase
     {
+        private int CurrentUserId => int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
        
         /// <summary>
         /// Creates a new production order with the specified product and quantity.
@@ -22,12 +24,8 @@ namespace FlowtrixAI.Api.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> CreateProductionOrder(CreateProductionOrderDto createProductionOrderDto)
         {
-          //  var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userId = 3; // Temporary hardcoded user ID for testing purposes
-
-            var result = await _productionOrderService.CreateOrderAsync(createProductionOrderDto.ProductId, createProductionOrderDto.Quantity, userId);
+            var result = await _productionOrderService.CreateOrderAsync(createProductionOrderDto.ProductId, createProductionOrderDto.Quantity, CurrentUserId);
             return Ok(result);
-
         }
         
         /// <summary>
@@ -66,8 +64,7 @@ namespace FlowtrixAI.Api.Controllers
         [HttpPost("{id}/fail")]
         public async Task<IActionResult> Fail(int id, [FromBody] FailOrderRequest request)
         {
-            var userId = 1; // Temporary
-            var result = await _productionOrderService.FailOrderAsync(id, request.ProblemDescription, userId);
+            var result = await _productionOrderService.FailOrderAsync(id, request.ProblemDescription, CurrentUserId);
             return Ok(result);
         }
         /// <summary>

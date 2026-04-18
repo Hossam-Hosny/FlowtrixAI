@@ -1,11 +1,13 @@
-﻿using FlowtrixAI.Application.BoM.Dtos;
+using FlowtrixAI.Application.BoM.Dtos;
 using FlowtrixAI.Application.BoM.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class BOMController(IBoMService _boMService) : ControllerBase
     {
 

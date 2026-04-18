@@ -1,12 +1,14 @@
-﻿using FlowtrixAI.Application.Process.Dtos;
+using FlowtrixAI.Application.Process.Dtos;
 using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProcessController(IProcessRepository _processRepository) : ControllerBase
     {
 

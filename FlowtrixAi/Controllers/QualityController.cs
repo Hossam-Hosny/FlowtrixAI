@@ -1,6 +1,7 @@
-﻿using FlowtrixAI.Application.Quality.Dtos;
+using FlowtrixAI.Application.Quality.Dtos;
 using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -8,6 +9,7 @@ namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class QualityController(IQualityCheckRepository _qualityCheckRepository) : ControllerBase
     {
         //Add Quality Check Result

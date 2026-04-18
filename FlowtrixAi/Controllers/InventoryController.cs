@@ -1,13 +1,17 @@
 using FlowtrixAI.Application.Inventory.Dtos;
 using FlowtrixAI.Application.Inventory.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class InventoryController(IInventoryService _inventoryService) : ControllerBase
     {
+        private int CurrentUserId => int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
 
         
         /// <summary>
@@ -18,20 +22,12 @@ namespace FlowtrixAI.Api.Controllers
         [HttpPost("AddToInventory")]
         public async Task<IActionResult> AddToInventory([FromBody] CreateInventoryDto _inventoryDto)
         {
-
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-
-
-            //var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            var userId = 1;
-
-           var result = await _inventoryService.AddItemAsync(_inventoryDto, userId);
+            var result = await _inventoryService.AddItemAsync(_inventoryDto, CurrentUserId);
 
             return Ok("Item Added to Inventory Successfully");
-
-
         }
 
         /// <summary>
@@ -67,18 +63,12 @@ namespace FlowtrixAI.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-          //  var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-          var userId = 3;
-
-            var result = await _inventoryService.UpdateItemAsync(_inventoryDto,userId);
+            var result = await _inventoryService.UpdateItemAsync(_inventoryDto, CurrentUserId);
 
             if (result == false)
                 return NotFound("Inventory Item Not Found");
 
             return Ok("Inventory Item Updated Successfully");
-
-
-            
         }
     }
 }

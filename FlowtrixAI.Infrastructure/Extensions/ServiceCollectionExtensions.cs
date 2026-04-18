@@ -24,6 +24,12 @@ namespace FlowtrixAI.Infrastructure.Extensions
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                // السماح بالحروف العربية والأرقام والمسافات وبعض الرموز الخاصة
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ اأإآببتثجحخدذرزسشصضطظعغفقكلمنهويىيةئؤء";
+            });
+
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IInventoryRepository, InventoryRepository>();

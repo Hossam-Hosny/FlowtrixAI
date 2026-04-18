@@ -1,14 +1,17 @@
 using FlowtrixAI.Application.Product.Dtos;
 using FlowtrixAI.Application.Product.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ProductController(IProductService _productService) : ControllerBase
     {
+        private int CurrentUserId => int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
 
         /// <summary>
         /// Create Product and save to db
@@ -18,13 +21,10 @@ namespace FlowtrixAI.Api.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto createProductDto)
         {
-            //var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-           var userId = 1;
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             
-
-            var result = await _productService.CreateProductAsync(createProductDto, userId);
+            var result = await _productService.CreateProductAsync(createProductDto, CurrentUserId);
 
             if (result==false)
                 return BadRequest("Failed to create product.");
@@ -73,11 +73,10 @@ namespace FlowtrixAI.Api.Controllers
         [HttpPut("[action]/{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] CreateProductDto updateProductDto)
         {
-            var userId = 1; // Simulation
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _productService.UpdateProductAsync(id, updateProductDto, userId);
+            var result = await _productService.UpdateProductAsync(id, updateProductDto, CurrentUserId);
 
             if (!result)
                 return BadRequest("Failed to update product.");

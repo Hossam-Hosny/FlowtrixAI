@@ -9,9 +9,17 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using FlowtrixAI.Domain.Entities;
 using Microsoft.AspNetCore.StaticFiles;
+using System.Collections.Concurrent;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseStaticWebAssets();
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+{
+    Args = args,
+    ContentRootPath = AppContext.BaseDirectory
+});
+if (builder.Environment.IsDevelopment())
+{
+    builder.WebHost.UseStaticWebAssets();
+}
 
 // Add services to the container.
 
@@ -66,6 +74,7 @@ builder.Services.AddAuthorization();
 
 
 var app = builder.Build();
+var frameworkAliasCache = new ConcurrentDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
 using (var scope = app.Services.CreateScope())
 {
@@ -82,15 +91,70 @@ using (var scope = app.Services.CreateScope())
 
 app.UseCors("AllowBlazorClient");
 
+app.Use(async (context, next) =>
+{
+    var requestPath = context.Request.Path.Value;
+    if (string.IsNullOrWhiteSpace(requestPath))
+    {
+        await next();
+        return;
+    }
+
+    static string? MatchFrameworkAsset(string webRootPath, string pattern, Func<string, bool>? extraFilter = null)
+    {
+        if (string.IsNullOrWhiteSpace(webRootPath))
+        {
+            return null;
+        }
+
+        var frameworkDir = Path.Combine(webRootPath, "_framework");
+        if (!Directory.Exists(frameworkDir))
+        {
+            return null;
+        }
+
+        return Directory.EnumerateFiles(frameworkDir, pattern, SearchOption.TopDirectoryOnly)
+                        .Select(Path.GetFileName)
+                        .Where(file => !string.IsNullOrWhiteSpace(file))
+                        .Where(file => extraFilter == null || extraFilter(file!))
+                        .FirstOrDefault();
+    }
+
+    static string? ResolveFrameworkAlias(string requestPath, string webRootPath)
+    {
+        return requestPath.ToLowerInvariant() switch
+        {
+            "/_framework/blazor.webassembly.js" => MatchFrameworkAsset(webRootPath, "blazor.webassembly.*.js"),
+            "/_framework/dotnet.js" => MatchFrameworkAsset(webRootPath, "dotnet.*.js", file => !file.StartsWith("dotnet.native.", StringComparison.OrdinalIgnoreCase) && !file.StartsWith("dotnet.runtime.", StringComparison.OrdinalIgnoreCase)),
+            "/_framework/dotnet.native.js" => MatchFrameworkAsset(webRootPath, "dotnet.native.*.js"),
+            "/_framework/dotnet.runtime.js" => MatchFrameworkAsset(webRootPath, "dotnet.runtime.*.js"),
+            _ => null
+        };
+    }
+
+    if (requestPath.StartsWith("/_framework/", StringComparison.OrdinalIgnoreCase))
+    {
+        var mappedPath = frameworkAliasCache.GetOrAdd(requestPath, key =>
+        {
+            var resolved = ResolveFrameworkAlias(key, app.Environment.WebRootPath);
+            return string.IsNullOrWhiteSpace(resolved) ? string.Empty : $"/_framework/{resolved}";
+        });
+
+        if (!string.IsNullOrWhiteSpace(mappedPath))
+        {
+            context.Request.Path = mappedPath;
+        }
+    }
+
+    await next();
+});
+
 
 
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-
-app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
@@ -104,15 +168,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
+app.MapStaticAssets();
+app.UseStaticFiles();
 
-var provider = new FileExtensionContentTypeProvider();
-provider.Mappings[".wasm"] = "application/wasm";
-provider.Mappings[".dll"] = "application/octet-stream";
-
-app.UseStaticFiles(new StaticFileOptions
-{
-    ContentTypeProvider = provider
-});
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();

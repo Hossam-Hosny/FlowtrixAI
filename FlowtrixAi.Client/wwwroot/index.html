@@ -208,38 +208,7 @@
             });
         }
     </script>
-    <script>
-        (function () {
-            function appendScript(src) {
-                var s = document.createElement("script");
-                s.src = src;
-                document.body.appendChild(s);
-                return s;
-            }
-
-            function loadBlazorLoader() {
-                var primary = appendScript("_framework/blazor.webassembly.js");
-                primary.onerror = function () {
-                    fetch("service-worker-assets.js", { cache: "no-store" })
-                        .then(function (r) { return r.ok ? r.text() : ""; })
-                        .then(function (text) {
-                            var match = text.match(/_framework\/blazor\.webassembly\.[^"'\\\s]+\.js/g);
-                            var loader = match && match.length ? match[0] : null;
-                            if (loader) {
-                                appendScript(loader);
-                            } else {
-                                console.error("Blazor loader file was not found in service-worker-assets.js");
-                            }
-                        })
-                        .catch(function () {
-                            console.error("Failed to load Blazor loader and failed to read service-worker-assets.js");
-                        });
-                };
-            }
-
-            loadBlazorLoader();
-        })();
-    </script>
+    <script src="_framework/blazor.webassembly.js"></script>
     <!-- <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script> -->
 </body>
 

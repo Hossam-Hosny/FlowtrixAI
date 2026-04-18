@@ -14,7 +14,7 @@ builder.Services.AddScoped<AuthHandler>();
 // تسجيل HttpClient مع ربطه بالوسيط المخصص
 builder.Services.AddHttpClient("ServerAPI", client => 
 {
-    client.BaseAddress = new Uri("https://localhost:44350");
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 })
 .AddHttpMessageHandler<AuthHandler>();
 

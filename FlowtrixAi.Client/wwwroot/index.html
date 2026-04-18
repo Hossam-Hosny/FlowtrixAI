@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FlowtrixAi.Client</title>
     <base href="/" />
-    <link rel="preload" id="webassembly" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -200,8 +199,48 @@
         <a href="." class="reload">Reload</a>
         <span class="dismiss">🗙</span>
     </div>
-    <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
-    <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script>
+    <script>
+        if ((location.hostname === "localhost" || location.hostname === "127.0.0.1") && "serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                registrations.forEach(function (registration) {
+                    registration.unregister();
+                });
+            });
+        }
+    </script>
+    <script>
+        (function () {
+            function appendScript(src) {
+                var s = document.createElement("script");
+                s.src = src;
+                document.body.appendChild(s);
+                return s;
+            }
+
+            function loadBlazorLoader() {
+                var primary = appendScript("_framework/blazor.webassembly.js");
+                primary.onerror = function () {
+                    fetch("service-worker-assets.js", { cache: "no-store" })
+                        .then(function (r) { return r.ok ? r.text() : ""; })
+                        .then(function (text) {
+                            var match = text.match(/_framework\/blazor\.webassembly\.[^"'\\\s]+\.js/g);
+                            var loader = match && match.length ? match[0] : null;
+                            if (loader) {
+                                appendScript(loader);
+                            } else {
+                                console.error("Blazor loader file was not found in service-worker-assets.js");
+                            }
+                        })
+                        .catch(function () {
+                            console.error("Failed to load Blazor loader and failed to read service-worker-assets.js");
+                        });
+                };
+            }
+
+            loadBlazorLoader();
+        })();
+    </script>
+    <!-- <script>navigator.serviceWorker.register('service-worker.js', { updateViaCache: 'none' });</script> -->
 </body>
 
 </html>

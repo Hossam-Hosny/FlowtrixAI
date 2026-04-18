@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
@@ -13,9 +13,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="10.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FlowtrixAi.Client\FlowtrixAi.Client.csproj" />
     <ProjectReference Include="..\FlowtrixAI.Application\FlowtrixAI.Application.csproj" />
     <ProjectReference Include="..\FlowtrixAI.Domain\FlowtrixAI.Domain.csproj" />
     <ProjectReference Include="..\FlowtrixAI.Infrastructure\FlowtrixAI.Infrastructure.csproj" />

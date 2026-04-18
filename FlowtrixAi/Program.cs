@@ -25,6 +25,7 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddHttpClient();
 
 builder.Services.AddCors(options =>
 {

@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
 using FlowtrixAI.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -35,4 +35,7 @@ internal class InventoryRepository(AppDbContext _context) : IInventoryRepository
         _context.Inventory.Update(item);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<InventoryItem>> GetTopAsync(int count)
+        => await _context.Inventory.OrderByDescending(i => i.Id).Take(count).ToListAsync();
 }

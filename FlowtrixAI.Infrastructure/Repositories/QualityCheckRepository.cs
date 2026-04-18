@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
 using FlowtrixAI.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -34,4 +34,10 @@ internal class QualityCheckRepository(AppDbContext _context) : IQualityCheckRepo
             await _context.SaveChangesAsync();
         }
     }
+
+    public async Task<IEnumerable<QualityCheck>> GetLatestAsync(int count)
+        => await _context.QualityChecks
+                            .OrderByDescending(q => q.CheckAt)
+                            .Take(count)
+                            .ToListAsync();
 }

@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 using FlowtrixAI.Domain.Repositories;
 using FlowtrixAI.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
@@ -41,4 +41,11 @@ internal class ProductionRecordRepository(AppDbContext _context) : IProductionRe
         _context.ProductionRecords.Update(record);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<ProductionRecord>> GetLatestAsync(int count)
+        => await _context.ProductionRecords
+                            .Include(pr => pr.Process)
+                            .OrderByDescending(pr => pr.ProduceAd)
+                            .Take(count)
+                            .ToListAsync();
 }

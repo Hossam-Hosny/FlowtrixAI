@@ -6,15 +6,9 @@ namespace FlowtrixAI.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-    public class ReportController(IReportService _reportService) : ControllerBase
+    [Authorize(Roles = "Admin")]
+    public class ReportController(IReportService _reportService, IAiService _aiService) : ControllerBase
     {
-      /// <summary>
-      /// Handles HTTP GET requests to retrieve the current system report.
-      /// </summary>
-      /// <remarks>The returned result typically includes system status and diagnostic information. The
-      /// exact structure of the report is determined by the implementation of the report service.</remarks>
-      /// <returns>An <see cref="IActionResult"/> containing the system report data if successful.</returns>
         [HttpGet("[action]")]
         public async Task<IActionResult> GetReport()
         {
@@ -22,8 +16,41 @@ namespace FlowtrixAI.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("ai-full-report")]
+        public async Task<IActionResult> GetAiFullReport()
+        {
+            var result = await _aiService.GenerateFullReportAsync();
+            return Ok(new { report = result });
+        }
 
+        [HttpPost("ai-chat")]
+        public async Task<IActionResult> ChatWithAi([FromBody] FlowtrixAI.Application.Reports.Dtos.AiChatRequest request)
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "Anonymous";
+            var result = await _aiService.ChatWithAiAsync(userId, request.ChatId, request.History, request.Message);
+            return Ok(new { reply = result });
+        }
 
+        [HttpGet("ai-chat-sessions")]
+        public async Task<IActionResult> GetUserChatSessions()
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "Anonymous";
+            var sessions = await _aiService.GetUserChatSessionsAsync(userId);
+            return Ok(sessions);
+        }
 
+        [HttpGet("ai-chat-messages/{chatId}")]
+        public async Task<IActionResult> GetChatMessagesBySession(string chatId)
+        {
+            var messages = await _aiService.GetChatMessagesBySessionAsync(chatId);
+            return Ok(messages);
+        }
+
+        [HttpPost("delete-session/{chatId}")]
+        public async Task<IActionResult> DeleteChatSession([FromRoute] string chatId)
+        {
+            await _aiService.DeleteChatSessionAsync(chatId);
+            return Ok(new { success = true });
+        }
     }
 }

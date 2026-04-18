@@ -52,6 +52,15 @@ namespace FlowtrixAI.Infrastructure.Repositories
             }
         }
 
+        public async Task<IEnumerable<Export>> GetLatestAsync(int count)
+        {
+            return await _context.Exports
+                .Include(e => e.Product)
+                .OrderByDescending(e => e.OrderDate)
+                .Take(count)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Export>> GetByDateRangeAsync(DateTime start, DateTime end)
         {
             return await _context.Exports

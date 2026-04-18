@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 
 namespace FlowtrixAI.Domain.Repositories;
 
@@ -10,5 +10,5 @@ public interface IQualityCheckRepository
     Task AddAsync(QualityCheck qc);
     Task UpdateAsync(QualityCheck qc);
     Task DeleteAsync(int id);
-
+    Task<IEnumerable<QualityCheck>> GetLatestAsync(int count);
 }

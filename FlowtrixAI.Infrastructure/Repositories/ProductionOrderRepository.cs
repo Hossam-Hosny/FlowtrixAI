@@ -23,6 +23,13 @@ internal class ProductionOrderRepository(AppDbContext _context) : IProductionOrd
 
     public async Task<ProductionOrder?> GetByIdAsync(int id)=> await _context.ProductionOrders.Include(o=>o.Product).FirstOrDefaultAsync(o=>o.Id==id);
 
+    public async Task<IEnumerable<ProductionOrder>> GetLatestAsync(int count) => 
+        await _context.ProductionOrders
+            .Include(o => o.Product)
+            .ThenInclude(p => p.Processes)
+            .OrderByDescending(o => o.CreatedAt)
+            .Take(count)
+            .ToListAsync();
 
     public async Task UpdateAsync(ProductionOrder order)
     {

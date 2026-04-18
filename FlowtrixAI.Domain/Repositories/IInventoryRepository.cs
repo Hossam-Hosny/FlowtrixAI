@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 
 namespace FlowtrixAI.Domain.Repositories;
 
@@ -10,4 +10,5 @@ public interface IInventoryRepository
     Task AddAsync(InventoryItem item);
     Task UpdateAsync(InventoryItem item);
     Task DeleteAsync(int id);
+    Task<IEnumerable<InventoryItem>> GetTopAsync(int count);
 }

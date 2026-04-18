@@ -42,6 +42,7 @@ namespace FlowtrixAI.Infrastructure.Extensions
 
             services.AddScoped<IProductionOrderRepository, ProductionOrderRepository>();
             services.AddScoped<IExportRepository, ExportRepository>();
+            services.AddScoped<IAiChatRepository, AiChatRepository>();
 
 
 

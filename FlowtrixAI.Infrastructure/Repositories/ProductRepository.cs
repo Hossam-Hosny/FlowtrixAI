@@ -39,4 +39,7 @@ internal class ProductRepository(AppDbContext _context) : IProductRepository
         _context.Products.Update(product);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<Product>> GetTopAsync(int count)
+        => await _context.Products.OrderByDescending(p => p.Id).Take(count).ToListAsync();
 }

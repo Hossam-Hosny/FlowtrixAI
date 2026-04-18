@@ -1,4 +1,4 @@
-﻿using FlowtrixAI.Domain.Entities;
+using FlowtrixAI.Domain.Entities;
 
 namespace FlowtrixAI.Domain.Repositories;
 
@@ -9,4 +9,5 @@ public interface IProductionRecordRepository
     Task AddAsync(ProductionRecord record);
     Task UpdateAsync(ProductionRecord record);
     Task DeleteAsync(int id);
+    Task<IEnumerable<ProductionRecord>> GetLatestAsync(int count);
 }

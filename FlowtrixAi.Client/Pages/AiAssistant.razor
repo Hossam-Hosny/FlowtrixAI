@@ -1,0 +1,281 @@
+@page "/ai-assistant"
+@layout DashboardLayout
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@using FlowtrixAi.Client.Models
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize(Roles = "Admin")]
+
+<div class="ai-container">
+    <div class="chat-wrapper">
+        <!-- Sidebar التاريخ -->
+        <div class="history-sidebar">
+            <div class="sidebar-header-btn">
+                <button class="new-chat-btn" @onclick="PrepareNewChat">
+                    <i class="bi bi-chat-left-text"></i> محادثة جديدة
+                </button>
+            </div>
+            
+            <div class="history-list">
+                @if (_historyItems == null || !_historyItems.Any())
+                {
+                    <p style="text-align: center; color: gray; font-size: 0.8rem;">لا توجد محادثات سابقة</p>
+                }
+                else
+                {
+                    @foreach (var item in _historyItems)
+                    {
+                        <div class="history-item @(_currentChatId == item.ChatId ? "active" : "")" @onclick="() => SelectHistoryItem(item)">
+                            <div class="item-info">
+                                <span class="msg-preview">@item.UserMessage</span>
+                                <span class="msg-date">@item.Timestamp.ToString("yyyy/MM/dd hh:mm tt")</span>
+                            </div>
+                            <button class="delete-session-btn" @onclick:stopPropagation="true" @onclick="() => ConfirmDeleteSession(item.ChatId)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+        <!-- القسم الرئيسي للمحادثة -->
+        <div class="main-chat-container">
+            <div class="chat-header">
+                <div class="header-content">
+                    <div class="ai-avatar pulse">
+                        <i class="bi bi-robot"></i>
+                    </div>
+                    <div class="header-text">
+                        <h1>المساعد الذكي (Flowtrix AI)</h1>
+                        <p>أنا هنا لمساعدتك في تحليل البيانات واتخاذ القرارات.</p>
+                    </div>
+                </div>
+                <button class="clear-btn" @onclick="ClearChat">
+                    <i class="bi bi-trash"></i> مسح الحالية
+                </button>
+            </div>
+
+            <div class="messages-area" id="messagesArea">
+                @foreach (var msg in _messages)
+                {
+                    <div class="message-row @(msg.IsUser ? "user" : "ai")">
+                        <div class="message-bubble">
+                            @if (!msg.IsUser)
+                            {
+                                <div class="ai-mini-avatar">
+                                    <i class="bi bi-stars"></i>
+                                </div>
+                            }
+                            <div class="message-content">
+                                 @((MarkupString)msg.Content.Replace("\n", "<br/>"))
+                            </div>
+                            <div class="message-time">@msg.Timestamp.ToString("hh:mm tt")</div>
+                        </div>
+                    </div>
+                }
+                @if (_isTyping)
+                {
+                    <div class="message-row ai">
+                        <div class="message-bubble typing">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="input-area">
+                <div class="input-container">
+                    <textarea @bind="_userInput" 
+                              @bind:event="oninput"
+                              @onkeydown="HandleKeyDown"
+                              placeholder="اسألني عن أي شيء يخص المصنع..." 
+                              rows="1"></textarea>
+                    <button class="send-btn" @onclick="SendMessage" disabled="@(_isTyping || string.IsNullOrWhiteSpace(_userInput))">
+                        <i class="bi bi-send-fill"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string _userInput = "";
+    private List<ChatMessage> _messages = new();
+    private List<AiChatHistoryDto> _historyItems = new();
+    private bool _isTyping = false;
+    private string? _currentChatId = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadChatSessions();
+        PrepareNewChat();
+    }
+
+    private void PrepareNewChat()
+    {
+        _currentChatId = Guid.NewGuid().ToString(); // توليد معرف جديد لكل محادثة جديدة
+        _messages.Clear();
+        _messages.Add(new ChatMessage 
+        { 
+            Content = "أهلاً بك يا مسؤول النظام! أنا مساعدك الذكي المرتبط ببيانات FlowtrixAI. كيف يمكنني مساعدتك اليوم؟", 
+            IsUser = false 
+        });
+    }
+
+    private async Task LoadChatSessions()
+    {
+        try
+        {
+            // جلب الجلسات الفريدة للعرض في القائمة الجانبية
+            _historyItems = await Http.GetFromJsonAsync<List<AiChatHistoryDto>>("api/Report/ai-chat-sessions");
+        }
+        catch (Exception)
+        {
+            _historyItems = new List<AiChatHistoryDto>();
+        }
+    }
+
+    private async Task SelectHistoryItem(AiChatHistoryDto item)
+    {
+        _currentChatId = item.ChatId;
+        try 
+        {
+            // جلب كل الرسائل المرتبطة بهذه الجلسة
+            var sessionMessages = await Http.GetFromJsonAsync<List<AiChatHistoryRecordDto>>($"api/Report/ai-chat-messages/{item.ChatId}");
+            if (sessionMessages != null)
+            {
+                _messages.Clear();
+                foreach (var msg in sessionMessages)
+                {
+                    _messages.Add(new ChatMessage { Content = msg.UserMessage, IsUser = true, Timestamp = msg.Timestamp });
+                    _messages.Add(new ChatMessage { Content = msg.AiResponse, IsUser = false, Timestamp = msg.Timestamp });
+                }
+            }
+        }
+        catch (Exception)
+        {
+            // خطأ في التحميل
+        }
+    }
+
+    private async Task ConfirmDeleteSession(string chatId)
+    {
+        try
+        {
+            var response = await Http.PostAsync($"api/Report/delete-session/{chatId}", null);
+            if (response.IsSuccessStatusCode)
+            {
+                if (_currentChatId == chatId)
+                {
+                    PrepareNewChat();
+                }
+                await LoadChatSessions();
+            }
+        }
+        catch (Exception)
+        {
+            // صامت
+        }
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey)
+        {
+            await SendMessage();
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        if (string.IsNullOrWhiteSpace(_userInput) || _isTyping) return;
+
+        var userMsg = _userInput;
+        _userInput = "";
+        
+        var history = _messages
+            .Where(m => !m.Content.Contains("أهلاً بك يا مسؤول النظام"))
+            .TakeLast(10)
+            .Select(m => new AiChatMessageDto 
+            { 
+                Role = m.IsUser ? "user" : "model", 
+                Text = m.Content 
+            }).ToList();
+
+        _messages.Add(new ChatMessage { Content = userMsg, IsUser = true });
+        _isTyping = true;
+        
+        StateHasChanged();
+        await ScrollToBottom();
+
+        try
+        {
+            var request = new AiChatRequest 
+            { 
+                Message = userMsg, 
+                ChatId = _currentChatId ?? Guid.NewGuid().ToString(), // التأكد من إرسال نفس الـ ChatId
+                History = history 
+            };
+
+            var response = await Http.PostAsJsonAsync("api/Report/ai-chat", request);
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<AiChatResponse>();
+                _messages.Add(new ChatMessage { Content = result?.Reply ?? "لم أستطع الحصول على رد.", IsUser = false });
+                
+                await LoadChatSessions();
+            }
+            else
+            {
+                _messages.Add(new ChatMessage { Content = "❌ عذراً، حدث خطأ أثناء الاتصال بالـ AI.", IsUser = false });
+            }
+        }
+        catch (Exception)
+        {
+            _messages.Add(new ChatMessage { Content = "❌ عذراً، حدث خطأ تقني.", IsUser = false });
+        }
+        finally
+        {
+            _isTyping = false;
+            StateHasChanged();
+            await ScrollToBottom();
+        }
+    }
+
+    private void ClearChat() => PrepareNewChat();
+
+    private async Task ScrollToBottom()
+    {
+        await Task.Delay(100);
+        await JS.InvokeVoidAsync("eval", "var el = document.getElementById('messagesArea'); if(el) el.scrollTop = el.scrollHeight;");
+    }
+
+    public class AiChatHistoryDto
+    {
+        public int Id { get; set; }
+        public string ChatId { get; set; } = "";
+        public string UserMessage { get; set; } = "";
+        public string AiResponse { get; set; } = "";
+        public DateTime Timestamp { get; set; }
+    }
+
+    public class AiChatHistoryRecordDto
+    {
+        public string UserMessage { get; set; } = "";
+        public string AiResponse { get; set; } = "";
+        public DateTime Timestamp { get; set; }
+    }
+
+    public class ChatMessage
+    {
+        public string Content { get; set; } = "";
+        public bool IsUser { get; set; }
+        public DateTime Timestamp { get; set; } = DateTime.Now;
+    }
+}

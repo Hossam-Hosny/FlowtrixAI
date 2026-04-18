@@ -18,6 +18,7 @@ public class AppDbContext (DbContextOptions<AppDbContext> options)
     public DbSet<InventoryItem> Inventory { get; set; }
     public DbSet<ProductionOrder> ProductionOrders { get; set; }
     public DbSet<Export> Exports { get; set; }
+    public DbSet<AiChatHistory> AiChatHistories { get; set; }
 
 
 

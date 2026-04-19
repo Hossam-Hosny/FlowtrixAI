@@ -49,4 +49,14 @@ public class ProductClientService(HttpClient http)
         }
         catch { return false; }
     }
+
+    public async Task<bool> DeleteProductAsync(int id)
+    {
+        try
+        {
+            var response = await http.DeleteAsync($"{BaseUrl}/DeleteProduct/{id}");
+            return response.IsSuccessStatusCode;
+        }
+        catch { return false; }
+    }
 }

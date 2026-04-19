@@ -3,12 +3,23 @@
 @using FlowtrixAi.Client.Services
 @using FlowtrixAi.Client.Models
 @inject ProductionOrderClientService ProductionService
+@inject MaintenanceClientService MaintenanceService
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JS
 
 <PageTitle>لوحة التحكم - نظام MES</PageTitle>
 
 <div class="dashboard-container">
-    <h1 class="dashboard-title">لوحة التحكم</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="dashboard-title mb-0">لوحة التحكم</h1>
+        <AuthorizeView Roles="Admin">
+            <button class="btn btn-outline-danger d-flex align-items-center gap-2 px-3 py-2" 
+                    style="border-radius: 10px; font-weight: 500; border-width: 2px;" @onclick="OpenResetModal">
+                <i class="bi bi-arrow-counterclockwise"></i>
+                <span>تصفير النظام</span>
+            </button>
+        </AuthorizeView>
+    </div>
 
     @if (stats == null)
     {
@@ -151,6 +162,46 @@
             </div>
         </div>
     }
+
+    @if (showResetModal)
+    {
+        <div class="problem-modal-overlay">
+            <div class="problem-modal animate-slide-up" style="max-width: 500px;">
+                <div class="modal-header bg-danger text-white">
+                    <h3 class="mb-0 text-white">تأكير تصفير النظام</h3>
+                    <button class="btn-close-modal text-white" @onclick="CloseResetModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning mb-4">
+                        <i class="bi bi-warning me-2"></i>
+                        تحذير: سيتم حذف جميع البيانات (المواد، المنتجات، الطلبيات) وإعادة النظام لحالته الأولى.
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="figma-label mb-2">يرجى إدخال كلمة مرور الحساب للتأكيد:</label>
+                        <input type="password" @bind="adminPassword" class="form-control figma-input" placeholder="كلمة المرور" />
+                    </div>
+                    @if (!string.IsNullOrEmpty(resetError))
+                    {
+                        <div class="alert alert-danger py-2">@resetError</div>
+                    }
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-cancel" @onclick="CloseResetModal" disabled="@isResetting">إلغاء</button>
+                    <button class="btn btn-danger px-4 py-2" style="border-radius: 8px;" @onclick="HandleResetDatabase" disabled="@(isResetting || string.IsNullOrEmpty(adminPassword))">
+                        @if (isResetting)
+                        {
+                            <span class="spinner-border spinner-border-sm me-2"></span>
+                            <span>جاري التصفير...</span>
+                        }
+                        else
+                        {
+                            <span>تأكيد الحذف النهائي</span>
+                        }
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 @code {
@@ -227,4 +278,49 @@
         "pending" => "قيد الانتظار",
         _ => status ?? "غير معروف"
     };
+
+    // Reset System Logic
+    private bool showResetModal = false;
+    private bool isResetting = false;
+    private string adminPassword = "";
+    private string resetError = "";
+
+    private void OpenResetModal() 
+    {
+        adminPassword = "";
+        resetError = "";
+        showResetModal = true;
+    }
+
+    private void CloseResetModal() => showResetModal = false;
+
+    private async Task HandleResetDatabase()
+    {
+        if (string.IsNullOrEmpty(adminPassword)) return;
+
+        isResetting = true;
+        resetError = "";
+
+        try
+        {
+            var result = await MaintenanceService.ResetDatabaseAsync(adminPassword);
+            if (string.IsNullOrEmpty(result.Error))
+            {
+                await JS.InvokeVoidAsync("alert", result.Message);
+                NavigationManager.NavigateTo("/login", forceLoad: true);
+            }
+            else
+            {
+                resetError = result.Message;
+            }
+        }
+        catch (Exception ex)
+        {
+            resetError = "حدث خطأ غير متوقع: " + ex.Message;
+        }
+        finally
+        {
+            isResetting = false;
+        }
+    }
 }

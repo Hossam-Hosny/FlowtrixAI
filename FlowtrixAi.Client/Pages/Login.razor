@@ -1,8 +1,10 @@
 @page "/login"
 @layout LandingLayout
+@using FlowtrixAi.Client.Handlers
 @inject HttpClient Http
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
 
 <div class="login-wrapper" @onclick='() => Navigation.NavigateTo("/")'>
     <div class="login-card" @onclick:stopPropagation="true">
@@ -91,6 +93,12 @@
                 if (result != null && !string.IsNullOrEmpty(result.Token))
                 {
                     await JS.InvokeVoidAsync("localStorage.setItem", "authToken", result.Token);
+                    
+                    if (AuthStateProvider is JwtAuthenticationStateProvider jwtProvider)
+                    {
+                        jwtProvider.NotifyUserAuthentication(result.Token);
+                    }
+                    
                     Navigation.NavigateTo("/dashboard", forceLoad: true);
                 }
             }

@@ -154,4 +154,13 @@ internal class ProductService(IProductRepository _productRepository) : IProductS
             }).ToList()
         };
     }
+
+    public async Task<bool> DeleteProductAsync(int id)
+    {
+        var product = await _productRepository.GetByIdAsync(id);
+        if (product == null) return false;
+
+        await _productRepository.DeleteAsync(id);
+        return true;
+    }
 }

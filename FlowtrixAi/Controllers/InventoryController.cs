@@ -70,5 +70,14 @@ namespace FlowtrixAI.Api.Controllers
 
             return Ok("Inventory Item Updated Successfully");
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteInventory(int id)
+        {
+            var result = await _inventoryService.DeleteItemAsync(id);
+            if (!result)
+                return NotFound("Inventory Item Not Found");
+
+            return Ok("Inventory Item Deleted Successfully");
+        }
     }
 }

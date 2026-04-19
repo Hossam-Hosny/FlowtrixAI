@@ -3,6 +3,7 @@
 @using FlowtrixAi.Client.Services
 @using FlowtrixAi.Client.Models
 @inject InventoryClientService InventoryService
+@inject IJSRuntime JS
 
 <PageTitle>المخزن - نظام MES</PageTitle>
 
@@ -90,11 +91,11 @@
                 <div class="search-filters d-flex gap-2">
                     <div class="search-input-wrapper">
                         <i class="bi bi-search"></i>
-                        <input type="text" @bind="searchTerm" @bind:event="oninput" placeholder="بحث باسم المادة..." class="form-control search-input" />
+                        <input type="text" @bind="searchTerm" @bind:event="oninput" placeholder="بحث باسم المادة..." class="search-control" />
                     </div>
                     <div class="search-input-wrapper">
                         <i class="bi bi-hash"></i>
-                        <input type="text" @bind="searchCode" @bind:event="oninput" placeholder="بحث بالكود..." class="form-control search-input" />
+                        <input type="text" @bind="searchCode" @bind:event="oninput" placeholder="بحث بالكود..." class="search-control" />
                     </div>
                 </div>
             </div>
@@ -105,18 +106,20 @@
                         <tr>
                             <th>المادة</th>
                             <th>الكود</th>
-                            <th>الكمية المتاحة</th>
+                            <th>الحد الأدنى</th>
+                            <th>المتبقي حالياً</th>
                             <th>إجمالي الوارد</th>
                             <th>إجمالي المستخدم</th>
                             <th>تاريخ التحديث</th>
                             <th>الحالة</th>
+                            <th>الإجراءات</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if (FilteredItems == null || !FilteredItems.Any())
                         {
                             <tr>
-                                <td colspan="7" class="text-center py-5 text-muted">لا توجد مواد تطابق البحث</td>
+                                <td colspan="9" class="text-center py-5 text-muted">لا توجد مواد تطابق البحث</td>
                             </tr>
                         }
                         else
@@ -130,14 +133,17 @@
                                     <td>
                                         <code class="order-number">@item.MaterialCode</code>
                                     </td>
-                                    <td>
-                                        <span class="fw-bold">@item.QuantityAvailable.ToString("N0")</span>
+                                    <td class="text-center">
+                                        <span class="badge bg-light text-dark">@item.MinimumStockLevel.ToString("N0")</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="fw-bold @(item.IsLowStock ? "text-danger" : "text-success")">@item.QuantityAvailable.ToString("N0")</span>
                                         <small class="text-muted ms-1">@item.Unit</small>
                                     </td>
-                                    <td>@item.TotalIncoming.ToString("N0")</td>
-                                    <td>@item.TotalUsed.ToString("N0")</td>
+                                    <td class="text-center">@item.TotalIncoming.ToString("N0")</td>
+                                    <td class="text-center">@item.TotalUsed.ToString("N0")</td>
                                     <td>@item.UpdateAt.ToLocalTime().ToString("yyyy/MM/dd HH:mm")</td>
-                                    <td>
+                                    <td class="text-center">
                                         @if (item.IsLowStock)
                                         {
                                             <span class="status-badge failed">مخزون منخفض</span>
@@ -146,6 +152,16 @@
                                         {
                                             <span class="status-badge progressing">متوفر</span>
                                         }
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-1">
+                                            <button class="btn btn-sm btn-outline-primary border-0" title="تعديل" @onclick="() => OpenEditModal(item)">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-danger border-0" title="حذف" @onclick="() => HandleDeleteMaterial(item.ComponentId)">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -171,7 +187,6 @@
             <EditForm Model="newItem" OnValidSubmit="HandleAddMaterial">
                 <div class="ar-modal-body">
                     <h4 class="section-title-ar">معلومات المادة</h4>
-                    
                     <div class="row g-4 mb-4">
                         <div class="col-md-6">
                             <label class="figma-label">اسم المادة</label>
@@ -186,41 +201,86 @@
                         </div>
                         <div class="col-md-6">
                             <label class="figma-label">الكود</label>
-                            <InputText @bind-Value="newItem.MaterialCode" class="form-control figma-input" 
-                                       placeholder="أدخل الكود" onfocus="this.select()" />
+                            <InputText @bind-Value="newItem.MaterialCode" class="form-control figma-input" placeholder="أدخل الكود" />
                         </div>
                     </div>
 
                     <h4 class="section-title-ar">الكميات والوحدات</h4>
-                    
                     <div class="row g-4 mb-4">
                         <div class="col-md-4">
                             <label class="figma-label">الوحدة</label>
-                            <input list="unitsList" @bind="newItem.Unit" @bind:event="oninput" 
-                                   class="form-control figma-input" placeholder="أدخل الوحدة" onfocus="this.select()" />
+                            <input list="unitsList" @bind="newItem.Unit" @bind:event="oninput" class="form-control figma-input" />
                             <datalist id="unitsList">
-                                @foreach (var unit in existingUnits)
-                                {
-                                    <option value="@unit" />
-                                }
+                                @foreach (var unit in existingUnits) { <option value="@unit" /> }
                             </datalist>
                         </div>
                         <div class="col-md-4">
                             <label class="figma-label">الكمية الواردة</label>
-                            <InputNumber @bind-Value="newItem.Quantity" min="0" class="form-control figma-input text-center" 
-                                         placeholder="الكمية" onfocus="this.select()" />
+                            <InputNumber @bind-Value="newItem.Quantity" min="0" class="form-control figma-input text-center" onfocus="this.select()" />
                         </div>
                         <div class="col-md-4">
                             <label class="figma-label">الحد الأدنى للمخزون</label>
-                            <InputNumber @bind-Value="newItem.MinimumStockLevel" min="0" class="form-control figma-input text-center" 
-                                         placeholder="الحد الأدنى" onfocus="this.select()" />
+                            <InputNumber @bind-Value="newItem.MinimumStockLevel" min="0" class="form-control figma-input text-center" onfocus="this.select()" />
                         </div>
                     </div>
                 </div>
-
                 <div class="ar-modal-footer">
                     <button type="submit" class="btn-save-ar">إضافة المادة</button>
                     <button type="button" class="btn-close-ar" @onclick="CloseAddModal">إلغاء</button>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+}
+
+@if (isEditModalOpen)
+{
+    <div class="modal-overlay" @onclick="CloseEditModal">
+        <div class="modal-card modal-card-wide animate-slide-up" @onclick:stopPropagation="true">
+            <div class="ar-modal-header" style="background: var(--primary-color); color: white;">
+                <h3 class="mb-0">تعديل بيانات المادة</h3>
+                <button class="btn-close" style="background: none; border: none; color: white;" @onclick="CloseEditModal">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            
+            <EditForm Model="editItem" OnValidSubmit="HandleUpdateMaterial">
+                <div class="ar-modal-body">
+                    <h4 class="section-title-ar">المعلومات الأساسية</h4>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <label class="figma-label">اسم المادة</label>
+                            <InputText @bind-Value="editItem.MaterialName" class="form-control figma-input" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="figma-label">الكود</label>
+                            <InputText @bind-Value="editItem.MaterialCode" class="form-control figma-input" />
+                        </div>
+                    </div>
+
+                    <h4 class="section-title-ar">المخزون والوحدات</h4>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-4">
+                            <label class="figma-label">الوحدة</label>
+                            <input list="unitsListEdit" @bind="editItem.Unit" @bind:event="oninput" 
+                                   class="form-control figma-input" placeholder="أدخل الوحدة" />
+                            <datalist id="unitsListEdit">
+                                @foreach (var unit in existingUnits) { <option value="@unit" /> }
+                            </datalist>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="figma-label">الكمية المتاحة حالياً</label>
+                            <InputNumber @bind-Value="editItem.Quantity" min="0" class="form-control figma-input text-center" onfocus="this.select()" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="figma-label">الحد الأدنى للمخزون</label>
+                            <InputNumber @bind-Value="editItem.MinimumStockLevel" min="0" class="form-control figma-input text-center" onfocus="this.select()" />
+                        </div>
+                    </div>
+                </div>
+                <div class="ar-modal-footer">
+                    <button type="submit" class="btn-save-ar">حفظ التغييرات</button>
+                    <button type="button" class="btn-close-ar" @onclick="CloseEditModal">إلغاء</button>
                 </div>
             </EditForm>
         </div>
@@ -231,13 +291,14 @@
     private WarehouseStats? stats;
     private List<InventoryResponse>? inventoryItems;
     private bool isAddModalOpen = false;
+    private bool isEditModalOpen = false;
     private CreateInventoryRequest newItem = new();
+    private UpdateInventoryRequest editItem = new();
     
     private string searchTerm = "";
     private string searchCode = "";
     private List<string> existingMaterialNames = new();
     private List<string> existingUnits = new();
-
     private bool showLowStockOnly = false;
 
     private IEnumerable<InventoryResponse>? FilteredItems => inventoryItems?
@@ -245,15 +306,9 @@
                     (string.IsNullOrEmpty(searchCode) || i.MaterialCode.Contains(searchCode, StringComparison.OrdinalIgnoreCase)) &&
                     (!showLowStockOnly || i.IsLowStock));
 
-    private void ToggleLowStockFilter()
-    {
-        showLowStockOnly = !showLowStockOnly;
-    }
+    private void ToggleLowStockFilter() => showLowStockOnly = !showLowStockOnly;
 
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadData();
-    }
+    protected override async Task OnInitializedAsync() => await LoadData();
 
     private async Task LoadData()
     {
@@ -274,17 +329,49 @@
 
     private void CloseAddModal() => isAddModalOpen = false;
 
+    private void OpenEditModal(InventoryResponse item)
+    {
+        editItem = new UpdateInventoryRequest
+        {
+            ComponentId = item.ComponentId,
+            MaterialName = item.ComponentName,
+            MaterialCode = item.MaterialCode,
+            Quantity = item.QuantityAvailable,
+            MinimumStockLevel = item.MinimumStockLevel,
+            Unit = item.Unit
+        };
+        isEditModalOpen = true;
+    }
+
+    private void CloseEditModal() => isEditModalOpen = false;
+
     private async Task HandleAddMaterial()
     {
-        // Prevent negative numbers
-        newItem.Quantity = Math.Max(0, newItem.Quantity);
-        newItem.MinimumStockLevel = Math.Max(0, newItem.MinimumStockLevel);
-
         var success = await InventoryService.AddToInventoryAsync(newItem);
         if (success)
         {
             CloseAddModal();
             await LoadData();
+        }
+    }
+
+    private async Task HandleUpdateMaterial()
+    {
+        var success = await InventoryService.UpdateInventoryAsync(editItem);
+        if (success)
+        {
+            CloseEditModal();
+            await LoadData();
+        }
+    }
+
+    private async Task HandleDeleteMaterial(int id)
+    {
+        var confirmed = await JS.InvokeAsync<bool>("confirm", "هل أنت متأكد من حذف هذه المادة؟");
+        if (confirmed)
+        {
+            var success = await InventoryService.DeleteInventoryAsync(id);
+            if (success) await LoadData();
         }
     }
 }

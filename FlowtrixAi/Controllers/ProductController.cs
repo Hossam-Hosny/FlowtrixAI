@@ -1,5 +1,6 @@
 using FlowtrixAI.Application.Product.Dtos;
 using FlowtrixAI.Application.Product.Interface;
+using FlowtrixAI.Domain.Constants;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -30,8 +31,6 @@ namespace FlowtrixAI.Api.Controllers
                 return BadRequest("Failed to create product.");
 
             return Ok("Product Created Successfully");
-            
-
         }
        
         /// <summary>
@@ -46,10 +45,7 @@ namespace FlowtrixAI.Api.Controllers
             if (result == null || !result.Any())
                 return NotFound("No Products found.");
             
-
             return Ok(result);
-
-
         }
 
         // Get Product by Id
@@ -82,6 +78,18 @@ namespace FlowtrixAI.Api.Controllers
                 return BadRequest("Failed to update product.");
 
             return Ok("Product Updated Successfully");
+        }
+
+        [Authorize(Roles = UserRoles.Admin)]
+        [HttpDelete("[action]/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var result = await _productService.DeleteProductAsync(id);
+
+            if (!result)
+                return BadRequest("Failed to delete product or product not found.");
+
+            return Ok("Product Deleted Successfully");
         }
     }
 }

@@ -32,3 +32,13 @@ public class WarehouseStats
     public decimal TotalRemaining { get; set; }
     public int LowStockCount { get; set; }
 }
+
+public class UpdateInventoryRequest
+{
+    public int ComponentId { get; set; }
+    public string MaterialName { get; set; } = string.Empty;
+    public string MaterialCode { get; set; } = string.Empty;
+    public decimal Quantity { get; set; }
+    public decimal MinimumStockLevel { get; set; }
+    public string Unit { get; set; } = string.Empty;
+}

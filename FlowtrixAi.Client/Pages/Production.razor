@@ -31,10 +31,9 @@
                         }
                     </InputSelect>
                 </div>
-
                 <div class="form-group">
                     <label class="figma-label">الكمية</label>
-                    <InputNumber @bind-Value="orderRequest.Quantity" class="form-control figma-input text-center" placeholder="أدخل الكمية" />
+                    <InputNumber @bind-Value="orderRequest.Quantity" class="form-control figma-input text-center" placeholder="أدخل الكمية" onfocus="this.select()" />
                 </div>
 
                 @if (!string.IsNullOrEmpty(message))

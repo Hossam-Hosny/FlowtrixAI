@@ -44,4 +44,24 @@ public class InventoryClientService(HttpClient http)
             LowStockCount = items.Count(i => i.IsLowStock)
         };
     }
+
+    public async Task<bool> DeleteInventoryAsync(int id)
+    {
+        try
+        {
+            var response = await http.DeleteAsync($"{BaseUrl}/{id}");
+            return response.IsSuccessStatusCode;
+        }
+        catch { return false; }
+    }
+
+    public async Task<bool> UpdateInventoryAsync(UpdateInventoryRequest request)
+    {
+        try
+        {
+            var response = await http.PutAsJsonAsync($"{BaseUrl}/UpdateInventory", request);
+            return response.IsSuccessStatusCode;
+        }
+        catch { return false; }
+    }
 }

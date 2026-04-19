@@ -238,6 +238,25 @@
     color: #1e293b;
 }
 
+.btn-delete-ar {
+    background: white;
+    border: 1px solid #fee2e2;
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ef4444;
+    transition: all 0.2s;
+}
+
+.btn-delete-ar:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #dc2626;
+}
+
 .view-bom-card {
     background: white;
     border-radius: 16px;

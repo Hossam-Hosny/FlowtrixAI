@@ -19,7 +19,7 @@ namespace FlowtrixAI.Api.Controllers
             var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Name.ToLower() == request.Name.ToLower());
 
             if (user == null || !await _userManager.CheckPasswordAsync(user, request.Password))
-                return Unauthorized(new { Message = "الاسم أو كلمة المرور غير صحيحة" });
+                return BadRequest(new { Message = "الاسم أو كلمة المرور غير صحيحة" });
 
             var token = await _jwtService.GenerateTokenAsync(user);
             return Ok(new { Token = token });

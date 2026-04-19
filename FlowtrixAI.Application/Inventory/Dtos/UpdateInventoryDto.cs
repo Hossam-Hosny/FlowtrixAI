@@ -7,4 +7,5 @@ public class UpdateInventoryDto
     public string MaterialCode { get; set; }
     public decimal Quantity { get; set; }
     public decimal MinimumStockLevel { get; set; }
+    public string Unit { get; set; }
 }

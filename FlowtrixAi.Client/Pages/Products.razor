@@ -4,6 +4,7 @@
 @using FlowtrixAi.Client.Models
 @inject ProductClientService ProductService
 @inject InventoryClientService InventoryService
+@inject IJSRuntime JS
 
 <PageTitle>المنتجات - نظام MES</PageTitle>
 
@@ -84,10 +85,18 @@
                                 المنتجات الجاهزة المتاحة: <span class="stock-number">@selectedProduct.StockQuantity</span>
                             </div>
                         </div>
-                        <button class="btn btn-edit-ar" @onclick="() => OpenEditModal(selectedProduct)">
-                            <i class="bi bi-pencil-square"></i>
-                            <span>تعديل</span>
-                        </button>
+                        <div class="d-flex gap-2">
+                            <AuthorizeView Roles="Admin">
+                                <button class="btn btn-delete-ar" @onclick="() => showDeleteConfirm = true">
+                                    <i class="bi bi-trash"></i>
+                                    <span>حذف</span>
+                                </button>
+                            </AuthorizeView>
+                            <button class="btn btn-edit-ar" @onclick="() => OpenEditModal(selectedProduct)">
+                                <i class="bi bi-pencil-square"></i>
+                                <span>تعديل</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -172,8 +181,16 @@
                 </button>
             </div>
             
-            <EditForm Model="editProduct" OnValidSubmit="HandleEditProduct">
+            <EditForm Model="editProduct" OnSubmit="HandleEditProduct">
+                <DataAnnotationsValidator />
                 <div class="ar-modal-body">
+                    @if (!string.IsNullOrEmpty(modalMessage))
+                    {
+                        <div class="alert alert-danger mb-4 animate-fade-in">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            @modalMessage
+                        </div>
+                    }
                     <h4 class="section-title-ar">معلومات أساسية</h4>
                     <div class="row g-4 mb-4">
                         <div class="col-md-8">
@@ -226,7 +243,7 @@
                                                     }
                                                 </InputSelect>
                                             </td>
-                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="form-control bom-input" min="0" step="0.1" placeholder="0" /></td>
+                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="@(wasValidated && (bom.QuantityRequired == null || bom.QuantityRequired <= 0) ? "form-control bom-input is-invalid" : "form-control bom-input")" min="0" step="0.1" placeholder="0" onfocus="this.select()" /></td>
                                             <td>
                                                 <InputSelect @bind-Value="bom.Unit" class="form-select bom-input">
                                                     <option value="">-- الوحدة --</option>
@@ -263,7 +280,7 @@
                                 <div class="step-edit-row mb-2 animate-fade-in">
                                     <div class="step-seq">@step.Sequence</div>
                                     <InputText @bind-Value="step.StepName" class="form-control step-input flex-grow-1" placeholder="اسم الخطوة..." />
-                                    <InputNumber @bind-Value="step.DurationMinutes" class="form-control step-input text-center" style="width: 110px;" placeholder="0" />
+                                    <InputNumber @bind-Value="step.DurationMinutes" class="@(wasValidated && (step.DurationMinutes == null || step.DurationMinutes <= 0) ? "form-control step-input text-center is-invalid" : "form-control step-input text-center")" style="width: 110px;" placeholder="0" onfocus="this.select()" />
                                     <button type="button" class="btn-remove-row" @onclick="() => RemoveEditStepRow(step)">
                                         <i class="bi bi-trash3"></i>
                                     </button>
@@ -282,6 +299,35 @@
     </div>
 }
 
+@if (showDeleteConfirm)
+{
+    <div class="modal-overlay">
+        <div class="modal-card animate-slide-up" style="max-width: 450px;">
+            <div class="ar-modal-header bg-danger text-white">
+                <h3 class="mb-0 text-white">تأكيد حذف المنتج</h3>
+                <button class="btn-close text-white" @onclick="() => showDeleteConfirm = false">&times;</button>
+            </div>
+            <div class="ar-modal-body text-center p-5">
+                <div class="mb-4">
+                    <i class="bi bi-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+                </div>
+                <h4>هل أنت متأكد من حذف المنتج؟</h4>
+                <p class="text-muted">"@selectedProduct?.Name"<br/><small>هذا الإجراء لا يمكن التراجع عنه.</small></p>
+            </div>
+            <div class="ar-modal-footer">
+                <button class="btn btn-danger px-4" @onclick="HandleDeleteProduct" disabled="@isDeleting">
+                    @if (isDeleting)
+                    {
+                        <span class="spinner-border spinner-border-sm me-2"></span>
+                    }
+                    <span>تأكيد الحذف</span>
+                </button>
+                <button class="btn btn-secondary px-4" @onclick="() => showDeleteConfirm = false" disabled="@isDeleting">إلغاء</button>
+            </div>
+        </div>
+    </div>
+}
+
 @if (isAddModalOpen)
 {
     <div class="modal-overlay" @onclick="CloseAddModal">
@@ -293,8 +339,16 @@
                 </button>
             </div>
             
-            <EditForm Model="newProduct" OnValidSubmit="HandleAddProduct">
+            <EditForm Model="newProduct" OnSubmit="HandleAddProduct">
+                <DataAnnotationsValidator />
                 <div class="ar-modal-body">
+                    @if (!string.IsNullOrEmpty(modalMessage))
+                    {
+                        <div class="alert alert-danger mb-4 animate-fade-in">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            @modalMessage
+                        </div>
+                    }
                     <h4 class="section-title-ar">معلومات أساسية</h4>
                     <div class="row g-4 mb-4">
                         <div class="col-md-8">
@@ -346,7 +400,7 @@
                                                     }
                                                 </InputSelect>
                                             </td>
-                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="form-control bom-input" min="0" step="0.1" placeholder="0" /></td>
+                                            <td><InputNumber @bind-Value="bom.QuantityRequired" class="@(wasValidated && (bom.QuantityRequired == null || bom.QuantityRequired <= 0) ? "form-control bom-input is-invalid" : "form-control bom-input")" min="0" step="0.1" placeholder="0" onfocus="this.select()" /></td>
                                             <td>
                                                 <InputSelect @bind-Value="bom.Unit" class="form-select bom-input">
                                                     <option value="">-- الوحدة --</option>
@@ -382,7 +436,7 @@
                                 <div class="step-edit-row mb-2 animate-fade-in">
                                     <div class="step-seq">@step.Sequence</div>
                                     <InputText @bind-Value="step.StepName" class="form-control step-input flex-grow-1" placeholder="اسم الخطوة..." />
-                                    <InputNumber @bind-Value="step.DurationMinutes" class="form-control step-input text-center" style="width: 110px;" placeholder="0" />
+                                    <InputNumber @bind-Value="step.DurationMinutes" class="@(wasValidated && (step.DurationMinutes == null || step.DurationMinutes <= 0) ? "form-control step-input text-center is-invalid" : "form-control step-input text-center")" style="width: 110px;" placeholder="0" onfocus="this.select()" />
                                     <button type="button" class="btn-remove-row" @onclick="() => RemoveStepRow(step)">
                                         <i class="bi bi-trash3"></i>
                                     </button>
@@ -410,6 +464,7 @@
     private CreateProductRequest newProduct = new();
     private CreateProductRequest editProduct = new();
     private string searchTerm = "";
+    private string modalMessage = "";
     
     private List<string> SystemUnits => inventoryItems?
         .Where(i => !string.IsNullOrEmpty(i.Unit))
@@ -467,23 +522,55 @@
         }
     }
 
+    private bool wasValidated = false;
+
     private void OpenAddModal()
     {
+        modalMessage = "";
+        wasValidated = false;
         newProduct = new CreateProductRequest();
         newProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "", QuantityRequired = null });
         newProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = 1, DurationMinutes = null });
         isAddModalOpen = true;
     }
 
-    private void CloseAddModal() => isAddModalOpen = false;
+    private void CloseAddModal() 
+    {
+        modalMessage = "";
+        wasValidated = false;
+        isAddModalOpen = false;
+    }
     private void AddBOMRow() => newProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "", QuantityRequired = null });
     private void RemoveBOMRow(CreateBOMItemRequest row) => newProduct.BOMs.Remove(row);
     
     private void AddStepRow() => newProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = newProduct.ProductionSteps.Count + 1, DurationMinutes = null });
     private void RemoveStepRow(CreateProcessStepRequest row) => newProduct.ProductionSteps.Remove(row);
 
-    private async Task HandleAddProduct()
+    private async Task HandleAddProduct(EditContext editContext)
     {
+        wasValidated = true;
+        bool isValid = editContext.Validate();
+
+        // Manual check for lists as standard validator might miss them
+        if (newProduct.ProductionSteps.Any(s => s.DurationMinutes == null || s.DurationMinutes <= 0))
+        {
+            modalMessage = "يرجى إدخال مدة زمنية صحيحة (أكبر من صفر) لجميع خطوات العمل";
+            return;
+        }
+
+        if (newProduct.BOMs.Any(b => b.QuantityRequired == null || b.QuantityRequired <= 0))
+        {
+            modalMessage = "يرجى إدخال كميات صحيحة لجميع مكونات المنتج";
+            return;
+        }
+
+        if (!isValid)
+        {
+            modalMessage = "يرجى إكمال جميع البيانات المطلوبة بشكل صحيح";
+            return;
+        }
+
+        modalMessage = "";
         var success = await ProductService.CreateProductAsync(newProduct);
         if (success)
         {
@@ -491,10 +578,39 @@
             selectedProduct = null;
             await LoadData();
         }
+        else
+        {
+            modalMessage = "حدث خطأ أثناء حفظ المنتج. يرجى التحقق من البيانات والمحاولة مرة أخرى.";
+        }
+    }
+
+    private bool showDeleteConfirm = false;
+    private bool isDeleting = false;
+    
+    private async Task HandleDeleteProduct()
+    {
+        if (selectedProduct == null) return;
+        
+        isDeleting = true;
+        var success = await ProductService.DeleteProductAsync(selectedProduct.Id);
+        isDeleting = false;
+        
+        if (success)
+        {
+            showDeleteConfirm = false;
+            selectedProduct = null;
+            await LoadData();
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("alert", "فشل في حذف المنتج. قد يكون مرتبطاً بطلبيات إنتاج حالية.");
+        }
     }
 
     private void OpenEditModal(ProductResponse p)
     {
+        modalMessage = "";
+        wasValidated = false;
         editProduct = new CreateProductRequest
         {
             Name = p.Name,
@@ -531,17 +647,44 @@
         isEditModalOpen = true;
     }
 
-    private void CloseEditModal() => isEditModalOpen = false;
+    private void CloseEditModal() 
+    {
+        modalMessage = "";
+        wasValidated = false;
+        isEditModalOpen = false;
+    }
     private void AddEditBOMRow() => editProduct.BOMs.Add(new CreateBOMItemRequest { Unit = "", QuantityRequired = null });
     private void RemoveEditBOMRow(CreateBOMItemRequest row) => editProduct.BOMs.Remove(row);
     
     private void AddEditStepRow() => editProduct.ProductionSteps.Add(new CreateProcessStepRequest { Sequence = editProduct.ProductionSteps.Count + 1, DurationMinutes = null });
     private void RemoveEditStepRow(CreateProcessStepRequest row) => editProduct.ProductionSteps.Remove(row);
 
-    private async Task HandleEditProduct()
+    private async Task HandleEditProduct(EditContext editContext)
     {
         if (selectedProduct == null) return;
         
+        wasValidated = true;
+        bool isValid = editContext.Validate();
+
+        if (editProduct.ProductionSteps.Any(s => s.DurationMinutes == null || s.DurationMinutes <= 0))
+        {
+            modalMessage = "يرجى إدخال مدة زمنية صحيحة (أكبر من صفر) لجميع خطوات العمل";
+            return;
+        }
+
+        if (editProduct.BOMs.Any(b => b.QuantityRequired == null || b.QuantityRequired <= 0))
+        {
+            modalMessage = "يرجى إدخال كميات صحيحة لجميع مكونات المنتج";
+            return;
+        }
+
+        if (!isValid)
+        {
+            modalMessage = "يرجى إكمال جميع البيانات المطلوبة بشكل صحيح";
+            return;
+        }
+
+        modalMessage = "";
         var success = await ProductService.UpdateProductAsync(selectedProduct.Id, editProduct);
         if (success)
         {
@@ -549,6 +692,10 @@
             // Update the selected product local data or reload
             await LoadData();
             selectedProduct = products?.FirstOrDefault(p => p.Id == selectedProduct.Id);
+        }
+        else
+        {
+            modalMessage = "حدث خطأ أثناء تحديث المنتج. يرجى المحاولة مرة أخرى.";
         }
     }
 }

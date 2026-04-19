@@ -129,6 +129,7 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
         item.MaterialCode = _inventoryDto.MaterialCode;
         item.QuantityAvailable = _inventoryDto.Quantity;
         item.MinimumStockLevel = _inventoryDto.MinimumStockLevel;
+        item.Unit = _inventoryDto.Unit;
         item.UpdateAt = DateTime.UtcNow;
         item.UpdatedById = userId;
 
@@ -137,5 +138,14 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
         return true;
 
        
+    }
+
+    public async Task<bool> DeleteItemAsync(int id)
+    {
+        var item = await _inventoryRepository.GetByIdAsync(id);
+        if (item == null) return false;
+
+        await _inventoryRepository.DeleteAsync(id);
+        return true;
     }
 }

@@ -21,7 +21,7 @@ internal class AiService(
     IConfiguration _configuration,
     IHttpClientFactory _httpClientFactory) : IAiService
 {
-    private string GeminiApiKey => _configuration["Gemini:ApiKey"] ?? "";
+    private List<string> GeminiApiKeys => _configuration.GetSection("Gemini:ApiKeys").Get<List<string>>() ?? new List<string>();
 
     public async Task<AiInsightDto> GenerateInsightsAsync()
     {
@@ -169,36 +169,48 @@ internal class AiService(
 
     private async Task<string> CallGeminiRawAsync(object requestBody)
     {
-        if (string.IsNullOrEmpty(GeminiApiKey))
-            return "❌ خطأ: لم يتم العثور على مفتاح API.";
+        var keys = GeminiApiKeys.Where(k => !string.IsNullOrEmpty(k)).ToList();
+
+        if (!keys.Any())
+            return "❌ خطأ: لم يتم العثور على مفاتيح API في الإعدادات.";
 
         var client = _httpClientFactory.CreateClient();
-        var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GeminiApiKey}";
-        var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
+        var jsonRequest = JsonSerializer.Serialize(requestBody);
+        var errors = new List<string>();
 
-        try
+        foreach (var key in keys)
         {
-            var response = await client.PostAsync(url, content);
-            if (!response.IsSuccessStatusCode)
+            // نستخدم Gemini 1.5 Flash أو الموديل المحدد في الكود الأصلي
+            var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={key}";
+            var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
+
+            try
             {
+                var response = await client.PostAsync(url, content);
+                
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseBody = await response.Content.ReadAsStringAsync();
+                    using var doc = JsonDocument.Parse(responseBody);
+                    var text = doc.RootElement
+                        .GetProperty("candidates")[0]
+                        .GetProperty("content")
+                        .GetProperty("parts")[0]
+                        .GetProperty("text")
+                        .GetString();
+
+                    return text ?? "⚠️ الـ AI لم يعطِ ردّاً.";
+                }
+
                 var errorContent = await response.Content.ReadAsStringAsync();
-                return $"❌ فشل الـ AI (كود {response.StatusCode}): {errorContent}";
+                errors.Add($"Key ({key.Substring(0, Math.Min(5, key.Length))}...): {response.StatusCode}");
             }
-
-            var responseBody = await response.Content.ReadAsStringAsync();
-            using var doc = JsonDocument.Parse(responseBody);
-            var text = doc.RootElement
-                .GetProperty("candidates")[0]
-                .GetProperty("content")
-                .GetProperty("parts")[0]
-                .GetProperty("text")
-                .GetString();
-
-            return text ?? "⚠️ الـ AI لم يعطِ ردّاً.";
+            catch (Exception ex)
+            {
+                errors.Add($"Key Error: {ex.Message}");
+            }
         }
-        catch (Exception ex)
-        {
-            return $"❌ خطأ تقني: {ex.Message}";
-        }
+
+        return $"❌ فشلت جميع المحاولات باستخدام {keys.Count} مفاتيح. الأخطاء: {string.Join(" | ", errors)}";
     }
 }

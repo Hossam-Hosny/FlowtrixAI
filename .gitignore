@@ -6,8 +6,11 @@
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
-dist/
 build/
+
+## Frontend build output (but NOT vendor libs like bootstrap in wwwroot/lib)
+**/dist/
+!**/wwwroot/lib/**/dist/
 
 ## Visual Studio
 .vs/

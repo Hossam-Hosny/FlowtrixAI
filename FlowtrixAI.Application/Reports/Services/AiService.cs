@@ -204,10 +204,14 @@ internal class AiService(
 
                 var errorContent = await response.Content.ReadAsStringAsync();
                 errors.Add($"Key ({key.Substring(0, Math.Min(5, key.Length))}...): {response.StatusCode}");
+                
+                // إضافة تأخير بسيط قبل تجربة المفتاح التالي
+                await Task.Delay(1000);
             }
             catch (Exception ex)
             {
                 errors.Add($"Key Error: {ex.Message}");
+                await Task.Delay(1000);
             }
         }
 

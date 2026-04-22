@@ -347,6 +347,12 @@
 
     private async Task HandleAddMaterial()
     {
+        if (newItem.Quantity < newItem.MinimumStockLevel)
+        {
+            await JS.InvokeVoidAsync("alert", "⚠️ خطأ: الكمية الواردة يجب أن تكون أكبر من أو تساوي الحد الأدنى للمخزون.");
+            return;
+        }
+
         var success = await InventoryService.AddToInventoryAsync(newItem);
         if (success)
         {
@@ -357,6 +363,12 @@
 
     private async Task HandleUpdateMaterial()
     {
+        if (editItem.Quantity < editItem.MinimumStockLevel)
+        {
+            await JS.InvokeVoidAsync("alert", "⚠️ خطأ: الكمية المتاحة يجب أن تكون أكبر من أو تساوي الحد الأدنى للمخزون.");
+            return;
+        }
+
         var success = await InventoryService.UpdateInventoryAsync(editItem);
         if (success)
         {

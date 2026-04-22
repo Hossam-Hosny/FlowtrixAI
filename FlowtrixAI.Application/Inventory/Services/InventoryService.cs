@@ -12,6 +12,9 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
 {
     public async Task<bool> AddItemAsync(CreateInventoryDto _inventoryDto, int userId)
     {
+        if (_inventoryDto.Quantity < _inventoryDto.MinimumStockLevel)
+            throw new Exception("الكمية الواردة يجب أن تكون أكبر من أو تساوي الحد الأدنى للمخزون.");
+
         _inventoryDto.MaterialName = _inventoryDto.MaterialName.Trim().ToLower();
         var component = await _inventoryRepository.GetByNameAsync(_inventoryDto.MaterialName);
 
@@ -115,8 +118,11 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
         return item.QuantityAvailable >= requiredQuantity;
     }
 
-    public async Task<bool> UpdateItemAsync(UpdateInventoryDto _inventoryDto , int userId)
+    public async Task<bool> UpdateItemAsync(UpdateInventoryDto _inventoryDto, int userId)
     {
+        if (_inventoryDto.Quantity < _inventoryDto.MinimumStockLevel)
+            throw new Exception("الكمية المتاحة يجب أن تكون أكبر من أو تساوي الحد الأدنى للمخزون.");
+
         var item = await _inventoryRepository.GetByIdAsync(_inventoryDto.ComponentId);
 
         // If you want to find by name instead, you can use

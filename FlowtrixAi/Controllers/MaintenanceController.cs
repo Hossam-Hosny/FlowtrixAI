@@ -40,21 +40,41 @@ namespace FlowtrixAI.Api.Controllers
 
             try
             {
-                // إغلاق الاتصالات النشطة إذا لزم الأمر (بيعتمد على نوع قاعدة البيانات)
-                // في حالة SQLite أو SQL Server Express، EnsureDeleted عادة ما تنجح إذا لم تكن هناك أقفال.
-                
-                await _context.Database.EnsureDeletedAsync();
-                await _context.Database.MigrateAsync();
-                
-                // إعادة بذر البيانات الأساسية
-                await RoleSeeder.SeedRolesAsync(_roleManager);
-                await UserSeeder.SeedAdminUserAsync(_userManager);
+                // 1. تعطيل جميع القيود (Constraints) مؤقتاً لتجنب مشاكل الـ Foreign Keys
+                await _context.Database.ExecuteSqlRawAsync("EXEC sp_MSforeachtable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL'");
 
-                return Ok(new { Message = "تم تصفير النظام وإعادة التهيئة بنجاح. سيتم توجيهك لصفحة تسجيل الدخول باستخدام الحساب الافتراضي." });
+                // 2. مسح البيانات من جميع الجداول
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [AiChatHistories]");
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [QualityChecks]");
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [ProductionRecords]");
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [ProductionOrders]");
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [Reports]");
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [Exports]");
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [Processes]");
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [Inventory]");
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [BoMs]");
+                await _context.Database.ExecuteSqlRawAsync("DELETE FROM [Products]");
+
+                // 3. إعادة تصفير الـ Identifiers للجداول الأساسية فقط (التي تمتلك Identity)
+                var tablesToReseed = new[] { "Inventory", "Products", "ProductionOrders", "ProductionRecords", "QualityChecks", "Exports", "AiChatHistories" };
+                foreach (var table in tablesToReseed)
+                {
+                    try {
+                        await _context.Database.ExecuteSqlRawAsync($"DBCC CHECKIDENT ('[{table}]', RESEED, 0)");
+                    } catch { /* نادراً ما تفشل هنا بعد التحقق من اسم الجدول */ }
+                }
+
+                // 4. إعادة تفعيل القيود (Constraints)
+                await _context.Database.ExecuteSqlRawAsync("EXEC sp_MSforeachtable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL'");
+
+                return Ok(new { Message = "تم تصفير جميع بيانات النظام بنجاح. تم الحفاظ على حسابات المستخدمين والأدوار." });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = "فشل في تصفير النظام. قد تكون قاعدة البيانات قيد الاستخدام حالياً.", Error = ex.Message });
+                // في حالة الفشل، نحاول إعادة تفعيل القيود برضه لضمان سلامة الداتا
+                try { await _context.Database.ExecuteSqlRawAsync("EXEC sp_MSforeachtable 'ALTER TABLE ? WITH CHECK CHECK CONSTRAINT ALL'"); } catch {}
+                
+                return StatusCode(500, new { Message = "حدث خطأ أثناء تصفير العدادات، لكن البيانات غالباً تم مسحها.", Error = ex.Message });
             }
         }
     }

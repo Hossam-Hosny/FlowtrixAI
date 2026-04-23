@@ -269,8 +269,8 @@
                             </datalist>
                         </div>
                         <div class="col-md-4">
-                            <label class="figma-label">الكمية المتاحة حالياً</label>
-                            <InputNumber @bind-Value="editItem.Quantity" min="0" class="form-control figma-input text-center" onfocus="this.select()" />
+                            <label class="figma-label">الكمية الواردة (تضاف للمخزون)</label>
+                            <InputNumber @bind-Value="editItem.IncomingQuantity" class="form-control figma-input text-center" onfocus="this.select()" />
                         </div>
                         <div class="col-md-4">
                             <label class="figma-label">الحد الأدنى للمخزون</label>
@@ -336,7 +336,7 @@
             ComponentId = item.ComponentId,
             MaterialName = item.ComponentName,
             MaterialCode = item.MaterialCode,
-            Quantity = item.QuantityAvailable,
+            IncomingQuantity = 0, // Initialize with 0 for new input
             MinimumStockLevel = item.MinimumStockLevel,
             Unit = item.Unit
         };
@@ -363,12 +363,9 @@
 
     private async Task HandleUpdateMaterial()
     {
-        if (editItem.Quantity < editItem.MinimumStockLevel)
-        {
-            await JS.InvokeVoidAsync("alert", "⚠️ خطأ: الكمية المتاحة يجب أن تكون أكبر من أو تساوي الحد الأدنى للمخزون.");
-            return;
-        }
-
+        // Removed the check that forced quantity >= minimum stock, 
+        // as we are now adding an incoming amount and may still be below minimum.
+        
         var success = await InventoryService.UpdateInventoryAsync(editItem);
         if (success)
         {

@@ -120,30 +120,29 @@ internal class InventoryService(IInventoryRepository _inventoryRepository)
 
     public async Task<bool> UpdateItemAsync(UpdateInventoryDto _inventoryDto, int userId)
     {
-        if (_inventoryDto.Quantity < _inventoryDto.MinimumStockLevel)
-            throw new Exception("الكمية المتاحة يجب أن تكون أكبر من أو تساوي الحد الأدنى للمخزون.");
-
         var item = await _inventoryRepository.GetByIdAsync(_inventoryDto.ComponentId);
-
-        // If you want to find by name instead, you can use
-        //   var item = await _inventoryRepository.GetByNameAsync(_inventoryDto.MaterialName);
 
         if (item is null)
             return false;
 
+        // Check if the resulting quantity would be valid (though for incoming it should be positive)
+        if (item.QuantityAvailable + _inventoryDto.IncomingQuantity < 0)
+            throw new Exception("الكمية الناتجة لا يمكن أن تكون أقل من الصفر.");
+
         item.ComponentName = _inventoryDto.MaterialName;
         item.MaterialCode = _inventoryDto.MaterialCode;
-        item.QuantityAvailable = _inventoryDto.Quantity;
+        
+        // Add incoming quantity to existing stock
+        item.QuantityAvailable += _inventoryDto.IncomingQuantity;
+        item.TotalIncoming += _inventoryDto.IncomingQuantity;
+        
         item.MinimumStockLevel = _inventoryDto.MinimumStockLevel;
         item.Unit = _inventoryDto.Unit;
         item.UpdateAt = DateTime.UtcNow;
         item.UpdatedById = userId;
 
-
         await _inventoryRepository.UpdateAsync(item);
         return true;
-
-       
     }
 
     public async Task<bool> DeleteItemAsync(int id)

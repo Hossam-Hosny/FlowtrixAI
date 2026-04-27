@@ -22,6 +22,7 @@ internal class AiService(
     IHttpClientFactory _httpClientFactory) : IAiService
 {
     private List<string> GeminiApiKeys => _configuration.GetSection("Gemini:ApiKeys").Get<List<string>>() ?? new List<string>();
+    private List<string> GroqApiKeys => _configuration.GetSection("Groq:ApiKeys").Get<List<string>>() ?? new List<string>();
 
     public async Task<AiInsightDto> GenerateInsightsAsync()
     {
@@ -170,51 +171,92 @@ internal class AiService(
     private async Task<string> CallGeminiRawAsync(object requestBody)
     {
         var keys = GeminiApiKeys.Where(k => !string.IsNullOrEmpty(k)).ToList();
-
-        if (!keys.Any())
-            return "❌ خطأ: لم يتم العثور على مفاتيح API في الإعدادات.";
-
         var client = _httpClientFactory.CreateClient();
         var jsonRequest = JsonSerializer.Serialize(requestBody);
         var errors = new List<string>();
 
+        // 1. محاولة استخدام Gemini أولاً
         foreach (var key in keys)
         {
-            // نستخدم Gemini 1.5 Flash أو الموديل المحدد في الكود الأصلي
-            var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={key}";
+            var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={key}";
             var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
 
             try
             {
                 var response = await client.PostAsync(url, content);
-                
                 if (response.IsSuccessStatusCode)
                 {
                     var responseBody = await response.Content.ReadAsStringAsync();
                     using var doc = JsonDocument.Parse(responseBody);
-                    var text = doc.RootElement
-                        .GetProperty("candidates")[0]
-                        .GetProperty("content")
-                        .GetProperty("parts")[0]
-                        .GetProperty("text")
-                        .GetString();
-
-                    return text ?? "⚠️ الـ AI لم يعطِ ردّاً.";
+                    return doc.RootElement.GetProperty("candidates")[0].GetProperty("content").GetProperty("parts")[0].GetProperty("text").GetString() ?? "⚠️ الـ AI لم يعطِ ردّاً.";
                 }
-
-                var errorContent = await response.Content.ReadAsStringAsync();
-                errors.Add($"Key ({key.Substring(0, Math.Min(5, key.Length))}...): {response.StatusCode}");
                 
-                // إضافة تأخير بسيط قبل تجربة المفتاح التالي
-                await Task.Delay(1000);
+                var errorBody = await response.Content.ReadAsStringAsync();
+                errors.Add($"Gemini Error ({response.StatusCode})");
             }
-            catch (Exception ex)
+            catch (Exception ex) { errors.Add($"Gemini Exception: {ex.Message}"); }
+            await Task.Delay(500); // تأخير بسيط
+        }
+
+        // 2. إذا فشل Gemini، نحاول استخدام Groq كـ Fallback
+        var groqKeys = GroqApiKeys.Where(k => !string.IsNullOrEmpty(k)).ToList();
+        if (groqKeys.Any())
+        {
+            foreach (var gKey in groqKeys)
             {
-                errors.Add($"Key Error: {ex.Message}");
-                await Task.Delay(1000);
+                try
+                {
+                    return await CallGroqRawAsync(requestBody, gKey);
+                }
+                catch (Exception ex) { errors.Add($"Groq Error: {ex.Message}"); }
             }
         }
 
-        return $"❌ فشلت جميع المحاولات باستخدام {keys.Count} مفاتيح. الأخطاء: {string.Join(" | ", errors)}";
+        return $"❌ فشلت جميع المحاولات (Gemini & Groq). الأخطاء: {string.Join(" | ", errors)}";
+    }
+
+    private async Task<string> CallGroqRawAsync(object geminiRequestBody, string apiKey)
+    {
+        var client = _httpClientFactory.CreateClient();
+        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey);
+
+        // تحويل كائن Gemini إلى نص صالح لـ Groq
+        string promptContent;
+        try
+        {
+            // نقوم بتحويل الكائن بالكامل إلى JSON كحل سريع وشامل للسياق
+            promptContent = JsonSerializer.Serialize(geminiRequestBody);
+        }
+        catch
+        {
+            promptContent = "Error parsing system context.";
+        }
+
+        var groqRequest = new
+        {
+            model = "llama-3.3-70b-versatile", // تم التحديث للموديل الجديد المتاح
+            messages = new[]
+            {
+                new { role = "system", content = "You are a factory management expert for FlowtrixAI system. Analyze the following data and provide a detailed report or answer in Arabic." },
+                new { role = "user", content = promptContent }
+            },
+            temperature = 0.7,
+            max_tokens = 2048
+        };
+
+        var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+        var content = new StringContent(JsonSerializer.Serialize(groqRequest, jsonOptions), Encoding.UTF8, "application/json");
+        
+        var response = await client.PostAsync("https://api.groq.com/openai/v1/chat/completions", content);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var body = await response.Content.ReadAsStringAsync();
+            using var doc = JsonDocument.Parse(body);
+            return doc.RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString() ?? "⚠️ Groq لم يعطِ ردّاً.";
+        }
+
+        var errorResponse = await response.Content.ReadAsStringAsync();
+        throw new Exception($"Groq API failed: {response.StatusCode} - {errorResponse}");
     }
 }
